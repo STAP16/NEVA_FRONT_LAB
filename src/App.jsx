@@ -1,9 +1,13 @@
+import Header from './components/Header'
+import HeroSection from './components/HeroSection'
+import './App.css'
+
 function App() {
   return (
-    <main className="app">
-      <h1>NEVA LAB</h1>
-      <p>Сейчас тут будет верстка</p>
-    </main>
+    <div className="app">
+      <Header />
+      <HeroSection />
+    </div>
   )
 }
 

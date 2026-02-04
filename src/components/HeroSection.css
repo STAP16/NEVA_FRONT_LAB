@@ -1,0 +1,225 @@
+.hero {
+	position: relative;
+	min-height: calc(100vh - 80px);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 40px 20px 120px;
+}
+
+.hero__content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	width: 100%;
+	max-width: 1200px;
+}
+
+.content_about__block {
+	position: absolute;
+	top: 40px;
+	left: 50%;
+	transform: translateX(-50%);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0;
+}
+
+.hero__title {
+	font-size: clamp(24px, 5vw, 82px);
+	font-weight: 600;
+	color: #5f7fb0;
+	letter-spacing: -0.2px;
+	margin: 0;
+	line-height: 1.1;
+	white-space: nowrap;
+}
+
+.hero__subtitle {
+	font-size: clamp(18px, 4vw, 68px);
+	font-weight: 500;
+	color: #8192b3;
+	margin: 0;
+	margin-top: 20px;
+	line-height: 1.1;
+}
+
+.hero__brand {
+	display: block;
+	font-size: clamp(36px, 6vw, 96px);
+	font-weight: 700;
+	color: #5176af;
+	letter-spacing: clamp(2px, 0.5vw, 8px);
+	margin-top: 20px;
+}
+
+.hero__visual {
+	margin-bottom: 40px;
+}
+
+.button_container {
+	position: absolute;
+	left: 50%;
+	bottom: 40px;
+	transform: translateX(-50%);
+}
+
+.hero__cta {
+	font-family: 'Montserrat', sans-serif;
+	font-size: clamp(18px, 2vw, 26px);
+	font-weight: 500;
+	color: #2c5aa0;
+	background: linear-gradient(180deg, #f0f7ff 0%, #e0efff 100%);
+	border: none;
+	border-radius: 999px;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	width: clamp(240px, 30vw, 348px);
+	height: clamp(56px, 6vw, 80px);
+	box-shadow: 0px 8px 25px #7fb4e3;
+}
+
+.hero__cta:hover {
+	background: linear-gradient(180deg, #ffffff 0%, #f0f7ff 100%);
+	box-shadow: 0 6px 28px rgba(74, 143, 239, 0.35);
+	transform: translateY(-2px);
+}
+
+.hero__cta:active {
+	transform: translateY(1px);
+	box-shadow: 0 2px 12px rgba(74, 143, 239, 0.2);
+}
+
+/* Планшеты */
+@media (max-width: 1024px) {
+	.hero {
+		min-height: calc(100vh - 70px);
+		padding: 30px 20px 100px;
+	}
+
+	.content_about__block {
+		top: 100px;
+	}
+
+	.hero__title {
+		font-size: 48px;
+	}
+
+	.hero__subtitle {
+		font-size: 40px;
+		margin-top: 16px;
+	}
+
+	.hero__brand {
+		font-size: 64px;
+		letter-spacing: 6px;
+		margin-top: 16px;
+	}
+
+	.button_container {
+		bottom: 30px;
+	}
+}
+
+/* Маленькие планшеты / большие телефоны */
+@media (max-width: 768px) {
+	.hero {
+		min-height: calc(100vh - 60px);
+		padding: 20px 16px 100px;
+	}
+
+	.content_about__block {
+		top: 30px;
+	}
+
+	.hero__title {
+		font-size: 32px;
+	}
+
+	.hero__subtitle {
+		font-size: 26px;
+		margin-top: 12px;
+	}
+
+	.hero__brand {
+		font-size: 48px;
+		letter-spacing: 4px;
+		margin-top: 12px;
+	}
+
+	.hero__cta {
+		width: 280px;
+		height: 64px;
+		font-size: 20px;
+	}
+}
+
+/* Мобильные */
+@media (max-width: 480px) {
+	.hero {
+		min-height: calc(100vh - 50px);
+		padding: 16px 12px 90px;
+		justify-content: flex-start;
+		padding-top: 60px;
+	}
+
+	.content_about__block {
+		top: 30px;
+	}
+
+	.hero__title {
+		font-size: 24px;
+	}
+
+	.hero__subtitle {
+		font-size: 20px;
+		margin-top: 10px;
+	}
+
+	.hero__brand {
+		font-size: 40px;
+		letter-spacing: 2px;
+		margin-top: 10px;
+	}
+
+	.hero__cta {
+		width: 240px;
+		height: 56px;
+		font-size: 18px;
+	}
+
+	.button_container {
+		bottom: 24px;
+	}
+}
+
+/* Очень маленькие экраны */
+@media (max-width: 360px) {
+	.content_about__block {
+		top: 50px;
+	}
+
+	.hero__title {
+		font-size: 20px;
+	}
+
+	.hero__subtitle {
+		font-size: 16px;
+		margin-top: 8px;
+	}
+
+	.hero__brand {
+		font-size: 32px;
+		letter-spacing: 1px;
+		margin-top: 8px;
+	}
+
+	.hero__cta {
+		width: 200px;
+		height: 50px;
+		font-size: 16px;
+	}
+}
