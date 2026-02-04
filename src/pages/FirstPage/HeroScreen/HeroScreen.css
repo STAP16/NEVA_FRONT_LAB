@@ -1,0 +1,7 @@
+.hero_screen_bg {
+	min-height: 100vh;
+	background-image: url('./BG_FOR_NEVA_LAB.jpg');
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+}
