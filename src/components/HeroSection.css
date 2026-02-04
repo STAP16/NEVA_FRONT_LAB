@@ -22,7 +22,7 @@
 	top: 40px;
 	left: 50%;
 	transform: translateX(-50%);
-	display: flex;
+	display: inline-block;
 	flex-direction: column;
 	align-items: center;
 	gap: 0;
@@ -43,7 +43,6 @@
 	font-weight: 500;
 	color: #8192b3;
 	margin: 0;
-	margin-top: 20px;
 	line-height: 1.1;
 }
 
@@ -63,7 +62,7 @@
 .button_container {
 	position: absolute;
 	left: 50%;
-	bottom: 40px;
+	bottom: 80px;
 	transform: translateX(-50%);
 }
 
@@ -77,7 +76,7 @@
 	border-radius: 999px;
 	cursor: pointer;
 	transition: all 0.2s ease;
-	width: clamp(240px, 30vw, 348px);
+	width: clamp(240px, 30vw, 400px);
 	height: clamp(56px, 6vw, 80px);
 	box-shadow: 0px 8px 25px #7fb4e3;
 }
