@@ -1,8 +1,11 @@
-﻿import './DirectionsSection.css'
+﻿import './SectionTwo.css'
 
-function DirectionsSection() {
+function SectionTwo() {
 	return (
-		<section className="directions" id="directions">
+		<section
+			className="directions"
+			id="directions"
+		>
 			<div className="directions__container">
 				<header className="directions__header">
 					<h1 className="directions__title">Кем ты хочешь быть в следующем семестре?</h1>
@@ -15,18 +18,26 @@ function DirectionsSection() {
 
 				<div className="directions__cards">
 					<article className="direction-card">
-						<div className="direction-card__icon" aria-hidden="true">🚀</div>
+						<div
+							className="direction-card__icon"
+							aria-hidden="true"
+						>
+							🚀
+						</div>
 						<h3 className="direction-card__title">Для личных целей</h3>
-						<p className="direction-card__text">
-							Собери команду под свой стартап или пет-проект.
-						</p>
+						<p className="direction-card__text">Собери команду под свой стартап или пет-проект.</p>
 						<p className="direction-card__role">
 							Ты — <span>предприниматель</span>.
 						</p>
 					</article>
 
 					<article className="direction-card">
-						<div className="direction-card__icon" aria-hidden="true">💼</div>
+						<div
+							className="direction-card__icon"
+							aria-hidden="true"
+						>
+							💼
+						</div>
 						<h3 className="direction-card__title">Для коммерции</h3>
 						<p className="direction-card__text">
 							Решай реальные задачи бизнеса и получай опыт для резюме.
@@ -37,7 +48,12 @@ function DirectionsSection() {
 					</article>
 
 					<article className="direction-card">
-						<div className="direction-card__icon" aria-hidden="true">🏫</div>
+						<div
+							className="direction-card__icon"
+							aria-hidden="true"
+						>
+							🏫
+						</div>
 						<h3 className="direction-card__title">Для колледжа</h3>
 						<p className="direction-card__text">
 							Улучшай жизнь вуза цифровыми продуктами, которые будут использовать все.
@@ -54,7 +70,10 @@ function DirectionsSection() {
 					</h2>
 					<div className="story-list">
 						<article className="story-card">
-							<div className="story-card__media story-card__media--mvp" aria-hidden="true">
+							<div
+								className="story-card__media story-card__media--mvp"
+								aria-hidden="true"
+							>
 								<div className="mock mock--mvp">
 									<div className="mock__bar">
 										<span className="mock__dot" />
@@ -83,7 +102,10 @@ function DirectionsSection() {
 						</article>
 
 						<article className="story-card">
-							<div className="story-card__media story-card__media--landing" aria-hidden="true">
+							<div
+								className="story-card__media story-card__media--landing"
+								aria-hidden="true"
+							>
 								<div className="mock mock--landing">
 									<div className="mock__bar">
 										<span className="mock__dot" />
@@ -107,7 +129,10 @@ function DirectionsSection() {
 						</article>
 
 						<article className="story-card">
-							<div className="story-card__media story-card__media--bot" aria-hidden="true">
+							<div
+								className="story-card__media story-card__media--bot"
+								aria-hidden="true"
+							>
 								<div className="mock mock--phone">
 									<div className="mock__speaker" />
 									<div className="mock__chat mock__chat--left" />
@@ -119,8 +144,8 @@ function DirectionsSection() {
 							<div className="story-card__content">
 								<p className="story-card__label">Колледж</p>
 								<p className="story-card__quote">
-									«Наш чат-бот для абитуриентов уже обработал 1000+ вопросов и снизил нагрузку
-									на приёмную комиссию».
+									«Наш чат-бот для абитуриентов уже обработал 1000+ вопросов и снизил нагрузку на
+									приёмную комиссию».
 								</p>
 								<p className="story-card__meta">Имя, факультет</p>
 							</div>
@@ -129,10 +154,16 @@ function DirectionsSection() {
 				</div>
 
 				<div className="directions__cta">
-					<a className="directions__button directions__button--primary" href="#form">
+					<a
+						className="directions__button directions__button--primary"
+						href="#form"
+					>
 						Хочу так же! Расскажите, как начать
 					</a>
-					<a className="directions__button directions__button--secondary" href="#projects">
+					<a
+						className="directions__button directions__button--secondary"
+						href="#projects"
+					>
 						Посмотреть все проекты
 					</a>
 				</div>
@@ -141,4 +172,4 @@ function DirectionsSection() {
 	)
 }
 
-export default DirectionsSection
+export default SectionTwo
