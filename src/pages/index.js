@@ -1,2 +1,2 @@
 export * from './FirstPage/HeroScreen/HeroScreen'
-export * from './FirstPage/DirectionsScreen/DirectionsScreen'
+export * from './FirstPage/DirectionsScreen/SecondScreen'
