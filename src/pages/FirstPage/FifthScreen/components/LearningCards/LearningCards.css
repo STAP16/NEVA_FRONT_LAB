@@ -20,15 +20,12 @@
 	gap: 12px;
 	padding: clamp(20px, 2.5vw, 28px);
 	border-radius: 20px;
-	background: linear-gradient(
-		180deg,
-		rgba(240, 247, 255, 0.96) 0%,
-		rgba(232, 242, 255, 0.94) 100%
-	);
+	background: linear-gradient(180deg, rgba(240, 247, 255, 0.96) 0%, rgba(232, 242, 255, 0.94) 100%);
 	box-shadow: 0 4px 24px rgba(127, 180, 227, 0.15);
 	border: 1px solid rgba(95, 127, 176, 0.12);
-	text-align: center;
-	transition: transform 0.2s ease, box-shadow 0.2s ease;
+	transition:
+		transform 0.2s ease,
+		box-shadow 0.2s ease;
 }
 
 .learning-card:hover {
@@ -39,34 +36,31 @@
 /* ── AI card wide layout ── */
 
 .learning-card--wide {
-	flex-direction: row;
-	align-items: flex-start;
-	text-align: left;
-	gap: clamp(20px, 3vw, 40px);
+	flex-direction: column;
+	align-items: center;
+	gap: clamp(12px, 1.5vw, 16px);
 	padding: clamp(24px, 3vw, 36px);
 }
 
-.learning-card--wide .learning-card__info {
+.learning-card__header {
 	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	gap: 12px;
-	flex-shrink: 0;
-	max-width: 280px;
-}
-
-.learning-card--wide .learning-card__features {
-	flex: 1;
-	flex-direction: row;
+	align-items: center;
+	justify-content: center;
 	gap: clamp(12px, 1.5vw, 16px);
 }
 
-.learning-card--wide .learning-card__feature {
-	flex: 1;
+.learning-card__subdescription {
+	margin: 0;
+	font-size: clamp(14px, 1.5vw, 17px);
+	font-weight: 500;
+	color: #4a6fa5;
+	line-height: 1.5;
 }
 
-.learning-card--wide .learning-card__footnote {
-	text-align: left;
+.learning-card--wide .learning-card__features {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: clamp(12px, 1.6vw, 16px);
 }
 
 /* ── Icon ── */
@@ -129,6 +123,10 @@
 	transition: background 0.2s ease;
 }
 
+.learning-card--wide .learning-card__feature {
+	height: 100%;
+}
+
 .learning-card__feature:hover {
 	background: rgba(255, 255, 255, 0.85);
 }
@@ -174,7 +172,7 @@
 	}
 
 	.learning-card--wide .learning-card__features {
-		flex-direction: row;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
 	}
 }
 
@@ -191,16 +189,8 @@
 		text-align: left;
 	}
 
-	.learning-card--wide {
-		flex-direction: column;
-	}
-
-	.learning-card--wide .learning-card__info {
-		max-width: none;
-	}
-
 	.learning-card--wide .learning-card__features {
-		flex-direction: column;
+		grid-template-columns: 1fr;
 	}
 }
 

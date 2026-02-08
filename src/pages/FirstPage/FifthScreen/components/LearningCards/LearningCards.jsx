@@ -13,7 +13,7 @@ function LearningCards({ cards }) {
 					>
 						{isWide ? (
 							<>
-								<div className="learning-card__info">
+								<div className="learning-card__header">
 									<div className="learning-card__icon">
 										<img
 											src={card.icon}
@@ -22,13 +22,15 @@ function LearningCards({ cards }) {
 										/>
 									</div>
 									<h3 className="learning-card__title">{card.title}</h3>
-									<p className="learning-card__description">
-										{card.description}
-									</p>
-									{card.footnote && (
-										<p className="learning-card__footnote">{card.footnote}</p>
-									)}
 								</div>
+								<p className="learning-card__description">
+									{card.description}
+								</p>
+								{card.subdescription && (
+									<p className="learning-card__subdescription">
+										{card.subdescription}
+									</p>
+								)}
 								<div className="learning-card__features">
 									{card.features.map((feature, index) => (
 										<div key={index} className="learning-card__feature">
@@ -41,6 +43,9 @@ function LearningCards({ cards }) {
 										</div>
 									))}
 								</div>
+								{card.footnote && (
+									<p className="learning-card__footnote">{card.footnote}</p>
+								)}
 							</>
 						) : (
 							<>
