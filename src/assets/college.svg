@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="28 24 64 82" fill="none" width="100%" height="100%">
+  <g stroke="#3B82F6" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <!-- roof -->
+    <path d="M34 44 L60 28 L86 44" />
+
+    <!-- top line -->
+    <path d="M32 52 H88" />
+
+    <!-- columns -->
+    <path d="M42 62 V90" />
+    <path d="M54 62 V90" />
+    <path d="M66 62 V90" />
+    <path d="M78 62 V90" />
+
+    <!-- base -->
+    <path d="M32 100 H88" />
+  </g>
+</svg>

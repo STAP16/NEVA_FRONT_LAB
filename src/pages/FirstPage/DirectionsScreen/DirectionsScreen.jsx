@@ -81,6 +81,7 @@ function DirectionsScreen() {
 							<DirectionDetail
 								icon={direction.icon}
 								category={direction.category}
+								type={direction.type}
 								title={direction.title}
 								description={direction.description}
 								forYou={direction.forYou}

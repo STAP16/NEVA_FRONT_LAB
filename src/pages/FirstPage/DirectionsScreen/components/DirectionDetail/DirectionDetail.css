@@ -24,8 +24,15 @@
 }
 
 .direction-detail__icon {
-	font-size: clamp(36px, 5vw, 48px);
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
 	line-height: 1;
+}
+
+.direction-detail__icon-image {
+	width: clamp(36px, 5vw, 48px);
+	height: clamp(36px, 5vw, 48px);
 }
 
 .direction-detail__category {
