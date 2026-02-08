@@ -1,6 +1,6 @@
 import Header from './components/Header/Header'
 import './App.css'
-import { HeroScreen, SecondScreen, ProcessScreen, DirectionsScreen } from './pages'
+import { HeroScreen, SecondScreen, ProcessScreen, DirectionsScreen, FifthScreen } from './pages'
 
 function App() {
 	return (
@@ -11,6 +11,7 @@ function App() {
 			{/* Экран 3 - Детальные направления */}
 			<DirectionsScreen />
 			<ProcessScreen />
+			<FifthScreen />
 		</>
 	)
 }
