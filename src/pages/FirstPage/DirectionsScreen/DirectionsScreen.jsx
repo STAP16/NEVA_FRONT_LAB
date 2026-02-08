@@ -4,6 +4,7 @@ import { DirectionDetail, VisualSection } from './components'
 import { directionsData, directionsTypes } from './direction-data'
 
 import './DirectionsScreen.css'
+import { NavLink } from 'react-router-dom'
 
 const CHANGE_DIRECTIONS_TIMEOUT = 4500
 
@@ -101,12 +102,12 @@ function DirectionsScreen() {
 				<VisualSection />
 
 				<div className="directions__cta">
-					<a
-						href="#portfolio"
+					<NavLink
+						to="/portfolio"
 						className="directions__cta-button"
 					>
 						Смотреть реализованные проекты →
-					</a>
+					</NavLink>
 				</div>
 			</div>
 		</section>
