@@ -2,7 +2,6 @@ import './DirectionDetail.css'
 import collegeIcon from '../../../../../assets/college.svg'
 import caseIcon from '../../../../../assets/case.svg'
 import rocketIcon from '../../../../../assets/rocket.svg'
-import reactIcon from '../../../../../assets/react.svg'
 import { directionsTypes } from '../../direction-data'
 
 const directionIconMap = {

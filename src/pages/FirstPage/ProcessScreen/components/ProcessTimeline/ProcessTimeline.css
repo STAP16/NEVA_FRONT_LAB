@@ -75,9 +75,15 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	font-size: clamp(22px, 3vw, 30px);
+	padding: 8px;
 	background: linear-gradient(180deg, #f8fbff 0%, #e9f2ff 100%);
 	box-shadow: 0 6px 14px rgba(127, 180, 227, 0.25);
+}
+
+.process-step__icon-image {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
 }
 
 /* ── Step text ── */
@@ -198,7 +204,7 @@
 	.process-step__icon {
 		width: 40px;
 		height: 40px;
-		font-size: 20px;
+		padding: 7px;
 	}
 }
 
