@@ -1,5 +1,5 @@
-import { LearningCards, LearningPath, Quote } from './components'
-import { learningCards, learningPathSteps, quoteData } from './fifth-screen-data'
+import { LearningCards } from './components'
+import { learningCards } from './fifth-screen-data'
 import './FifthScreen.css'
 
 export function FifthScreen() {
@@ -23,8 +23,6 @@ export function FifthScreen() {
 				</div>
 
 				<LearningCards cards={learningCards} />
-				<LearningPath steps={learningPathSteps} />
-				<Quote quote={quoteData} />
 
 				<p className="learning__cta-text">
 					За этой системой — люди, которые каждый день работают с кодом,

@@ -2,8 +2,13 @@
 
 .learning-cards {
 	display: grid;
-	grid-template-columns: repeat(4, 1fr);
+	grid-template-columns: repeat(3, 1fr);
 	gap: clamp(16px, 2vw, 24px);
+}
+
+/* 4th card (AI) spans full width */
+.learning-card:last-child {
+	grid-column: 1 / -1;
 }
 
 /* ── Card ── */
@@ -29,6 +34,39 @@
 .learning-card:hover {
 	transform: translateY(-4px);
 	box-shadow: 0 12px 32px rgba(127, 180, 227, 0.28);
+}
+
+/* ── AI card wide layout ── */
+
+.learning-card--wide {
+	flex-direction: row;
+	align-items: flex-start;
+	text-align: left;
+	gap: clamp(20px, 3vw, 40px);
+	padding: clamp(24px, 3vw, 36px);
+}
+
+.learning-card--wide .learning-card__info {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 12px;
+	flex-shrink: 0;
+	max-width: 280px;
+}
+
+.learning-card--wide .learning-card__features {
+	flex: 1;
+	flex-direction: row;
+	gap: clamp(12px, 1.5vw, 16px);
+}
+
+.learning-card--wide .learning-card__feature {
+	flex: 1;
+}
+
+.learning-card--wide .learning-card__footnote {
+	text-align: left;
 }
 
 /* ── Icon ── */
@@ -129,6 +167,15 @@
 		grid-template-columns: repeat(2, 1fr);
 		gap: clamp(16px, 3vw, 24px);
 	}
+
+	/* AI card still spans full width on tablet */
+	.learning-card:last-child {
+		grid-column: 1 / -1;
+	}
+
+	.learning-card--wide .learning-card__features {
+		flex-direction: row;
+	}
 }
 
 /* ── Responsive: Mobile ── */
@@ -142,6 +189,18 @@
 	.learning-card {
 		align-items: flex-start;
 		text-align: left;
+	}
+
+	.learning-card--wide {
+		flex-direction: column;
+	}
+
+	.learning-card--wide .learning-card__info {
+		max-width: none;
+	}
+
+	.learning-card--wide .learning-card__features {
+		flex-direction: column;
 	}
 }
 
