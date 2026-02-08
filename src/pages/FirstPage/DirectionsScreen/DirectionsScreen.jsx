@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { DirectionDetail, VisualSection } from './components'
 import { directionsData, directionsTypes } from './direction-data'
+
 import './DirectionsScreen.css'
 
 const CHANGE_DIRECTIONS_TIMEOUT = 4500
