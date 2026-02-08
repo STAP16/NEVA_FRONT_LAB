@@ -97,7 +97,23 @@
 		padding: 24px 20px;
 	}
 
+	.direction-detail {
+		width: 400px;
+	}
+
 	.direction-detail__block {
 		padding: 14px;
+	}
+}
+
+@media (max-width: 1024px) {
+	.direction-detail {
+		width: 500px;
+	}
+}
+
+@media (max-width: 480px) {
+	.direction-detail {
+		width: 400px;
 	}
 }

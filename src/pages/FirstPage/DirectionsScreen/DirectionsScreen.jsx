@@ -43,6 +43,11 @@ function DirectionsScreen() {
 					Собираем команды под задачи.
 					<br />
 					От идеи — до работающего решения.
+					<p className="directions__subtitle">
+						Выбери направление, в котором будешь расти.
+						<br />
+						Все они дают реальный опыт, а не теорию.
+					</p>
 				</h2>
 
 				<div className="current-direction-type-row">

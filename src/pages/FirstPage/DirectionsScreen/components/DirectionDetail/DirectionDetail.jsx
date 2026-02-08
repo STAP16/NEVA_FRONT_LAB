@@ -11,7 +11,7 @@ const directionIconMap = {
 	[directionsTypes.YOURSELF]: rocketIcon
 }
 
-function DirectionDetail({ icon, category, title, type, description, forYou, benefits, extra }) {
+function DirectionDetail({ category, title, type, description, forYou, benefits, extra }) {
 	return (
 		<article className="direction-detail">
 			<div className="direction-detail__header">

@@ -9,60 +9,7 @@ function SectionTwo() {
 			<div className="directions__container">
 				<header className="directions__header">
 					<h1 className="directions__title">Кем ты хочешь быть в следующем семестре?</h1>
-					<p className="directions__subtitle">
-						Выбери направление, в котором будешь расти.
-						<br />
-						Все они дают реальный опыт, а не теорию.
-					</p>
 				</header>
-
-				<div className="directions__cards">
-					<article className="direction-card">
-						<div
-							className="direction-card__icon"
-							aria-hidden="true"
-						>
-							🚀
-						</div>
-						<h3 className="direction-card__title">Для личных целей</h3>
-						<p className="direction-card__text">Собери команду под свой стартап или пет-проект.</p>
-						<p className="direction-card__role">
-							Ты — <span>предприниматель</span>.
-						</p>
-					</article>
-
-					<article className="direction-card">
-						<div
-							className="direction-card__icon"
-							aria-hidden="true"
-						>
-							💼
-						</div>
-						<h3 className="direction-card__title">Для коммерции</h3>
-						<p className="direction-card__text">
-							Решай реальные задачи бизнеса и получай опыт для резюме.
-						</p>
-						<p className="direction-card__role">
-							Ты — <span>коммерческий разработчик</span>.
-						</p>
-					</article>
-
-					<article className="direction-card">
-						<div
-							className="direction-card__icon"
-							aria-hidden="true"
-						>
-							🏫
-						</div>
-						<h3 className="direction-card__title">Для колледжа</h3>
-						<p className="direction-card__text">
-							Улучшай жизнь вуза цифровыми продуктами, которые будут использовать все.
-						</p>
-						<p className="direction-card__role">
-							Ты — <span>цифровой инноватор</span>.
-						</p>
-					</article>
-				</div>
 
 				<div className="directions__stories">
 					<h2 className="directions__stories-title">
