@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import nevikCap from '../../../assets/nevik_cap.png'
 import nevaShip from '../../../assets/neva_ship.png'
 import './SixthScreen.css'
@@ -23,9 +23,34 @@ const directions = [
 
 export function SixthScreen() {
 	const [selectedDirection, setSelectedDirection] = useState(directions[0].id)
+	const [isChatVisible, setIsChatVisible] = useState(false)
+	const sectionRef = useRef(null)
+
+	useEffect(() => {
+		const sectionElement = sectionRef.current
+
+		if (!sectionElement) return
+
+		const observer = new IntersectionObserver(
+			entries => {
+				const [entry] = entries
+
+				if (!entry.isIntersecting) return
+
+				setIsChatVisible(true)
+				observer.disconnect()
+			},
+			{ threshold: 0.55 }
+		)
+
+		observer.observe(sectionElement)
+
+		return () => observer.disconnect()
+	}, [])
 
 	return (
-		<section
+		<div
+			ref={sectionRef}
 			className="start-direction"
 			id="start-direction"
 		>
@@ -58,8 +83,8 @@ export function SixthScreen() {
 					</div>
 
 					<p className="start-direction__note">
-						За этой системой — люди, которые каждый день работают с кодом, дизайном, данными и AI.
-						Хочешь познакомиться с командой, которая будет тебя вести и делиться опытом?
+						Не важно, какой путь ты выберешь — каждый из них ведёт к реальному опыту, проекту в
+						портфолио и сообществу единомышленников. Главное — сделать шаг.
 					</p>
 
 					<a
@@ -68,15 +93,14 @@ export function SixthScreen() {
 					>
 						Выбрать направление и подать заявку →
 					</a>
-
-					<p className="start-direction__microtext">
-						После нажатия тебя перенаправит на форму, где ты сможешь указать выбранное направление и
-						оставить контакты. Мы свяжемся в течение 24 часов.
-					</p>
 				</div>
 
 				<div className="start-direction__visuals">
 					<div className="start-direction__visual-layer">
+						<div className={`start-direction__chat-bubble ${isChatVisible ? 'is-visible' : ''}`}>
+							За этой системой — люди, которые каждый день работают с кодом, дизайном, данными и AI.
+							Хочешь познакомиться с командой, которая будет тебя вести и делиться опытом?
+						</div>
 						<img
 							src={nevaShip}
 							alt="Корабль NEVA"
@@ -90,6 +114,6 @@ export function SixthScreen() {
 					</div>
 				</div>
 			</div>
-		</section>
+		</div>
 	)
 }
