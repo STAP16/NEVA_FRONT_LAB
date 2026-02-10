@@ -1,21 +1,29 @@
 import { useEffect, useRef, useState } from 'react'
 import nevikCap from '../../../assets/nevik_cap.png'
 import nevaShip from '../../../assets/neva_ship.png'
+import collegeIcon from '../../../assets/college.svg'
+import caseIcon from '../../../assets/case.svg'
+import rocketIcon from '../../../assets/rocket.svg'
 import './SixthScreen.css'
 
 const directions = [
 	{
 		id: 'college',
-		emoji: '🏫',
+		icon: collegeIcon,
+		iconAlt: 'Для колледжа',
 		text: 'Хочу создавать проекты, которыми будут пользоваться тысячи студентов. Улучшать то, что окружает меня каждый день.'
 	},
 	{
 		id: 'commerce',
+		icon: caseIcon,
+		iconAlt: 'Для коммерции',
 		emoji: '💼',
 		text: 'Хочу понять, как работает реальный бизнес, заработать первые деньги на своих навыках и собрать коммерческое портфолио.'
 	},
 	{
 		id: 'startup',
+		icon: rocketIcon,
+		iconAlt: 'Для стартапа',
 		emoji: '🚀',
 		text: 'Хочу проверить свою идею, собрать команду и запустить MVP. Начать свой путь в мире стартапов.'
 	}
@@ -76,7 +84,17 @@ export function SixthScreen() {
 								className={`start-direction__card ${selectedDirection === direction.id ? 'is-active' : ''}`}
 								onClick={() => setSelectedDirection(direction.id)}
 							>
-								<span className="start-direction__emoji">{direction.emoji}</span>
+								<span className="start-direction__emoji">
+									{direction.icon ? (
+										<img
+											src={direction.icon}
+											alt={direction.iconAlt}
+											className="start-direction__icon-image"
+										/>
+									) : (
+										direction.emoji
+									)}
+								</span>
 								<span className="start-direction__card-text">{direction.text}</span>
 							</button>
 						))}
