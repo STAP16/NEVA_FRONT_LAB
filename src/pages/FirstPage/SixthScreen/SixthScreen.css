@@ -5,6 +5,7 @@
 	padding-top: 80px;
 	background: linear-gradient(180deg, #f8fbff 0%, #ffffff 45%, #edf5ff 100%);
 	box-sizing: border-box;
+	padding-bottom: 100px;
 }
 
 .start-direction__container {

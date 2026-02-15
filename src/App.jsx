@@ -1,4 +1,5 @@
 import Header from './components/Header/Header'
+import Footer from './components/Footer/Footer'
 import './App.css'
 import { HeroScreen, SecondScreen, ProcessScreen, DirectionsScreen, FifthScreen, SixthScreen } from './pages'
 
@@ -13,6 +14,7 @@ function App() {
 			<ProcessScreen />
 			<FifthScreen />
 			<SixthScreen />
+			<Footer />
 		</>
 	)
 }

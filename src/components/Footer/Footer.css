@@ -1,0 +1,249 @@
+.footer {
+	background: linear-gradient(180deg, #2c5aa0 0%, #1e3a5f 100%);
+	color: #ffffff;
+	font-family: 'Montserrat', sans-serif;
+	padding-top: clamp(50px, 6vw, 80px);
+}
+
+.footer__container {
+	max-width: 1280px;
+	margin: 0 auto;
+	padding: 0 clamp(16px, 4vw, 40px);
+}
+
+/* ===== Сетка ===== */
+.footer__grid {
+	display: grid;
+	grid-template-columns: 1.4fr 1fr 1fr 1.3fr;
+	gap: clamp(24px, 4vw, 48px);
+	align-items: start;
+	padding-bottom: clamp(32px, 5vw, 56px);
+	border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+/* ===== Блок: Ядро ===== */
+.footer__logo {
+	height: clamp(32px, 4vw, 44px);
+	width: auto;
+	margin-bottom: 12px;
+	filter: brightness(0) invert(1);
+}
+
+.footer__subtitle {
+	font-size: clamp(12px, 1.2vw, 14px);
+	font-weight: 500;
+	color: rgba(255, 255, 255, 0.6);
+	margin-bottom: 16px;
+	line-height: 1.4;
+}
+
+.footer__description {
+	font-size: clamp(13px, 1.3vw, 15px);
+	font-weight: 400;
+	color: rgba(255, 255, 255, 0.7);
+	line-height: 1.6;
+}
+
+/* ===== Заголовки колонок ===== */
+.footer__heading {
+	font-size: clamp(12px, 1.2vw, 14px);
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	color: #ffffff;
+	margin-bottom: clamp(16px, 2vw, 24px);
+}
+
+.footer__heading--cta {
+	font-size: clamp(16px, 1.8vw, 20px);
+	font-weight: 600;
+	text-transform: none;
+	letter-spacing: normal;
+}
+
+/* ===== Ссылки ===== */
+.footer__links {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	gap: clamp(8px, 1.2vw, 12px);
+}
+
+.footer__link {
+	font-size: clamp(13px, 1.3vw, 15px);
+	font-weight: 400;
+	color: #7fb4e3;
+	text-decoration: none;
+	transition: color 0.2s ease;
+}
+
+.footer__link:hover {
+	color: #ffffff;
+}
+
+/* ===== CTA кнопка ===== */
+.footer__cta-button {
+	display: inline-block;
+	background: linear-gradient(180deg, #f0f7ff 0%, #e0efff 100%);
+	color: #2c5aa0;
+	font-family: 'Montserrat', sans-serif;
+	font-size: clamp(13px, 1.4vw, 16px);
+	font-weight: 600;
+	padding: clamp(12px, 1.5vw, 16px) clamp(24px, 3vw, 20px);
+	border-radius: 999px;
+	text-decoration: none;
+	box-shadow: 0 4px 20px rgba(127, 180, 227, 0.25);
+	transition:
+		transform 0.2s ease,
+		box-shadow 0.2s ease;
+	margin-bottom: clamp(16px, 2vw, 24px);
+}
+
+.footer__cta-button:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 8px 30px rgba(127, 180, 227, 0.4);
+}
+
+.footer__cta-button:active {
+	transform: translateY(0);
+}
+
+/* ===== Контактная информация ===== */
+.footer__contact-info {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	margin-bottom: clamp(16px, 2vw, 20px);
+}
+
+.footer__address {
+	font-size: clamp(12px, 1.2vw, 14px);
+	color: rgba(255, 255, 255, 0.6);
+	line-height: 1.5;
+}
+
+/* ===== Соцсети ===== */
+.footer__socials {
+	display: flex;
+	gap: 16px;
+}
+
+.footer__social-link {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 36px;
+	height: 36px;
+	color: rgba(255, 255, 255, 0.6);
+	border-radius: 50%;
+	border: 1px solid rgba(255, 255, 255, 0.15);
+	transition: all 0.2s ease;
+}
+
+.footer__social-link:hover {
+	color: #ffffff;
+	border-color: rgba(255, 255, 255, 0.4);
+	transform: translateY(-2px);
+}
+
+.footer__social-link svg {
+	width: 18px;
+	height: 18px;
+}
+
+/* ===== Нижняя полоса ===== */
+.footer__bottom {
+	background: rgba(0, 0, 0, 0.15);
+	padding: clamp(16px, 2vw, 20px) 0;
+}
+
+.footer__bottom-container {
+	max-width: 1280px;
+	margin: 0 auto;
+	padding: 0 clamp(16px, 4vw, 40px);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 12px;
+}
+
+.footer__copyright,
+.footer__made-by {
+	font-size: clamp(11px, 1.1vw, 13px);
+	font-weight: 400;
+	color: rgba(255, 255, 255, 0.5);
+}
+
+.footer__made-by {
+	text-align: center;
+}
+
+.footer__privacy-link {
+	font-size: clamp(11px, 1.1vw, 13px);
+	font-weight: 400;
+	color: rgba(255, 255, 255, 0.5);
+	text-decoration: none;
+	transition: color 0.2s ease;
+}
+
+.footer__privacy-link:hover {
+	color: rgba(255, 255, 255, 0.8);
+	text-decoration: underline;
+}
+
+/* ===== Адаптивность ===== */
+
+/* Планшет */
+@media (max-width: 1024px) {
+	.footer__grid {
+		grid-template-columns: 1fr 1fr;
+		gap: clamp(24px, 4vw, 40px);
+	}
+}
+
+/* Мобильные */
+@media (max-width: 768px) {
+	.footer__grid {
+		grid-template-columns: 1fr;
+		gap: clamp(28px, 5vw, 36px);
+		text-align: center;
+	}
+
+	.footer__logo {
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.footer__links {
+		align-items: center;
+	}
+
+	.footer__cta-button {
+		width: 100%;
+		text-align: center;
+	}
+
+	.footer__contact-info {
+		align-items: center;
+	}
+
+	.footer__socials {
+		justify-content: center;
+	}
+
+	.footer__bottom-container {
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+		gap: 8px;
+	}
+}
+
+@media (max-width: 480px) {
+	.footer {
+		padding-top: clamp(32px, 5vw, 48px);
+	}
+}
