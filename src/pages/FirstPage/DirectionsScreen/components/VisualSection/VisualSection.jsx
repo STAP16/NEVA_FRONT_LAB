@@ -1,7 +1,27 @@
+import { useEffect, useRef, useState } from 'react'
 import './VisualSection.css'
 import nevikMascot from './nevik.png'
 
 function VisualSection() {
+	const [isBubbleVisible, setIsBubbleVisible] = useState(false)
+	const sectionRef = useRef(null)
+
+	useEffect(() => {
+		const el = sectionRef.current
+		if (!el) return
+
+		const observer = new IntersectionObserver(
+			entries => {
+				if (!entries[0].isIntersecting) return
+				setIsBubbleVisible(true)
+				observer.disconnect()
+			},
+			{ threshold: 0.4 }
+		)
+
+		observer.observe(el)
+		return () => observer.disconnect()
+	}, [])
 	const visuals = [
 		{
 			title: 'Интерфейсы приложений',
@@ -21,7 +41,10 @@ function VisualSection() {
 	]
 
 	return (
-		<div className="visual-section">
+		<div
+			ref={sectionRef}
+			className="visual-section"
+		>
 			<div className="visual-section__layout">
 				<div className="visual-section__content">
 					<h3 className="visual-section__title">Как это выглядит</h3>
@@ -42,6 +65,9 @@ function VisualSection() {
 				</div>
 
 				<div className="visual-section__mascot">
+					<div className={`visual-section__bubble ${isBubbleVisible ? 'is-visible' : ''}`}>
+						Интересно, какие проекты уже запустили?
+					</div>
 					<img
 						src={nevikMascot}
 						alt="Маскот NEVA"

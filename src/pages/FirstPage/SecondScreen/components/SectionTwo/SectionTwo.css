@@ -73,7 +73,7 @@
 
 .stories__speech-bubble {
 	position: relative;
-	background: linear-gradient(135deg, #64b5f6 0%, #42a5f5 100%);
+	background: linear-gradient(135deg, #2c72de, #5b99f3);
 	color: #ffffff;
 	font-size: clamp(16px, 2vw, 22px);
 	font-weight: 600;
@@ -81,7 +81,7 @@
 	border-radius: 20px;
 	max-width: 360px;
 	text-align: center;
-	box-shadow: 0 8px 24px rgba(66, 165, 245, 0.3);
+	box-shadow: 0 8px 24px rgba(44, 114, 222, 0.3);
 	margin-bottom: -15px;
 	margin-right: 100px;
 	pointer-events: auto;
@@ -108,7 +108,7 @@
 	height: 0;
 	border-left: 14px solid transparent;
 	border-right: 14px solid transparent;
-	border-top: 14px solid #42a5f5;
+	border-top: 14px solid #4a88eb;
 }
 
 .stories__mascot-image {
@@ -435,7 +435,7 @@
 		right: auto;
 		transform: translateY(-50%);
 		border-left: none;
-		border-right: 14px solid #42a5f5;
+		border-right: 14px solid #4a88eb;
 		border-top: 10px solid transparent;
 		border-bottom: 10px solid transparent;
 	}
@@ -492,7 +492,7 @@
 		transform: translateX(-50%);
 		border-left: 14px solid transparent;
 		border-right: 14px solid transparent;
-		border-top: 14px solid #42a5f5;
+		border-top: 14px solid #4a88eb;
 		border-bottom: none;
 	}
 
