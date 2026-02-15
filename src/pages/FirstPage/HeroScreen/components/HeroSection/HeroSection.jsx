@@ -19,6 +19,11 @@ function HeroSection() {
 		const form = document.getElementById('contact-form')
 		if (form) {
 			form.scrollIntoView({ behavior: 'smooth' })
+			return
+		}
+		const nextSection = document.querySelector('.hero')?.nextElementSibling
+		if (nextSection) {
+			nextSection.scrollIntoView({ behavior: 'smooth' })
 		}
 	}
 
@@ -41,7 +46,7 @@ function HeroSection() {
 					className="hero__title"
 					variants={fadeUp}
 				>
-					Прокачай реальные IT-навыки в команде единомышленников
+					Прокачай IT-навыки в команде единомышленников
 				</motion.h1>
 
 				<motion.p
@@ -73,7 +78,6 @@ function HeroSection() {
 					>
 						Присоединиться
 					</button>
-					<p className="hero__cta-hint">Без опыта. Старт каждый месяц</p>
 				</motion.div>
 			</motion.div>
 
