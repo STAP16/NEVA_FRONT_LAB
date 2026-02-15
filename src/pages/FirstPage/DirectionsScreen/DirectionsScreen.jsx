@@ -15,11 +15,7 @@ function DirectionsScreen() {
 					Собираем команды под задачи.
 					<br />
 					От идеи — до работающего решения.
-					<p className="directions__subtitle">
-						Выбери направление, в котором будешь расти.
-						<br />
-						Все они дают реальный опыт, а не теорию.
-					</p>
+					<p className="directions__subtitle">Выбери направление, в котором будешь расти.</p>
 				</h2>
 
 				<div className="directions__cards">

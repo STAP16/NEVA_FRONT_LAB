@@ -16,8 +16,11 @@
 }
 
 .directions__subtitle {
-	margin-bottom: 60px;
-	margin-top: 40px;
+	margin-top: 20px;
+	font-size: clamp(15px, 2vw, 22px);
+	font-weight: 500;
+	color: #8192b3;
+	line-height: 1.5;
 }
 
 .directions__title {

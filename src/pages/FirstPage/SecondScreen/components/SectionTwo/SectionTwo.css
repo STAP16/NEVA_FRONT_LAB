@@ -1,27 +1,30 @@
-﻿.directions {
+.directions_screen_bg {
+}
+
+/* ===== Section: Stories ===== */
+.stories {
 	position: relative;
 	display: flex;
 	justify-content: center;
 	padding: clamp(80px, 10vw, 140px) 20px clamp(80px, 10vw, 140px);
 }
 
-.directions__container {
+.stories__container {
 	width: 100%;
 	max-width: 1200px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	text-align: center;
+	gap: clamp(32px, 5vw, 56px);
 }
 
-.directions__header {
-	display: flex;
-	flex-direction: column;
-	gap: 16px;
+/* ===== Header ===== */
+.stories__header {
+	text-align: center;
 	max-width: 980px;
 }
 
-.directions__title {
+.stories__title {
 	margin: 0;
 	font-size: clamp(26px, 4.5vw, 56px);
 	font-weight: 600;
@@ -30,102 +33,98 @@
 	line-height: 1.15;
 }
 
-.directions__subtitle {
-	margin: 0;
-	font-size: clamp(16px, 2.2vw, 26px);
-	font-weight: 500;
-	color: #8192b3;
-	line-height: 1.4;
-}
+/*
+ * =============================================
+ *  НАСТРОЙКИ МАСКОТА — меняй значения здесь
+ * =============================================
+ *
+ *  ВЫСОТА:     .stories__mascot-image  → height (% от блока карточек)
+ *  ЛЕВ. КРАЙ:  .stories__mascot-col   → left
+ *  ВЕРХ:        .stories__mascot-col   → top
+ *  НИЗ:         .stories__mascot-col   → bottom
+ *  ТЕНЬ:        .stories__mascot-image → filter: drop-shadow(...)
+ *  БАБЛ:        .stories__speech-bubble → всё внутри
+ */
 
-.directions__cards {
+/* ===== Layout ===== */
+.stories__layout {
+	position: relative; /* якорь для абсолютного маскота */
 	width: 100%;
-	display: grid;
-	grid-template-columns: repeat(3, minmax(0, 1fr));
-	gap: clamp(16px, 3vw, 28px);
 }
 
-.direction-card {
+/* ===== Mascot (absolute) ===== */
+.stories__mascot-col {
+	position: absolute;
+	left: -230px; /* сдвиг от левого края контейнера */
+	top: 0px; /* сдвиг от верха блока карточек */
+	bottom: 40px; /* отступ снизу (чуть меньше чем карточки) */
+	display: flex;
+	align-items: flex-end;
+	z-index: 2;
+	pointer-events: none;
+}
+
+.stories__mascot {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	gap: 14px;
-	padding: clamp(20px, 3vw, 30px);
-	border-radius: 26px;
-	background: linear-gradient(180deg, rgba(240, 247, 255, 0.96) 0%, rgba(224, 239, 255, 0.94) 100%);
-	box-shadow: 0 12px 30px rgba(127, 180, 227, 0.32);
-	border: 1px solid rgba(95, 127, 176, 0.2);
-	text-align: center;
+	height: 100%;
 }
 
-.direction-card__icon {
-	width: clamp(48px, 6vw, 64px);
-	height: clamp(48px, 6vw, 64px);
-	border-radius: 999px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	font-size: clamp(24px, 3.5vw, 34px);
-	background: linear-gradient(180deg, #f8fbff 0%, #e9f2ff 100%);
-	box-shadow: 0 8px 18px rgba(127, 180, 227, 0.35);
-}
-
-.direction-card__title {
-	margin: 0;
-	font-size: clamp(18px, 2.5vw, 26px);
-	font-weight: 600;
-	color: #4a6fa5;
-}
-
-.direction-card__text {
-	margin: 0;
-	font-size: clamp(14px, 2vw, 18px);
-	font-weight: 500;
-	color: #3e5f8f;
-	line-height: 1.5;
-}
-
-.direction-card__role {
-	margin: 0;
-	font-size: clamp(14px, 2vw, 18px);
-	font-weight: 600;
-	color: #2c5aa0;
-}
-
-.direction-card__role span {
-	color: #5176af;
-}
-
-.directions__stories {
-	width: 100%;
-	display: flex;
-	flex-direction: column;
-	gap: clamp(16px, 3vw, 28px);
+.stories__speech-bubble {
 	position: relative;
-	padding: clamp(18px, 3vw, 28px) clamp(12px, 3vw, 24px);
-	border-radius: 32px;
+	background: linear-gradient(135deg, #64b5f6 0%, #42a5f5 100%);
+	color: #ffffff;
+	font-size: clamp(16px, 2vw, 22px);
+	font-weight: 600;
+	padding: clamp(14px, 2.5vw, 24px) clamp(20px, 3vw, 32px);
+	border-radius: 20px;
+	max-width: 360px;
+	text-align: center;
+	box-shadow: 0 8px 24px rgba(66, 165, 245, 0.3);
+	margin-bottom: -15px;
+	margin-right: 100px;
+	pointer-events: auto;
+	flex-shrink: 0;
+	opacity: 0;
+	transform: translateY(24px) scale(0.95);
+	transition:
+		opacity 0.7s ease,
+		transform 0.7s ease;
 }
 
-.directions__stories::before {
+.stories__speech-bubble.is-visible {
+	opacity: 1;
+	transform: translateY(0) scale(1);
+}
+
+.stories__speech-bubble::after {
 	content: '';
 	position: absolute;
-	inset: 0;
-	border-radius: inherit;
-	background: linear-gradient(180deg, rgba(248, 251, 255, 0.9) 0%, rgba(233, 242, 255, 0.7) 100%);
-	box-shadow: 0 18px 40px rgba(127, 180, 227, 0.18);
+	bottom: -12px;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 0;
+	height: 0;
+	border-left: 14px solid transparent;
+	border-right: 14px solid transparent;
+	border-top: 14px solid #42a5f5;
 }
 
-.directions__stories > * {
-	position: relative;
-	z-index: 1;
+.stories__mascot-image {
+	flex: 1;
+	width: auto;
+	height: 100%; /* растягивается на всю доступную высоту */
+	max-height: 100%;
+	object-fit: contain;
+	object-position: center bottom;
+	filter: drop-shadow(0 16px 40px rgba(44, 90, 160, 0.3));
 }
 
-.directions__stories-title {
-	margin-bottom: 30px;
-	font-size: clamp(20px, 3vw, 32px);
-	font-weight: 600;
-	color: #5f7fb0;
-	text-align: center;
+/* ===== Cards column ===== */
+.stories__cards-col {
+	min-width: 0;
+	margin-left: 420px; /* отступ слева под маскота — подгоняй под ширину маскота */
 }
 
 .story-list {
@@ -135,7 +134,7 @@
 
 .story-card {
 	display: grid;
-	grid-template-columns: minmax(140px, 180px) minmax(0, 1fr);
+	grid-template-columns: minmax(120px, 160px) minmax(0, 1fr);
 	gap: clamp(16px, 3vw, 28px);
 	align-items: center;
 	padding: clamp(18px, 3vw, 28px);
@@ -144,8 +143,17 @@
 	box-shadow: 0 12px 30px rgba(127, 180, 227, 0.25);
 	border: 1px solid rgba(95, 127, 176, 0.18);
 	text-align: left;
+	transition:
+		transform 0.3s ease,
+		box-shadow 0.3s ease;
 }
 
+.story-card:hover {
+	transform: translateY(-3px);
+	box-shadow: 0 16px 36px rgba(127, 180, 227, 0.35);
+}
+
+/* ===== Mock media ===== */
 .story-card__media {
 	position: relative;
 	width: 100%;
@@ -284,6 +292,7 @@
 	width: 55%;
 }
 
+/* ===== Card content ===== */
 .story-card__content {
 	display: flex;
 	flex-direction: column;
@@ -314,14 +323,15 @@
 	color: #5176af;
 }
 
-.directions__cta {
+/* ===== CTA buttons ===== */
+.stories__cta {
 	display: flex;
 	flex-wrap: wrap;
 	gap: clamp(12px, 2.5vw, 20px);
 	justify-content: center;
 }
 
-.directions__button {
+.stories__button {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
@@ -335,53 +345,110 @@
 	transition: all 0.2s ease;
 	box-shadow: 0 8px 25px rgba(127, 180, 227, 0.35);
 	border: none;
+	text-decoration: none;
 }
 
-.directions__button--primary {
+.stories__button--primary {
 	background: linear-gradient(180deg, #f0f7ff 0%, #e0efff 100%);
 }
 
-.directions__button--primary:hover {
+.stories__button--primary:hover {
 	background: linear-gradient(180deg, #ffffff 0%, #f0f7ff 100%);
 	transform: translateY(-2px);
 	box-shadow: 0 10px 28px rgba(74, 143, 239, 0.35);
 }
 
-.directions__button--secondary {
+.stories__button--secondary {
 	background: rgba(255, 255, 255, 0.8);
 	border: 1px solid rgba(74, 111, 165, 0.3);
 	color: #4a6fa5;
 	box-shadow: 0 6px 18px rgba(127, 180, 227, 0.2);
 }
 
-.directions__button--secondary:hover {
+.stories__button--secondary:hover {
 	background: rgba(255, 255, 255, 0.95);
 	transform: translateY(-2px);
 	box-shadow: 0 10px 24px rgba(74, 143, 239, 0.25);
 }
 
-.directions__button:active {
+.stories__button:active {
 	transform: translateY(1px);
 	box-shadow: 0 2px 12px rgba(74, 143, 239, 0.2);
 }
 
+/* ===== Responsive ===== */
 @media (max-width: 1024px) {
-	.directions__cards {
-		grid-template-columns: repeat(2, minmax(0, 1fr));
+	.stories__cards-col {
+		margin-left: 340px; /* уменьшаем отступ на планшете */
+	}
+
+	.stories__mascot-col {
+		left: -20px;
+	}
+
+	.stories__speech-bubble {
+		max-width: 280px;
+		font-size: clamp(14px, 1.6vw, 17px);
 	}
 
 	.story-card {
-		grid-template-columns: minmax(120px, 160px) minmax(0, 1fr);
+		grid-template-columns: minmax(100px, 140px) minmax(0, 1fr);
 	}
 }
 
 @media (max-width: 768px) {
-	.directions {
+	.stories {
 		padding: 80px 16px;
 	}
 
-	.directions__cards {
-		grid-template-columns: 1fr;
+	/* Сбрасываем абсолют — маскот идёт над карточками */
+	.stories__layout {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 32px;
+	}
+
+	.stories__mascot-col {
+		position: static;
+		display: flex;
+		align-items: center;
+		pointer-events: auto;
+	}
+
+	.stories__mascot {
+		flex-direction: row;
+		align-items: flex-end;
+		height: auto;
+		gap: 16px;
+	}
+
+	.stories__speech-bubble {
+		order: 2;
+		margin-bottom: 0;
+	}
+
+	.stories__speech-bubble::after {
+		bottom: auto;
+		top: 50%;
+		left: -12px;
+		right: auto;
+		transform: translateY(-50%);
+		border-left: none;
+		border-right: 14px solid #42a5f5;
+		border-top: 10px solid transparent;
+		border-bottom: 10px solid transparent;
+	}
+
+	.stories__mascot-image {
+		order: 1;
+		width: clamp(140px, 35vw, 200px);
+		height: auto;
+		flex: none;
+	}
+
+	.stories__cards-col {
+		margin-left: 0;
 	}
 
 	.story-card {
@@ -403,11 +470,38 @@
 }
 
 @media (max-width: 480px) {
-	.directions {
+	.stories {
 		padding: 70px 12px;
 	}
 
-	.directions__button {
+	.stories__mascot {
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.stories__speech-bubble {
+		order: 1;
+		margin-bottom: 12px;
+	}
+
+	.stories__speech-bubble::after {
+		top: auto;
+		bottom: -12px;
+		left: 50%;
+		right: auto;
+		transform: translateX(-50%);
+		border-left: 14px solid transparent;
+		border-right: 14px solid transparent;
+		border-top: 14px solid #42a5f5;
+		border-bottom: none;
+	}
+
+	.stories__mascot-image {
+		order: 2;
+		width: clamp(160px, 50vw, 220px);
+	}
+
+	.stories__button {
 		width: 100%;
 	}
 
@@ -417,7 +511,7 @@
 }
 
 @media (max-width: 360px) {
-	.directions__title {
+	.stories__title {
 		font-size: 22px;
 	}
 }
