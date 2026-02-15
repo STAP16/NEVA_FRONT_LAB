@@ -1,5 +1,5 @@
-import { ProcessTimeline, ProcessStats } from './components'
-import { processSteps, processStats } from './process-data'
+import { ProcessTimeline } from './components'
+import { processSteps } from './process-data'
 import './ProcessScreen.css'
 
 export function ProcessScreen() {
@@ -23,7 +23,6 @@ export function ProcessScreen() {
 				</div>
 
 				<ProcessTimeline steps={processSteps} />
-				<ProcessStats stats={processStats} />
 			</div>
 		</section>
 	)
