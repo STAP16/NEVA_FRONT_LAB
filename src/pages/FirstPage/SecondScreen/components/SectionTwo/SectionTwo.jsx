@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { NavLink } from 'react-router-dom'
 import './SectionTwo.css'
 import nevikRespect from '../../../../../assets/Nevik_respect.png'
 
@@ -126,8 +127,7 @@ function SectionTwo() {
 								<div className="story-card__content">
 									<p className="story-card__label">Колледж</p>
 									<p className="story-card__quote">
-										«Наш чат-бот для абитуриентов уже обработал 1000+ вопросов и снизил нагрузку на
-										приёмную комиссию».
+										«Разработали удобную систему расписания на сайте колледжа».
 									</p>
 									<p className="story-card__meta">Имя, факультет</p>
 								</div>
@@ -137,18 +137,18 @@ function SectionTwo() {
 				</div>
 
 				<div className="stories__cta">
-					<a
+					<NavLink
 						className="stories__button stories__button--primary"
-						href="#form"
+						to="/form"
 					>
 						Хочу так же! Расскажите, как начать
-					</a>
-					<a
+					</NavLink>
+					<NavLink
 						className="stories__button stories__button--secondary"
-						href="#projects"
+						to="/projects"
 					>
 						Посмотреть все проекты
-					</a>
+					</NavLink>
 				</div>
 			</div>
 		</section>
