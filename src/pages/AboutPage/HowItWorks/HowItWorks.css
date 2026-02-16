@@ -1,0 +1,163 @@
+.how {
+	min-height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: linear-gradient(180deg, #ffffff 0%, #f8fbff 50%, #f0f7ff 100%);
+	padding: clamp(60px, 10vw, 120px) clamp(16px, 4vw, 40px);
+	box-sizing: border-box;
+}
+
+.how__container {
+	max-width: 1000px;
+	width: 100%;
+	margin: 0 auto;
+}
+
+.how__header {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: clamp(12px, 2vw, 20px);
+	text-align: center;
+	margin-bottom: clamp(48px, 7vw, 80px);
+	max-width: 800px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.how__title {
+	margin: 0;
+	font-size: clamp(24px, 4vw, 42px);
+	font-weight: 600;
+	color: #2c5aa0;
+	line-height: 1.3;
+}
+
+.how__subtitle {
+	margin: 0;
+	font-size: clamp(15px, 2vw, 20px);
+	font-weight: 400;
+	color: #5a7aa0;
+	line-height: 1.6;
+}
+
+/* Таймлайн */
+.how__stages {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	gap: clamp(24px, 3vw, 36px);
+}
+
+.how__timeline-line {
+	position: absolute;
+	left: 36px;
+	top: 0;
+	bottom: 0;
+	width: 2px;
+	background: linear-gradient(180deg, #2c5aa0 0%, #a0c4e8 100%);
+	border-radius: 1px;
+}
+
+/* Карточка этапа */
+.how__stage {
+	display: flex;
+	gap: clamp(20px, 3vw, 32px);
+	position: relative;
+	z-index: 1;
+}
+
+.how__stage-number {
+	flex-shrink: 0;
+	width: 72px;
+	height: 72px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: clamp(20px, 2.5vw, 28px);
+	font-weight: 700;
+	color: #ffffff;
+	background: linear-gradient(135deg, #2c5aa0 0%, #4a7fd4 100%);
+	border-radius: 50%;
+	box-shadow: 0 4px 20px rgba(44, 90, 160, 0.25);
+}
+
+.how__stage-body {
+	flex: 1;
+	padding: clamp(20px, 3vw, 28px);
+	background: rgba(255, 255, 255, 0.7);
+	backdrop-filter: blur(8px);
+	border: 1px solid rgba(44, 90, 160, 0.1);
+	border-radius: 20px;
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.how__stage-body:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 6px 24px rgba(44, 90, 160, 0.12);
+}
+
+.how__stage-title {
+	margin: 0 0 8px;
+	font-size: clamp(17px, 2vw, 22px);
+	font-weight: 600;
+	color: #1e3a6e;
+	line-height: 1.3;
+}
+
+.how__stage-desc {
+	margin: 0 0 12px;
+	font-size: clamp(14px, 1.4vw, 17px);
+	font-weight: 400;
+	color: #3d5a80;
+	line-height: 1.6;
+}
+
+.how__stage-detail {
+	display: inline-block;
+	font-size: clamp(12px, 1.2vw, 14px);
+	font-weight: 500;
+	color: #2c5aa0;
+	background: rgba(44, 90, 160, 0.06);
+	padding: 4px 12px;
+	border-radius: 999px;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+	.how__timeline-line {
+		left: 24px;
+	}
+
+	.how__stage-number {
+		width: 48px;
+		height: 48px;
+		font-size: 18px;
+	}
+}
+
+@media (max-width: 480px) {
+	.how {
+		padding: 60px 16px;
+	}
+
+	.how__stages {
+		gap: 20px;
+	}
+
+	.how__timeline-line {
+		display: none;
+	}
+
+	.how__stage {
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+		gap: 12px;
+	}
+
+	.how__stage-body {
+		padding: 20px 16px;
+	}
+}
