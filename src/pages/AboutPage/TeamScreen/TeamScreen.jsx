@@ -1,0 +1,122 @@
+import { useRef } from 'react'
+import { motion, useInView } from 'framer-motion'
+import './TeamScreen.css'
+
+const mentors = [
+	{
+		role: 'Веб-разработка',
+		description: 'Практикующие разработчики с опытом коммерческих проектов. Помогают освоить стек, код-ревью и продуктовые практики.',
+		icon: '💻'
+	},
+	{
+		role: 'Мобильная разработка',
+		description: 'Специалисты по iOS и Android. Ведут от прототипа до рабочего приложения.',
+		icon: '📱'
+	},
+	{
+		role: 'AI и Data Science',
+		description: 'Инженеры с опытом в ML и анализе данных. Помогают внедрить AI в реальный продукт.',
+		icon: '🤖'
+	},
+	{
+		role: 'UI/UX Дизайн',
+		description: 'Дизайнеры с опытом запуска продуктов. Учат проектировать интерфейсы, которые решают задачи пользователя.',
+		icon: '🎨'
+	}
+]
+
+const roles = [
+	{ name: 'PM', label: 'Управление проектом' },
+	{ name: 'Dev', label: 'Разработка' },
+	{ name: 'Design', label: 'Дизайн' },
+	{ name: 'AI', label: 'Искусственный интеллект' },
+	{ name: 'QA', label: 'Тестирование' }
+]
+
+const fadeUp = {
+	hidden: { opacity: 0, y: 20 },
+	visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+}
+
+export function TeamScreen() {
+	const ref = useRef(null)
+	const isInView = useInView(ref, { once: true, margin: '-100px' })
+
+	return (
+		<section className="team" id="team">
+			<div className="team__container" ref={ref}>
+				<motion.div
+					className="team__header"
+					initial={{ opacity: 0, y: 20 }}
+					animate={isInView ? { opacity: 1, y: 0 } : {}}
+					transition={{ duration: 0.5 }}
+				>
+					<h2 className="team__title">Кто ведёт лабораторию</h2>
+					<p className="team__subtitle">
+						Практикующие специалисты с опытом коммерческих проектов.
+						Не теоретики из учебников — люди, которые запускали продукты
+						и знают, как работают настоящие команды.
+					</p>
+				</motion.div>
+
+				{/* Руководитель */}
+				<motion.div
+					className="team__lead"
+					initial="hidden"
+					animate={isInView ? 'visible' : 'hidden'}
+					variants={fadeUp}
+					transition={{ delay: 0.2 }}
+				>
+					<div className="team__lead-avatar">
+						<span className="team__lead-avatar-text">🧭</span>
+					</div>
+					<div className="team__lead-info">
+						<h3 className="team__lead-name">Руководитель лаборатории</h3>
+						<p className="team__lead-role">Координация направлений, связь с партнёрами, стратегия развития</p>
+						<div className="team__lead-stats">
+							<span className="team__lead-stat">Участие в запуске 15+ продуктов</span>
+							<span className="team__lead-stat">Опыт управления командами</span>
+						</div>
+					</div>
+				</motion.div>
+
+				{/* Менторы */}
+				<div className="team__mentors">
+					{mentors.map((mentor, i) => (
+						<motion.div
+							className="team__mentor"
+							key={mentor.role}
+							initial="hidden"
+							animate={isInView ? 'visible' : 'hidden'}
+							variants={fadeUp}
+							transition={{ delay: 0.3 + i * 0.1 }}
+						>
+							<span className="team__mentor-icon">{mentor.icon}</span>
+							<h4 className="team__mentor-role">{mentor.role}</h4>
+							<p className="team__mentor-desc">{mentor.description}</p>
+						</motion.div>
+					))}
+				</div>
+
+				{/* Роли в проекте */}
+				<motion.div
+					className="team__roles-block"
+					initial="hidden"
+					animate={isInView ? 'visible' : 'hidden'}
+					variants={fadeUp}
+					transition={{ delay: 0.7 }}
+				>
+					<h3 className="team__roles-title">Роли в каждом проекте</h3>
+					<div className="team__roles">
+						{roles.map((role) => (
+							<div className="team__role" key={role.name}>
+								<span className="team__role-name">{role.name}</span>
+								<span className="team__role-label">{role.label}</span>
+							</div>
+						))}
+					</div>
+				</motion.div>
+			</div>
+		</section>
+	)
+}

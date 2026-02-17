@@ -1,0 +1,133 @@
+.about-cta {
+	min-height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: linear-gradient(180deg, #ffffff 0%, #f0f7ff 30%, #e0efff 100%);
+	padding: clamp(60px, 10vw, 120px) clamp(16px, 4vw, 40px);
+	box-sizing: border-box;
+}
+
+.about-cta__container {
+	max-width: 800px;
+	width: 100%;
+	margin: 0 auto;
+}
+
+.about-cta__content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+}
+
+.about-cta__title {
+	margin: 0;
+	font-size: clamp(26px, 4.5vw, 48px);
+	font-weight: 700;
+	color: #1e3a6e;
+	line-height: 1.2;
+	margin-bottom: clamp(16px, 2vw, 24px);
+}
+
+.about-cta__text {
+	margin: 0;
+	font-size: clamp(16px, 2vw, 22px);
+	font-weight: 400;
+	color: #3d5a80;
+	line-height: 1.6;
+	max-width: 600px;
+	margin-bottom: clamp(32px, 4vw, 48px);
+}
+
+/* Кнопка */
+.about-cta__button-block {
+	margin-bottom: clamp(32px, 4vw, 48px);
+}
+
+.about-cta__button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: clamp(16px, 2vw, 22px) clamp(40px, 5vw, 64px);
+	font-family: 'Montserrat', sans-serif;
+	font-size: clamp(16px, 2vw, 22px);
+	font-weight: 600;
+	color: #ffffff;
+	background: linear-gradient(135deg, #2c5aa0 0%, #4a7fd4 100%);
+	border: none;
+	border-radius: 999px;
+	cursor: pointer;
+	box-shadow: 0 8px 30px rgba(44, 90, 160, 0.35);
+	transition: all 0.3s ease;
+}
+
+.about-cta__button:hover {
+	background: linear-gradient(135deg, #1e4a8a 0%, #3a6fc4 100%);
+	transform: translateY(-3px);
+	box-shadow: 0 12px 40px rgba(44, 90, 160, 0.45);
+}
+
+.about-cta__button:active {
+	transform: translateY(0);
+}
+
+.about-cta__hint {
+	margin: 12px 0 0;
+	font-size: clamp(13px, 1.3vw, 16px);
+	font-weight: 400;
+	color: #5a7aa0;
+}
+
+/* Доп. преимущества */
+.about-cta__extras {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: clamp(16px, 2vw, 24px);
+}
+
+.about-cta__extra {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 10px 20px;
+	background: rgba(255, 255, 255, 0.7);
+	backdrop-filter: blur(8px);
+	border: 1px solid rgba(44, 90, 160, 0.1);
+	border-radius: 999px;
+	font-size: clamp(13px, 1.3vw, 15px);
+	font-weight: 500;
+	color: #2c5aa0;
+	transition: transform 0.2s ease;
+}
+
+.about-cta__extra:hover {
+	transform: translateY(-2px);
+}
+
+.about-cta__extra-icon {
+	font-size: clamp(16px, 1.8vw, 20px);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+	.about-cta__extras {
+		flex-direction: column;
+		align-items: center;
+	}
+}
+
+@media (max-width: 480px) {
+	.about-cta {
+		padding: 60px 16px;
+	}
+
+	.about-cta__button {
+		width: 100%;
+	}
+
+	.about-cta__extra {
+		padding: 8px 16px;
+	}
+}

@@ -1,29 +1,26 @@
 import { useEffect, useRef, useState } from 'react'
 import { NavLink } from 'react-router-dom'
+import { useRef } from 'react'
+import { motion, useInView } from 'framer-motion'
 import './SectionTwo.css'
 import nevikRespect from '../../../../../assets/Nevik_respect.png'
 
+const fadeUp = {
+	hidden: { opacity: 0, y: 20 },
+	visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+}
+
+const stagger = {
+	hidden: { opacity: 0 },
+	visible: {
+		opacity: 1,
+		transition: { staggerChildren: 0.15 }
+	}
+}
+
 function SectionTwo() {
-	const [isBubbleVisible, setIsBubbleVisible] = useState(false)
 	const sectionRef = useRef(null)
-
-	useEffect(() => {
-		const sectionElement = sectionRef.current
-		if (!sectionElement) return
-
-		const observer = new IntersectionObserver(
-			entries => {
-				const [entry] = entries
-				if (!entry.isIntersecting) return
-				setIsBubbleVisible(true)
-				observer.disconnect()
-			},
-			{ threshold: 0.4 }
-		)
-
-		observer.observe(sectionElement)
-		return () => observer.disconnect()
-	}, [])
+	const isInView = useInView(sectionRef, { once: true, margin: '-80px' })
 
 	return (
 		<section
@@ -32,27 +29,47 @@ function SectionTwo() {
 			id="directions"
 		>
 			<div className="stories__container">
-				<header className="stories__header">
+				<motion.header
+					className="stories__header"
+					initial={{ opacity: 0, y: 20 }}
+					animate={isInView ? { opacity: 1, y: 0 } : {}}
+					transition={{ duration: 0.5 }}
+				>
 					<h1 className="stories__title">Кем ты хочешь быть в следующем семестре?</h1>
-				</header>
+				</motion.header>
 
 				<div className="stories__layout">
 					<div className="stories__mascot-col">
 						<div className="stories__mascot">
-							<div className={`stories__speech-bubble ${isBubbleVisible ? 'is-visible' : ''}`}>
+							{/* Бабл появляется ПОСЛЕ маскота */}
+							<motion.div
+								className="stories__speech-bubble"
+								initial={{ opacity: 0, y: 24, scale: 0.95 }}
+								animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+								transition={{ duration: 0.6, delay: 0.8 }}
+							>
 								Смотри, что уже сделали студенты!
-							</div>
-							<img
+							</motion.div>
+							{/* Маскот появляется первым */}
+							<motion.img
 								src={nevikRespect}
 								alt="Маскот NEVA — Невик"
 								className="stories__mascot-image"
+								initial={{ opacity: 0, scale: 0.9 }}
+								animate={isInView ? { opacity: 1, scale: 1 } : {}}
+								transition={{ duration: 0.6, delay: 0.3 }}
 							/>
 						</div>
 					</div>
 
-					<div className="stories__cards-col">
+					<motion.div
+						className="stories__cards-col"
+						variants={stagger}
+						initial="hidden"
+						animate={isInView ? 'visible' : 'hidden'}
+					>
 						<div className="story-list">
-							<article className="story-card">
+							<motion.article className="story-card" variants={fadeUp}>
 								<div
 									className="story-card__media story-card__media--mvp"
 									aria-hidden="true"
@@ -82,9 +99,9 @@ function SectionTwo() {
 									</p>
 									<p className="story-card__meta">Имя, факультет</p>
 								</div>
-							</article>
+							</motion.article>
 
-							<article className="story-card">
+							<motion.article className="story-card" variants={fadeUp}>
 								<div
 									className="story-card__media story-card__media--landing"
 									aria-hidden="true"
@@ -109,9 +126,9 @@ function SectionTwo() {
 									</p>
 									<p className="story-card__meta">Имя, факультет</p>
 								</div>
-							</article>
+							</motion.article>
 
-							<article className="story-card">
+							<motion.article className="story-card" variants={fadeUp}>
 								<div
 									className="story-card__media story-card__media--bot"
 									aria-hidden="true"
@@ -131,13 +148,20 @@ function SectionTwo() {
 									</p>
 									<p className="story-card__meta">Имя, факультет</p>
 								</div>
-							</article>
+							</motion.article>
 						</div>
-					</div>
+					</motion.div>
 				</div>
 
 				<div className="stories__cta">
 					<NavLink
+				<motion.div
+					className="stories__cta"
+					initial={{ opacity: 0, y: 20 }}
+					animate={isInView ? { opacity: 1, y: 0 } : {}}
+					transition={{ duration: 0.5, delay: 0.6 }}
+				>
+					<a
 						className="stories__button stories__button--primary"
 						to="/form"
 					>
@@ -150,6 +174,8 @@ function SectionTwo() {
 						Посмотреть все проекты
 					</NavLink>
 				</div>
+					</a>
+				</motion.div>
 			</div>
 		</section>
 	)

@@ -75,8 +75,8 @@
 .visual-section__bubble {
 	position: absolute;
 	top: 173px;
-	right: -7%;
-	transform: translateX(-50%) translateY(20px) scale(0.95);
+	right: 20%;
+	transform: translateX(-50%);
 	background: linear-gradient(135deg, #2c72de, #5b99f3);
 	color: #ffffff;
 	font-size: clamp(14px, 1.6vw, 18px);
@@ -87,15 +87,6 @@
 	text-align: center;
 	box-shadow: 0 8px 24px rgba(44, 114, 222, 0.3);
 	z-index: 3;
-	opacity: 0;
-	transition:
-		opacity 0.7s ease,
-		transform 0.7s ease;
-}
-
-.visual-section__bubble.is-visible {
-	opacity: 1;
-	transform: translateX(-50%) translateY(0) scale(1);
 }
 
 .visual-section__bubble::after {

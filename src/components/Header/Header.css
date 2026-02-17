@@ -42,6 +42,11 @@
 	color: #2c4a7c;
 }
 
+.header__link--active {
+	color: #1e3a6e;
+	font-weight: 600;
+}
+
 /* Планшеты */
 @media (max-width: 1024px) {
 	.header {

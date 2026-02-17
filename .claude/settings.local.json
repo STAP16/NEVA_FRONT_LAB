@@ -7,7 +7,10 @@
       "Bash(npm install:*)",
       "Bash(npx vite:*)",
       "Bash(npx --yes sharp-cli:*)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(where node:*)",
+      "Bash(node --version:*)",
+      "Bash(node:*)"
     ]
   }
 }

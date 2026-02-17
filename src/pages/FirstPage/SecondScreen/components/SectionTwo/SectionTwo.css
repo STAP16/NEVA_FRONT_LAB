@@ -86,16 +86,6 @@
 	margin-right: 100px;
 	pointer-events: auto;
 	flex-shrink: 0;
-	opacity: 0;
-	transform: translateY(24px) scale(0.95);
-	transition:
-		opacity 0.7s ease,
-		transform 0.7s ease;
-}
-
-.stories__speech-bubble.is-visible {
-	opacity: 1;
-	transform: translateY(0) scale(1);
 }
 
 .stories__speech-bubble::after {
