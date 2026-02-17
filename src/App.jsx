@@ -5,6 +5,7 @@ import { AboutPage } from './pages/AboutPage/AboutPage'
 import './App.css'
 import {
 	DirectionsPage,
+	ProjectsPage,
 	HeroScreen,
 	SecondScreen,
 	ProcessScreen,
@@ -43,6 +44,10 @@ function App() {
 				<Route
 					path="/directions"
 					element={<DirectionsPage />}
+				/>
+				<Route
+					path="/projects"
+					element={<ProjectsPage />}
 				/>
 			</Routes>
 			<Footer />
