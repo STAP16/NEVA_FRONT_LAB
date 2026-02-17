@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
 import { NavLink } from 'react-router-dom'
-import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import './SectionTwo.css'
 import nevikRespect from '../../../../../assets/Nevik_respect.png'
@@ -153,15 +152,13 @@ function SectionTwo() {
 					</motion.div>
 				</div>
 
-				<div className="stories__cta">
-					<NavLink
 				<motion.div
 					className="stories__cta"
 					initial={{ opacity: 0, y: 20 }}
 					animate={isInView ? { opacity: 1, y: 0 } : {}}
 					transition={{ duration: 0.5, delay: 0.6 }}
 				>
-					<a
+					<NavLink
 						className="stories__button stories__button--primary"
 						to="/form"
 					>
@@ -173,8 +170,6 @@ function SectionTwo() {
 					>
 						Посмотреть все проекты
 					</NavLink>
-				</div>
-					</a>
 				</motion.div>
 			</div>
 		</section>

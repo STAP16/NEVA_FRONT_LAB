@@ -1,10 +1,8 @@
 import { Routes, Route } from 'react-router-dom'
 import Header from './components/Header/Header'
 import Footer from './components/Footer/Footer'
-import { HomePage } from './pages/HomePage/HomePage'
 import { AboutPage } from './pages/AboutPage/AboutPage'
 import './App.css'
-import { Route, Routes } from 'react-router-dom'
 import {
 	DirectionsPage,
 	HeroScreen,
@@ -18,17 +16,6 @@ import {
 function HomePage() {
 	return (
 		<>
-			<Header />
-			<Routes>
-				<Route
-					path="/"
-					element={<HomePage />}
-				/>
-				<Route
-					path="/about"
-					element={<AboutPage />}
-				/>
-			</Routes>
 			<HeroScreen />
 			<SecondScreen />
 			{/* Экран 3 - Детальные направления */}
@@ -48,6 +35,10 @@ function App() {
 				<Route
 					path="/"
 					element={<HomePage />}
+				/>
+				<Route
+					path="/about"
+					element={<AboutPage />}
 				/>
 				<Route
 					path="/directions"
