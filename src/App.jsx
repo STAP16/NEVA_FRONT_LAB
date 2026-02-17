@@ -1,12 +1,12 @@
 import Header from './components/Header/Header'
 import Footer from './components/Footer/Footer'
 import './App.css'
-import { HeroScreen, SecondScreen, ProcessScreen, DirectionsScreen, FifthScreen, SixthScreen } from './pages'
+import { Route, Routes } from 'react-router-dom'
+import { DirectionsPage, HeroScreen, SecondScreen, ProcessScreen, DirectionsScreen, FifthScreen, SixthScreen } from './pages'
 
-function App() {
+function HomePage() {
 	return (
 		<>
-			<Header />
 			<HeroScreen />
 			<SecondScreen />
 			{/* Экран 3 - Детальные направления */}
@@ -14,6 +14,24 @@ function App() {
 			<ProcessScreen />
 			<FifthScreen />
 			<SixthScreen />
+		</>
+	)
+}
+
+function App() {
+	return (
+		<>
+			<Header />
+			<Routes>
+				<Route
+					path="/"
+					element={<HomePage />}
+				/>
+				<Route
+					path="/directions"
+					element={<DirectionsPage />}
+				/>
+			</Routes>
 			<Footer />
 		</>
 	)

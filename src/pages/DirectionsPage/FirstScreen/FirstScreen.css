@@ -1,0 +1,4 @@
+.directions-page-first-screen {
+	min-height: 100vh;
+	background: url('../../../assets/directions_bg.png') center / cover no-repeat;
+}
