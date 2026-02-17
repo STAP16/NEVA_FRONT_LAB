@@ -1,13 +1,17 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { NavLink, Link, useLocation } from 'react-router-dom'
 import './Header.css'
 
 function Header() {
 	const [scrolled, setScrolled] = useState(false)
 	const { pathname } = useLocation()
+	const prevPathname = useRef(pathname)
 
 	useEffect(() => {
-		window.scrollTo(0, 0)
+		if (prevPathname.current !== pathname) {
+			window.scrollTo(0, 0)
+			prevPathname.current = pathname
+		}
 	}, [pathname])
 
 	useEffect(() => {

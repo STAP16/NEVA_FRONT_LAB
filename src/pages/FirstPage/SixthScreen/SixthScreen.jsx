@@ -122,12 +122,12 @@ export function SixthScreen() {
 						<img
 							src={nevaShip}
 							alt="Корабль NEVA"
-							className="start-direction__ship"
+							className={`start-direction__ship ${isChatVisible ? 'is-visible' : ''}`}
 						/>
 						<img
 							src={nevikCap}
 							alt="Капитан Nevik"
-							className="start-direction__cap"
+							className={`start-direction__cap ${isChatVisible ? 'is-visible' : ''}`}
 						/>
 					</div>
 				</div>

@@ -189,9 +189,12 @@
 	z-index: 3;
 	opacity: 0;
 	transform: translateY(22px) scale(0.98);
-	transition:
-		opacity 0.7s ease,
-		transform 0.7s ease;
+	transition: opacity 0.7s ease 0.8s, transform 0.7s ease 0.8s;
+}
+
+.start-direction__chat-bubble.is-visible {
+	opacity: 1;
+	transform: translateY(0) scale(1);
 }
 
 .start-direction__chat-bubble::after {
@@ -207,21 +210,22 @@
 	transform: rotate(45deg);
 }
 
-.start-direction__chat-bubble.is-visible {
-	opacity: 1;
-	transform: translateY(0) scale(1);
-}
-
 .start-direction__ship {
 	position: absolute;
-	right: 300px;
+	left: -4%;
 	bottom: 25%;
 	width: clamp(440px, 74%, 320px);
 	z-index: 1;
 	right: 34%;
+	opacity: 0;
+	transform: translateX(-20px) scale(0.95);
+	filter: drop-shadow(0 16px 28px rgba(66, 95, 145, 0.2));
+	transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.start-direction__ship.is-visible {
 	opacity: 0.95;
 	transform: translateX(3%) scale(0.95);
-	filter: drop-shadow(0 16px 28px rgba(66, 95, 145, 0.2));
 }
 
 .start-direction__cap {
@@ -230,8 +234,15 @@
 	bottom: -100px;
 	width: clamp(480px, 95%, 720px);
 	z-index: 2;
-	transform: translateX(-2%) scale(1.02);
+	opacity: 0;
+	transform: translateY(30px) translateX(-2%) scale(1.02);
 	filter: drop-shadow(0 18px 34px rgba(25, 45, 78, 0.461));
+	transition: opacity 0.9s ease 0.3s, transform 0.9s ease 0.3s;
+}
+
+.start-direction__cap.is-visible {
+	opacity: 1;
+	transform: translateY(0) translateX(-2%) scale(1.02);
 }
 
 @media (max-width: 2100px) {
