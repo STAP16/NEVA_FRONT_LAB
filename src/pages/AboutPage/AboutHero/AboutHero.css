@@ -1,10 +1,9 @@
 .about-hero {
-	min-height: 100vh;
 	display: flex;
-	align-items: center;
+	align-items: flex-start;
 	justify-content: center;
 	background: linear-gradient(180deg, #f0f7ff 0%, #f8fbff 50%, #ffffff 100%);
-	padding: clamp(60px, 10vw, 120px) clamp(16px, 4vw, 40px);
+	padding-top: 60px;
 	box-sizing: border-box;
 }
 
@@ -14,8 +13,8 @@
 	margin: 0 auto;
 	display: flex;
 	flex-direction: column;
-	align-items: center;
-	text-align: center;
+	align-items: flex-start;
+	text-align: left;
 }
 
 .about-hero__label {
@@ -34,6 +33,7 @@
 	color: #1e3a6e;
 	line-height: 1.2;
 	margin-bottom: clamp(16px, 2vw, 24px);
+	max-width: 2500px;
 }
 
 .about-hero__subtitle {
@@ -42,7 +42,6 @@
 	font-weight: 400;
 	color: #3d5a80;
 	line-height: 1.6;
-	max-width: 700px;
 	margin-bottom: clamp(32px, 4vw, 48px);
 }
 
@@ -66,7 +65,9 @@
 	border: 1px solid rgba(44, 90, 160, 0.1);
 	border-radius: 16px;
 	text-align: left;
-	transition: transform 0.2s ease, box-shadow 0.2s ease;
+	transition:
+		transform 0.2s ease,
+		box-shadow 0.2s ease;
 }
 
 .about-hero__point:hover {
@@ -138,10 +139,6 @@
 @media (max-width: 768px) {
 	.about-hero__points {
 		grid-template-columns: 1fr;
-	}
-
-	.about-hero__title br {
-		display: none;
 	}
 }
 

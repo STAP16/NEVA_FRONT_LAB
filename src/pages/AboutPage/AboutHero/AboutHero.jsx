@@ -48,35 +48,53 @@ export function AboutHero() {
 				initial="hidden"
 				animate="visible"
 			>
-				<motion.span className="about-hero__label" variants={fadeUp}>
+				<motion.span
+					className="about-hero__label"
+					variants={fadeUp}
+				>
 					О лаборатории
 				</motion.span>
 
-				<motion.h1 className="about-hero__title" variants={fadeUp}>
-					NEVA LAB — проектная лаборатория,
-					<br />а не учебные курсы
+				<motion.h1
+					className="about-hero__title"
+					variants={fadeUp}
+				>
+					NEVA LAB — проектная лаборатория
 				</motion.h1>
 
-				<motion.p className="about-hero__subtitle" variants={fadeUp}>
-					Мы не даём «контент». Мы создаём среду, где ты делаешь
-					реальные продукты в команде — с менторами, дедлайнами
-					и защитой результата.
+				<motion.p
+					className="about-hero__subtitle"
+					variants={fadeUp}
+				>
+					созданная студентами для студентов
 				</motion.p>
 
-				<motion.div className="about-hero__points" variants={fadeUp}>
+				<motion.div
+					className="about-hero__points"
+					variants={fadeUp}
+				>
 					{points.map((point, i) => (
-						<div className="about-hero__point" key={i}>
+						<div
+							className="about-hero__point"
+							key={i}
+						>
 							<span className="about-hero__point-icon">{point.icon}</span>
 							<span className="about-hero__point-text">{point.text}</span>
 						</div>
 					))}
 				</motion.div>
 
-				<motion.div className="about-hero__not-block" variants={fadeUp}>
+				<motion.div
+					className="about-hero__not-block"
+					variants={fadeUp}
+				>
 					<h3 className="about-hero__not-title">Чем мы НЕ являемся</h3>
 					<div className="about-hero__not-list">
 						{notList.map((item, i) => (
-							<div className="about-hero__not-item" key={i}>
+							<div
+								className="about-hero__not-item"
+								key={i}
+							>
 								<span className="about-hero__not-cross">✕</span>
 								<span>{item}</span>
 							</div>
