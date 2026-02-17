@@ -1,20 +1,21 @@
 .about-hero {
 	display: flex;
-	align-items: flex-start;
-	justify-content: center;
+	align-items: center;
 	background: linear-gradient(180deg, #f0f7ff 0%, #f8fbff 50%, #ffffff 100%);
-	padding-top: 60px;
+	padding: 80px clamp(24px, 5vw, 80px) 40px;
 	box-sizing: border-box;
+	overflow: hidden;
+	position: relative;
+	justify-content: center;
 }
 
-.about-hero__content {
-	max-width: 900px;
-	width: 100%;
-	margin: 0 auto;
+.about-hero__left {
+	flex: 0 1 55%;
+	max-width: 620px;
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
-	text-align: left;
+	z-index: 1;
 }
 
 .about-hero__label {
@@ -28,12 +29,11 @@
 
 .about-hero__title {
 	margin: 0;
-	font-size: clamp(26px, 4vw, 48px);
+	font-size: clamp(28px, 4vw, 52px);
 	font-weight: 700;
 	color: #1e3a6e;
-	line-height: 1.2;
-	margin-bottom: clamp(16px, 2vw, 24px);
-	max-width: 2500px;
+	line-height: 1.15;
+	margin-bottom: clamp(12px, 1.5vw, 20px);
 }
 
 .about-hero__subtitle {
@@ -42,24 +42,23 @@
 	font-weight: 400;
 	color: #3d5a80;
 	line-height: 1.6;
-	margin-bottom: clamp(32px, 4vw, 48px);
+	margin-bottom: clamp(28px, 3.5vw, 44px);
 }
 
-/* Пункты «что мы делаем» */
+/* ── Карточки «что мы делаем» ── */
 .about-hero__points {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
-	gap: clamp(12px, 2vw, 20px);
+	gap: clamp(10px, 1.5vw, 16px);
 	width: 100%;
-	max-width: 700px;
-	margin-bottom: clamp(40px, 5vw, 64px);
+	margin-bottom: clamp(28px, 3.5vw, 48px);
 }
 
 .about-hero__point {
 	display: flex;
 	align-items: center;
 	gap: 12px;
-	padding: clamp(14px, 2vw, 20px) clamp(16px, 2vw, 24px);
+	padding: clamp(12px, 1.5vw, 18px) clamp(14px, 1.5vw, 20px);
 	background: rgba(255, 255, 255, 0.7);
 	backdrop-filter: blur(8px);
 	border: 1px solid rgba(44, 90, 160, 0.1);
@@ -81,17 +80,17 @@
 }
 
 .about-hero__point-text {
-	font-size: clamp(14px, 1.4vw, 17px);
+	font-size: clamp(13px, 1.3vw, 16px);
 	font-weight: 500;
 	color: #1e3a6e;
 	line-height: 1.4;
 }
 
-/* Блок «Чем мы НЕ являемся» */
+/* ── Блок «Чем мы НЕ являемся» ── */
 .about-hero__not-block {
 	width: 100%;
-	max-width: 600px;
-	padding: clamp(24px, 3vw, 36px);
+	max-width: 520px;
+	padding: clamp(20px, 2.5vw, 32px);
 	background: rgba(255, 255, 255, 0.6);
 	backdrop-filter: blur(8px);
 	border: 1px solid rgba(44, 90, 160, 0.08);
@@ -99,7 +98,7 @@
 }
 
 .about-hero__not-title {
-	margin: 0 0 clamp(16px, 2vw, 24px);
+	margin: 0 0 clamp(12px, 1.5vw, 20px);
 	font-size: clamp(18px, 2vw, 24px);
 	font-weight: 600;
 	color: #2c5aa0;
@@ -108,7 +107,7 @@
 .about-hero__not-list {
 	display: flex;
 	flex-direction: column;
-	gap: clamp(10px, 1.5vw, 16px);
+	gap: clamp(8px, 1.2vw, 14px);
 }
 
 .about-hero__not-item {
@@ -135,16 +134,91 @@
 	border-radius: 50%;
 }
 
-/* Адаптивность */
+/* ── Правая колонка (NEVIK) ── */
+.about-hero__right {
+	display: flex;
+	align-items: flex-end;
+	justify-content: center;
+	align-self: flex-end;
+	position: relative;
+	z-index: 1;
+}
+
+.about-hero__bg {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	max-width: 1050px;
+	height: auto;
+	object-fit: contain;
+	pointer-events: none;
+	z-index: 0;
+}
+
+.about-hero__nevik {
+	width: 100%;
+	max-width: 580px;
+	height: auto;
+	object-fit: contain;
+	display: block;
+	position: relative;
+	z-index: 1;
+	bottom: -60px;
+}
+
+/* ── Адаптивность ── */
+@media (max-width: 1024px) {
+	.about-hero__left {
+		flex: 0 1 55%;
+	}
+
+	.about-hero__right {
+		flex: 0 1 40%;
+	}
+
+	.about-hero__nevik {
+		max-width: 420px;
+	}
+}
+
 @media (max-width: 768px) {
+	.about-hero {
+		flex-direction: column;
+		align-items: center;
+		padding: 80px 20px 0;
+		min-height: auto;
+	}
+
+	.about-hero__left {
+		flex: none;
+		max-width: 100%;
+		align-items: center;
+		text-align: center;
+	}
+
 	.about-hero__points {
 		grid-template-columns: 1fr;
+		z-index: 1;
+	}
+
+	.about-hero__not-block {
+		max-width: 100%;
+	}
+
+	.about-hero__right {
+		flex: none;
+		margin-top: 32px;
+	}
+
+	.about-hero__nevik {
+		max-width: 320px;
 	}
 }
 
 @media (max-width: 480px) {
 	.about-hero {
-		padding: 60px 16px;
+		padding: 60px 16px 0;
 	}
 
 	.about-hero__not-block {

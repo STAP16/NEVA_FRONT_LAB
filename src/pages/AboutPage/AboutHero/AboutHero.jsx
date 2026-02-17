@@ -1,4 +1,6 @@
 import { motion } from 'framer-motion'
+import nevikImg from '../../../assets/NEVIK_FOR_ABOUT_FIRST_SCREEN.png'
+import bgImg from '../../../assets/BG_FOR_ABOUT_FIRST_SCREEN.png'
 import './AboutHero.css'
 
 const stagger = {
@@ -43,7 +45,7 @@ export function AboutHero() {
 	return (
 		<section className="about-hero">
 			<motion.div
-				className="about-hero__content"
+				className="about-hero__left"
 				variants={stagger}
 				initial="hidden"
 				animate="visible"
@@ -101,6 +103,25 @@ export function AboutHero() {
 						))}
 					</div>
 				</motion.div>
+			</motion.div>
+
+			<motion.div
+				className="about-hero__right"
+				initial={{ opacity: 0, x: 40 }}
+				animate={{ opacity: 1, x: 0 }}
+				transition={{ duration: 0.7, delay: 0.3 }}
+			>
+				<img
+					className="about-hero__bg"
+					src={bgImg}
+					alt=""
+					aria-hidden="true"
+				/>
+				<img
+					className="about-hero__nevik"
+					src={nevikImg}
+					alt="NEVIK — маскот NEVA LAB"
+				/>
 			</motion.div>
 		</section>
 	)
