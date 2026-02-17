@@ -12,6 +12,7 @@ import { AboutPage } from './pages/AboutPage/AboutPage'
 import './App.css'
 import {
 	DirectionsPage,
+	ProjectsPage,
 	HeroScreen,
 	SecondScreen,
 	ProcessScreen,
