@@ -1,3 +1,5 @@
+import { useEffect, useRef, useState } from 'react'
+import { NavLink } from 'react-router-dom'
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import './SectionTwo.css'
@@ -142,8 +144,7 @@ function SectionTwo() {
 								<div className="story-card__content">
 									<p className="story-card__label">Колледж</p>
 									<p className="story-card__quote">
-										«Наш чат-бот для абитуриентов уже обработал 1000+ вопросов и снизил нагрузку на
-										приёмную комиссию».
+										«Разработали удобную систему расписания на сайте колледжа».
 									</p>
 									<p className="story-card__meta">Имя, факультет</p>
 								</div>
@@ -152,6 +153,8 @@ function SectionTwo() {
 					</motion.div>
 				</div>
 
+				<div className="stories__cta">
+					<NavLink
 				<motion.div
 					className="stories__cta"
 					initial={{ opacity: 0, y: 20 }}
@@ -160,15 +163,17 @@ function SectionTwo() {
 				>
 					<a
 						className="stories__button stories__button--primary"
-						href="#form"
+						to="/form"
 					>
 						Хочу так же! Расскажите, как начать
-					</a>
-					<a
+					</NavLink>
+					<NavLink
 						className="stories__button stories__button--secondary"
-						href="#projects"
+						to="/projects"
 					>
 						Посмотреть все проекты
+					</NavLink>
+				</div>
 					</a>
 				</motion.div>
 			</div>

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { NavLink } from 'react-router-dom'
 import nevikCap from '../../../assets/nevik_cap.png'
 import nevaShip from '../../../assets/neva_ship.png'
 import collegeIcon from '../../../assets/college.svg'
@@ -105,12 +106,12 @@ export function SixthScreen() {
 						портфолио и сообществу единомышленников. Главное — сделать шаг.
 					</p>
 
-					<a
-						href={`#form?direction=${selectedDirection}`}
+					<NavLink
+						to={`/form?direction=${selectedDirection}`}
 						className="start-direction__button"
 					>
 						Выбрать направление и подать заявку →
-					</a>
+					</NavLink>
 				</div>
 
 				<div className="start-direction__visuals">

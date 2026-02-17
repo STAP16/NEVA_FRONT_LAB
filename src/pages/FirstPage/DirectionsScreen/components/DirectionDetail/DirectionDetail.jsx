@@ -11,6 +11,8 @@ const directionIconMap = {
 }
 
 function DirectionDetail({ category, title, type, description, forYou, benefits, extra }) {
+	console.log(forYou)
+
 	return (
 		<article className="direction-detail">
 			<div className="direction-detail__header">
