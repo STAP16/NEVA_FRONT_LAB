@@ -83,6 +83,36 @@
 	pointer-events: none;
 }
 
+/* ===== Чат-баббл маскота ===== */
+.results__chat-bubble {
+	position: absolute;
+	left: 60px;
+	top: -20px;
+	width: clamp(200px, 18vw, 320px);
+	padding: clamp(12px, 1.4vw, 16px);
+	border-radius: 18px;
+	background: rgba(255, 255, 255, 0.97);
+	border: 1px solid #d7e6ff;
+	box-shadow: 0 14px 32px rgba(56, 101, 171, 0.2);
+	font-size: clamp(12px, 1.1vw, 15px);
+	line-height: 1.45;
+	color: #355a90;
+	z-index: 4;
+}
+
+.results__chat-bubble::after {
+	content: '';
+	position: absolute;
+	bottom: -7px;
+	left: 30%;
+	width: 12px;
+	height: 12px;
+	background: rgba(255, 255, 255, 0.97);
+	border-right: 1px solid #d7e6ff;
+	border-bottom: 1px solid #d7e6ff;
+	transform: rotate(45deg);
+}
+
 /* ===== Карточки — диагональное смещение ===== */
 .results__card {
 	position: relative;
@@ -247,7 +277,8 @@
 		transform: translateY(0);
 	}
 
-	.results__nevik {
+	.results__nevik,
+	.results__chat-bubble {
 		display: none;
 	}
 }

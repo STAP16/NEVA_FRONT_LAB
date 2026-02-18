@@ -43,8 +43,14 @@ export function ResultsScreen() {
 	const isInView = useInView(ref, { once: true, margin: '-100px' })
 
 	return (
-		<section className="results" id="results">
-			<div className="results__container" ref={ref}>
+		<section
+			className="results"
+			id="results"
+		>
+			<div
+				className="results__container"
+				ref={ref}
+			>
 				<motion.div
 					className="results__header"
 					initial={{ opacity: 0, y: 20 }}
@@ -53,8 +59,8 @@ export function ResultsScreen() {
 				>
 					<h2 className="results__title">Что получают участники</h2>
 					<p className="results__subtitle">
-						Не абстрактные «знания» — а конкретный результат на каждом уровне:
-						навык, портфолио, карьерное преимущество.
+						Не абстрактные «знания» — а конкретный результат на каждом уровне: навык, портфолио,
+						карьерное преимущество.
 					</p>
 				</motion.div>
 
@@ -67,6 +73,14 @@ export function ResultsScreen() {
 						animate={isInView ? { opacity: 1, x: 0 } : {}}
 						transition={{ duration: 0.7, delay: 0.2 }}
 					/>
+					<motion.div
+						className="results__chat-bubble"
+						initial={{ opacity: 0, y: 20, scale: 0.98 }}
+						animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+						transition={{ duration: 0.7, delay: 0.8 }}
+					>
+						Мы не тренируем учеников. Мы собираем специалистов.
+					</motion.div>
 					{results.map((result, i) => (
 						<motion.div
 							className={`results__card results__card--${i + 1}`}
@@ -88,7 +102,10 @@ export function ResultsScreen() {
 								{/* Список пунктов */}
 								<ul className="results__card-list">
 									{result.items.map((item, j) => (
-										<li className="results__card-item" key={j}>
+										<li
+											className="results__card-item"
+											key={j}
+										>
 											<svg
 												className="results__check-icon"
 												width="18"
@@ -96,7 +113,12 @@ export function ResultsScreen() {
 												viewBox="0 0 18 18"
 												fill="none"
 											>
-												<circle cx="9" cy="9" r="9" fill="rgba(44, 90, 160, 0.1)" />
+												<circle
+													cx="9"
+													cy="9"
+													r="9"
+													fill="rgba(44, 90, 160, 0.1)"
+												/>
 												<path
 													d="M5.5 9.5L7.5 11.5L12.5 6.5"
 													stroke="#2c5aa0"
