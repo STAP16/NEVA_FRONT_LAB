@@ -127,9 +127,7 @@ export function TeamScreen() {
 								<span className="team__mentor-icon">{mentor.icon}</span>
 							)}
 							<h4 className="team__mentor-role">{mentor.role}</h4>
-							{mentor.name && (
-								<p className="team__mentor-name">{mentor.name}</p>
-							)}
+							{mentor.name && <p className="team__mentor-name">{mentor.name}</p>}
 							<p className="team__mentor-desc">{mentor.description}</p>
 						</motion.div>
 					))}
@@ -143,7 +141,7 @@ export function TeamScreen() {
 					variants={fadeUp}
 					transition={{ delay: 0.7 }}
 				>
-					<h3 className="team__roles-title">Роли в каждом проекте</h3>
+					<h3 className="team__roles-title">Роли участников в каждом проекте</h3>
 					<div className="team__roles">
 						{roles.map(role => (
 							<div
