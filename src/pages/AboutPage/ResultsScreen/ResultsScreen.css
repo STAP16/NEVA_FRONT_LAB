@@ -101,38 +101,6 @@
 	margin-top: 1px;
 }
 
-/* Блок цифр */
-.results__stats {
-	display: flex;
-	justify-content: center;
-	flex-wrap: wrap;
-	gap: clamp(24px, 4vw, 56px);
-	padding: clamp(28px, 4vw, 44px);
-	background: rgba(255, 255, 255, 0.6);
-	backdrop-filter: blur(8px);
-	border: 1px solid rgba(44, 90, 160, 0.08);
-	border-radius: 24px;
-}
-
-.results__stat {
-	text-align: center;
-}
-
-.results__stat-number {
-	display: block;
-	font-size: clamp(28px, 3.5vw, 44px);
-	font-weight: 700;
-	color: #1e3a6e;
-	line-height: 1.2;
-}
-
-.results__stat-label {
-	display: block;
-	font-size: clamp(12px, 1.2vw, 15px);
-	font-weight: 400;
-	color: #5a7aa0;
-	margin-top: 4px;
-}
 
 /* Адаптивность */
 @media (max-width: 1024px) {
@@ -144,22 +112,9 @@
 	}
 }
 
-@media (max-width: 768px) {
-	.results__stats {
-		gap: 20px 32px;
-	}
-}
-
 @media (max-width: 480px) {
 	.results {
 		padding: 60px 16px;
-	}
-
-	.results__stats {
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-		gap: 16px;
-		padding: 20px 16px;
 	}
 
 	.results__level {

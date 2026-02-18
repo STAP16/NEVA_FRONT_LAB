@@ -16,21 +16,55 @@ const fadeUp = {
 	visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
 }
 
+const IconTeam = () => (
+	<svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<circle cx="10" cy="8" r="3.5" stroke="#2c5aa0" strokeWidth="1.8" />
+		<path d="M3 21c0-3.5 3-6 7-6s7 2.5 7 6" stroke="#2c5aa0" strokeWidth="1.8" strokeLinecap="round" />
+		<circle cx="20" cy="9.5" r="2.8" stroke="#2c5aa0" strokeWidth="1.8" />
+		<path d="M22 21c2.5-.5 4-2.5 4-4.5 0-2.5-2-4.5-5-5" stroke="#2c5aa0" strokeWidth="1.8" strokeLinecap="round" />
+	</svg>
+)
+
+const IconTarget = () => (
+	<svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<circle cx="14" cy="14" r="11" stroke="#2c5aa0" strokeWidth="1.8" />
+		<circle cx="14" cy="14" r="7" stroke="#2c5aa0" strokeWidth="1.8" />
+		<circle cx="14" cy="14" r="3" fill="#2c5aa0" />
+	</svg>
+)
+
+const IconSprint = () => (
+	<svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<path d="M16 3L10 14h5l-3 11 10-13h-6l4-9H16z" fill="#2c5aa0" />
+	</svg>
+)
+
+const IconTrophy = () => (
+	<svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<path d="M8 4h12v8c0 3.3-2.7 6-6 6s-6-2.7-6-6V4z" stroke="#2c5aa0" strokeWidth="1.8" />
+		<path d="M8 7H5c0 3 1.5 5 3 5.5" stroke="#2c5aa0" strokeWidth="1.8" strokeLinecap="round" />
+		<path d="M20 7h3c0 3-1.5 5-3 5.5" stroke="#2c5aa0" strokeWidth="1.8" strokeLinecap="round" />
+		<path d="M14 18v3" stroke="#2c5aa0" strokeWidth="1.8" strokeLinecap="round" />
+		<path d="M9 24h10" stroke="#2c5aa0" strokeWidth="1.8" strokeLinecap="round" />
+		<path d="M11 24v-3h6v3" stroke="#2c5aa0" strokeWidth="1.8" />
+	</svg>
+)
+
 const points = [
 	{
-		icon: '👥',
+		icon: <IconTeam />,
 		text: 'Работа в командах 3–5 человек'
 	},
 	{
-		icon: '🎯',
+		icon: <IconTarget />,
 		text: 'Настоящие задачи: колледж, бизнес, стартап'
 	},
 	{
-		icon: '⚡',
+		icon: <IconSprint />,
 		text: 'Спринты и дедлайны как в IT-компании'
 	},
 	{
-		icon: '🏆',
+		icon: <IconTrophy />,
 		text: 'Финальная защита результата'
 	}
 ]
@@ -61,14 +95,16 @@ export function AboutHero() {
 					className="about-hero__title"
 					variants={fadeUp}
 				>
-					NEVA LAB — проектная лаборатория
+					NEVA LAB — проектная
+					<br />
+					лаборатория
 				</motion.h1>
 
 				<motion.p
 					className="about-hero__subtitle"
 					variants={fadeUp}
 				>
-					созданная студентами для студентов
+					сделано студентами для студентов с использованием AI
 				</motion.p>
 
 				<motion.div

@@ -10,7 +10,10 @@
       "Bash(ls:*)",
       "Bash(where node:*)",
       "Bash(node --version:*)",
-      "Bash(node:*)"
+      "Bash(node:*)",
+      "Bash(npx sharp-cli:*)",
+      "Bash(python3:*)",
+      "Bash(identify:*)"
     ]
   }
 }

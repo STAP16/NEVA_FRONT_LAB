@@ -32,13 +32,6 @@ const results = [
 	}
 ]
 
-const stats = [
-	{ number: '15+', label: 'запущенных проектов' },
-	{ number: '100+', label: 'участников прошли лабораторию' },
-	{ number: '2500+', label: 'часов менторской поддержки' },
-	{ number: '92%', label: 'отмечают влияние на карьеру' }
-]
-
 const fadeUp = {
 	hidden: { opacity: 0, y: 20 },
 	visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
@@ -92,22 +85,6 @@ export function ResultsScreen() {
 						</motion.div>
 					))}
 				</div>
-
-				{/* Блок цифр */}
-				<motion.div
-					className="results__stats"
-					initial="hidden"
-					animate={isInView ? 'visible' : 'hidden'}
-					variants={fadeUp}
-					transition={{ delay: 0.7 }}
-				>
-					{stats.map((stat) => (
-						<div className="results__stat" key={stat.label}>
-							<span className="results__stat-number">{stat.number}</span>
-							<span className="results__stat-label">{stat.label}</span>
-						</div>
-					))}
-				</motion.div>
 			</div>
 		</section>
 	)

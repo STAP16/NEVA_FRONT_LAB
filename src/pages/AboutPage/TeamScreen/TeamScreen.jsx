@@ -1,11 +1,14 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
+import teamLeadImg from '../../../assets/NEVA_LAB_TEAM_LEAD.webp'
+import designerAvatar from '../../../assets/Designer_avatar.jpg'
 import './TeamScreen.css'
 
 const mentors = [
 	{
 		role: 'Веб-разработка',
-		description: 'Практикующие разработчики с опытом коммерческих проектов. Помогают освоить стек, код-ревью и продуктовые практики.',
+		description:
+			'Практикующие разработчики с опытом коммерческих проектов. Помогают освоить стек, код-ревью и продуктовые практики.',
 		icon: '💻'
 	},
 	{
@@ -15,12 +18,16 @@ const mentors = [
 	},
 	{
 		role: 'AI и Data Science',
-		description: 'Инженеры с опытом в ML и анализе данных. Помогают внедрить AI в реальный продукт.',
+		description:
+			'Инженеры с опытом в ML и анализе данных. Помогают внедрить AI в реальный продукт.',
 		icon: '🤖'
 	},
 	{
 		role: 'UI/UX Дизайн',
-		description: 'Дизайнеры с опытом запуска продуктов. Учат проектировать интерфейсы, которые решают задачи пользователя.',
+		name: 'Максим Панкрушев',
+		avatar: 'designer',
+		description:
+			'Дизайнеры с опытом запуска продуктов. Учат проектировать интерфейсы, которые решают задачи пользователя.',
 		icon: '🎨'
 	}
 ]
@@ -43,8 +50,14 @@ export function TeamScreen() {
 	const isInView = useInView(ref, { once: true, margin: '-100px' })
 
 	return (
-		<section className="team" id="team">
-			<div className="team__container" ref={ref}>
+		<section
+			className="team"
+			id="team"
+		>
+			<div
+				className="team__container"
+				ref={ref}
+			>
 				<motion.div
 					className="team__header"
 					initial={{ opacity: 0, y: 20 }}
@@ -53,9 +66,8 @@ export function TeamScreen() {
 				>
 					<h2 className="team__title">Кто ведёт лабораторию</h2>
 					<p className="team__subtitle">
-						Практикующие специалисты с опытом коммерческих проектов.
-						Не теоретики из учебников — люди, которые запускали продукты
-						и знают, как работают настоящие команды.
+						Практикующие специалисты с опытом коммерческих проектов. Не теоретики из учебников —
+						люди, которые запускали продукты и знают, как работают настоящие команды.
 					</p>
 				</motion.div>
 
@@ -68,14 +80,26 @@ export function TeamScreen() {
 					transition={{ delay: 0.2 }}
 				>
 					<div className="team__lead-avatar">
-						<span className="team__lead-avatar-text">🧭</span>
+						<img
+							className="team__lead-avatar-img"
+							src={teamLeadImg}
+							alt="Котоман Степан"
+						/>
 					</div>
 					<div className="team__lead-info">
-						<h3 className="team__lead-name">Руководитель лаборатории</h3>
-						<p className="team__lead-role">Координация направлений, связь с партнёрами, стратегия развития</p>
+						<h3 className="team__lead-name">
+							Руководитель лаборатории
+							<br /> <h3 className="team__lead-FIO">Котоман Степан</h3>
+						</h3>
+						<p className="team__lead-role">
+							Координация направлений, связь с партнёрами, стратегия развития
+						</p>
 						<div className="team__lead-stats">
-							<span className="team__lead-stat">Участие в запуске 15+ продуктов</span>
+							<span className="team__lead-stat">Участие в запуске продуктов</span>
 							<span className="team__lead-stat">Опыт управления командами</span>
+							<span className="team__lead-stat">Fullstack разработка</span>
+							<span className="team__lead-stat">Оркестрирование AI агентами</span>
+							<span className="team__lead-stat">Опыт публичных выступлений 400+ человек</span>
 						</div>
 					</div>
 				</motion.div>
@@ -91,8 +115,21 @@ export function TeamScreen() {
 							variants={fadeUp}
 							transition={{ delay: 0.3 + i * 0.1 }}
 						>
-							<span className="team__mentor-icon">{mentor.icon}</span>
+							{mentor.avatar === 'designer' ? (
+								<div className="team__mentor-avatar">
+									<img
+										className="team__mentor-avatar-img"
+										src={designerAvatar}
+										alt={mentor.name}
+									/>
+								</div>
+							) : (
+								<span className="team__mentor-icon">{mentor.icon}</span>
+							)}
 							<h4 className="team__mentor-role">{mentor.role}</h4>
+							{mentor.name && (
+								<p className="team__mentor-name">{mentor.name}</p>
+							)}
 							<p className="team__mentor-desc">{mentor.description}</p>
 						</motion.div>
 					))}
@@ -108,8 +145,11 @@ export function TeamScreen() {
 				>
 					<h3 className="team__roles-title">Роли в каждом проекте</h3>
 					<div className="team__roles">
-						{roles.map((role) => (
-							<div className="team__role" key={role.name}>
+						{roles.map(role => (
+							<div
+								className="team__role"
+								key={role.name}
+							>
 								<span className="team__role-name">{role.name}</span>
 								<span className="team__role-label">{role.label}</span>
 							</div>
