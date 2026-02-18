@@ -10,7 +10,7 @@ import coursesIcon from '../../assets/courses.svg'
 const projects = [
 	{
 		id: 'edu-track',
-		title: 'EduTrack',
+		title: 'Учебный трек',
 		category: 'Web',
 		categoryKey: 'web',
 		stage: 'Спринт 3/5',
@@ -22,7 +22,7 @@ const projects = [
 	},
 	{
 		id: 'city-assist',
-		title: 'City Assist',
+		title: 'Городской ассистент',
 		category: 'AI',
 		categoryKey: 'ai',
 		stage: 'Спринт 2/4',
@@ -34,7 +34,7 @@ const projects = [
 	},
 	{
 		id: 'campus-flow',
-		title: 'Campus Flow',
+		title: 'Поток кампуса',
 		category: 'Mobile',
 		categoryKey: 'mobile',
 		stage: 'Финальная сборка',
@@ -46,7 +46,7 @@ const projects = [
 	},
 	{
 		id: 'lab-kit-ui',
-		title: 'Lab Kit UI',
+		title: 'UI-набор лаборатории',
 		category: 'Design',
 		categoryKey: 'design',
 		stage: 'Спринт 1/3',
@@ -58,7 +58,7 @@ const projects = [
 	},
 	{
 		id: 'mentor-bot',
-		title: 'Mentor Bot',
+		title: 'Бот-ментор',
 		category: 'AI',
 		categoryKey: 'ai',
 		stage: 'Спринт 4/5',
@@ -70,7 +70,7 @@ const projects = [
 	},
 	{
 		id: 'market-pulse',
-		title: 'Market Pulse',
+		title: 'Пульс рынка',
 		category: 'Analytics',
 		categoryKey: 'analytics',
 		stage: 'Спринт 2/6',
