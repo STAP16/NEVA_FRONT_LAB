@@ -1,5 +1,5 @@
 ﻿import { useMemo, useState } from 'react'
-import { motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import './ProjectsPage.css'
 import codeIcon from '../../assets/code.svg'
 import aiIcon from '../../assets/ai_robot.svg'
@@ -13,6 +13,8 @@ const projects = [
 		title: 'Учебный трек',
 		category: 'Web',
 		categoryKey: 'web',
+		description:
+			'Платформа для персональных траекторий обучения: задания по уровням, прогресс в реальном времени и дашборд для менторов.',
 		stage: 'Спринт 3/5',
 		progress: 62,
 		participants: 14,
@@ -25,6 +27,8 @@ const projects = [
 		title: 'Городской ассистент',
 		category: 'AI',
 		categoryKey: 'ai',
+		description:
+			'AI-сервис для студентов и горожан: маршруты, ответы на частые вопросы и быстрый доступ к городским и кампусным сервисам.',
 		stage: 'Спринт 2/4',
 		progress: 48,
 		participants: 11,
@@ -37,6 +41,8 @@ const projects = [
 		title: 'Поток кампуса',
 		category: 'Mobile',
 		categoryKey: 'mobile',
+		description:
+			'Мобильное приложение для расписания, событий и командной работы. Фокус на ежедневных сценариях студентов и push-напоминаниях.',
 		stage: 'Финальная сборка',
 		progress: 87,
 		participants: 9,
@@ -49,6 +55,8 @@ const projects = [
 		title: 'UI-набор лаборатории',
 		category: 'Design',
 		categoryKey: 'design',
+		description:
+			'Единая дизайн-система для проектов NEVA LAB: компоненты, токены и гайды, чтобы быстрее запускать интерфейсы без потери качества.',
 		stage: 'Спринт 1/3',
 		progress: 31,
 		participants: 7,
@@ -61,6 +69,8 @@ const projects = [
 		title: 'Бот-ментор',
 		category: 'AI',
 		categoryKey: 'ai',
+		description:
+			'Ассистент для команд: подсказывает следующий шаг в спринте, собирает фидбек после демо и помогает не терять темп разработки.',
 		stage: 'Спринт 4/5',
 		progress: 79,
 		participants: 16,
@@ -73,6 +83,8 @@ const projects = [
 		title: 'Пульс рынка',
 		category: 'Analytics',
 		categoryKey: 'analytics',
+		description:
+			'Аналитический проект для проверки гипотез: сбор продуктовых метрик, визуализация динамики и рекомендации по приоритетам бэклога.',
 		stage: 'Спринт 2/6',
 		progress: 39,
 		participants: 12,
@@ -102,7 +114,15 @@ const categoryIcons = {
 
 export function ProjectsPage() {
 	const [selectedCategoryKey, setSelectedCategoryKey] = useState('all')
+	const [expandedProjectIds, setExpandedProjectIds] = useState([])
 	const safeCategoryKey = validCategoryKeys.has(selectedCategoryKey) ? selectedCategoryKey : 'all'
+	const toggleProjectDescription = projectId => {
+		setExpandedProjectIds(currentIds =>
+			currentIds.includes(projectId)
+				? currentIds.filter(id => id !== projectId)
+				: [...currentIds, projectId]
+		)
+	}
 
 	const filteredProjects = useMemo(() => {
 		if (safeCategoryKey === 'all') {
@@ -158,57 +178,87 @@ export function ProjectsPage() {
 				</div>
 
 				<div className="projects-grid">
-					{filteredProjects.map(project => (
-						<motion.article
-							key={project.id}
-							className="project-card"
-							initial={{ opacity: 0, y: 16 }}
-							animate={{ opacity: 1, y: 0 }}
-							transition={{ duration: 0.35, ease: 'easeOut' }}
-						>
-							<header className="project-card__header">
+					{filteredProjects.map(project => {
+						const isDescriptionExpanded = expandedProjectIds.includes(project.id)
+						const descriptionId = `project-description-${project.id}`
+
+						return (
+							<motion.article
+								key={project.id}
+								className="project-card"
+								initial={{ opacity: 0, y: 16 }}
+								animate={{ opacity: 1, y: 0 }}
+								transition={{ duration: 0.35, ease: 'easeOut' }}
+							>
+								<header className="project-card__header">
 								<div className="project-card__badge">
 									<img src={categoryIcons[project.categoryKey]} alt="" aria-hidden="true" />
 									<span>{project.category}</span>
 								</div>
 								<span className="project-card__deadline">{project.deadline}</span>
-							</header>
+								</header>
 
-							<h2 className="project-card__title">{project.title}</h2>
-							<p className="project-card__stage">{project.stage}</p>
+								<h2 className="project-card__title">{project.title}</h2>
+								<p className="project-card__stage">{project.stage}</p>
 
-							<div className="project-card__progress" aria-label={`Прогресс ${project.progress}%`}>
-								<div
-									className="project-card__progress-fill"
-									style={{ width: `${project.progress}%` }}
-								/>
-							</div>
+								<div className="project-card__progress" aria-label={`Прогресс ${project.progress}%`}>
+									<div
+										className="project-card__progress-fill"
+										style={{ width: `${project.progress}%` }}
+									/>
+								</div>
 
-							<div className="project-card__meta">
-								<p>
-									<span>Участники</span>
-									<strong>{project.participants}</strong>
-								</p>
-								<p>
-									<span>Свободных мест</span>
-									<strong>{project.seats}</strong>
-								</p>
-							</div>
+								<div className="project-card__meta">
+									<p>
+										<span>Участники</span>
+										<strong>{project.participants}</strong>
+									</p>
+									<p>
+										<span>Свободных мест</span>
+										<strong>{project.seats}</strong>
+									</p>
+								</div>
 
-							<div className="project-card__mentors">
-								<span>Менторы:</span>
-								<ul>
-									{project.mentors.map(mentor => (
-										<li key={mentor}>{mentor}</li>
-									))}
-								</ul>
-							</div>
+								<div className="project-card__mentors">
+									<span>Менторы:</span>
+									<ul>
+										{project.mentors.map(mentor => (
+											<li key={mentor}>{mentor}</li>
+										))}
+									</ul>
+								</div>
 
-							<button type="button" className="project-card__cta">
-								Присоединиться
-							</button>
-						</motion.article>
-					))}
+								<button
+									type="button"
+									className="project-card__details-toggle"
+									aria-expanded={isDescriptionExpanded}
+									aria-controls={descriptionId}
+									onClick={() => toggleProjectDescription(project.id)}
+								>
+									{isDescriptionExpanded ? 'Скрыть описание' : 'Показать описание'}
+								</button>
+
+								<AnimatePresence initial={false}>
+									{isDescriptionExpanded && (
+										<motion.p
+											id={descriptionId}
+											className="project-card__description"
+											initial={{ opacity: 0, height: 0 }}
+											animate={{ opacity: 1, height: 'auto' }}
+											exit={{ opacity: 0, height: 0 }}
+											transition={{ duration: 0.22, ease: 'easeOut' }}
+										>
+											{project.description}
+										</motion.p>
+									)}
+								</AnimatePresence>
+
+								<button type="button" className="project-card__cta">
+									Присоединиться
+								</button>
+							</motion.article>
+						)
+					})}
 				</div>
 			</section>
 		</main>
