@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
+import { motion, useInView, useScroll, useTransform } from 'framer-motion'
 import nevikImg from '../../../assets/NEVIK_WHAT_YOU_GET.png'
 import './ResultsScreen.css'
 
@@ -40,12 +40,23 @@ const fadeUp = {
 
 export function ResultsScreen() {
 	const ref = useRef(null)
+	const sectionRef = useRef(null)
 	const isInView = useInView(ref, { once: true, margin: '-100px' })
+
+	const { scrollYProgress } = useScroll({
+		target: sectionRef,
+		offset: ['0.5 start', 'end start']
+	})
+
+	const mascotOpacity = useTransform(scrollYProgress, [0, 0.35], [1, 0])
+	const mascotY = useTransform(scrollYProgress, [0, 0.35], [0, 100])
+	const mascotScale = useTransform(scrollYProgress, [0, 0.35], [1, 0.85])
 
 	return (
 		<section
 			className="results"
 			id="results"
+			ref={sectionRef}
 		>
 			<div
 				className="results__container"
@@ -72,12 +83,14 @@ export function ResultsScreen() {
 						initial={{ opacity: 0, x: -40 }}
 						animate={isInView ? { opacity: 1, x: 0 } : {}}
 						transition={{ duration: 0.7, delay: 0.2 }}
+						style={{ opacity: mascotOpacity, y: mascotY, scale: mascotScale }}
 					/>
 					<motion.div
 						className="results__chat-bubble"
 						initial={{ opacity: 0, y: 20, scale: 0.98 }}
 						animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
 						transition={{ duration: 0.7, delay: 0.8 }}
+						style={{ opacity: mascotOpacity, y: mascotY, scale: mascotScale }}
 					>
 						Мы не тренируем учеников. Мы собираем специалистов.
 					</motion.div>
