@@ -115,7 +115,7 @@
 .visual-section__placeholder {
 	width: 100%;
 	aspect-ratio: 4 / 3;
-	background: linear-gradient(135deg, #e8f2ff 0%, #d4e6f9 100%);
+	background: linear-gradient(135deg, #f0f7ff 0%, #e0efff 100%);
 	border-radius: 16px;
 	display: flex;
 	align-items: center;
@@ -147,7 +147,7 @@
 .visual-section__item-description {
 	font-size: clamp(12px, 1.2vw, 14px);
 	font-weight: 400;
-	color: #5f7fb0;
+	color: #5a7aa0;
 	line-height: 1.5;
 	margin: 0;
 }

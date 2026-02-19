@@ -2,7 +2,7 @@
 	display: flex;
 	flex-direction: column;
 	padding: clamp(24px, 4vw, 40px);
-	background: linear-gradient(180deg, #f0f7ff 0%, #e8f2ff 100%);
+	background: linear-gradient(180deg, #f0f7ff 0%, #e0efff 100%);
 	border-radius: 20px;
 	box-shadow: 0 4px 24px rgba(127, 180, 227, 0.15);
 	transition:
@@ -57,7 +57,7 @@
 .direction-detail__description {
 	font-size: clamp(14px, 1.5vw, 16px);
 	font-weight: 400;
-	color: #5f7fb0;
+	color: #5a7aa0;
 	line-height: 1.7;
 	margin: 0 0 24px 0;
 }
@@ -87,7 +87,7 @@
 .direction-detail__text {
 	font-size: clamp(13px, 1.3vw, 15px);
 	font-weight: 400;
-	color: #5176af;
+	color: #4a6fa5;
 	line-height: 1.6;
 	margin: 0;
 }

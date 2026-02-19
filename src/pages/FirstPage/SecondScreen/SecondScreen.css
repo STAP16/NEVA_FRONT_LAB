@@ -36,7 +36,7 @@
 	font-weight: 500;
 	color: #4a6fa5;
 	background: #ffffff;
-	border: 2px solid #e0e8f0;
+	border: 2px solid #e0efff;
 	border-radius: 50px;
 	cursor: pointer;
 	transition: all 0.3s ease;
@@ -87,7 +87,7 @@
 .directions__cta-button:hover {
 	transform: translateY(-2px);
 	box-shadow: 0 8px 30px rgba(44, 90, 160, 0.4);
-	background: linear-gradient(135deg, #5176af 0%, #3a6bb0 100%);
+	background: linear-gradient(135deg, #1e4a8a 0%, #3a6fc4 100%);
 }
 
 .directions__cta-button:active {

@@ -90,7 +90,7 @@ function VisualSection() {
 						animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
 						transition={{ duration: 0.6, delay: 0.8 }}
 					>
-						Интересно посмотреть, какие проекты уже реализованы?
+						Интересно посмотреть какие проекты уже реализованы?
 					</motion.div>
 				</div>
 			</div>
