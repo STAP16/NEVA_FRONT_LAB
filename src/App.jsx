@@ -1,10 +1,11 @@
-import { useEffect, useLayoutEffect } from 'react'
+import { useEffect, useLayoutEffect, useState } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import Header from './components/Header/Header'
 import Footer from './components/Footer/Footer'
 import {
 	consumeRouteScrollReset,
+	ROUTE_TRANSITION_START_EVENT,
 	resetScrollInstant
 } from './components/navigation/routeScrollReset'
 import { AboutPage } from './pages/AboutPage/AboutPage'
@@ -54,14 +55,31 @@ function HomePage() {
 
 function App() {
 	const location = useLocation()
+	const [isRouteWipeActive, setIsRouteWipeActive] = useState(false)
 
 	useLayoutEffect(() => {
 		if (!consumeRouteScrollReset()) return
 		resetScrollInstant()
 	}, [location.pathname])
 
+	useEffect(() => {
+		const handleTransitionStart = event => {
+			const duration = Number(event?.detail?.duration) || 180
+			setIsRouteWipeActive(true)
+			window.setTimeout(() => {
+				setIsRouteWipeActive(false)
+			}, duration + 220)
+		}
+
+		window.addEventListener(ROUTE_TRANSITION_START_EVENT, handleTransitionStart)
+		return () => {
+			window.removeEventListener(ROUTE_TRANSITION_START_EVENT, handleTransitionStart)
+		}
+	}, [])
+
 	return (
 		<>
+			<div className={`app__route-wipe${isRouteWipeActive ? ' app__route-wipe--active' : ''}`} />
 			<Header />
 			<AnimatePresence mode="wait">
 				<Routes

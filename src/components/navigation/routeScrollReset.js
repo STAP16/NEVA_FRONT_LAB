@@ -1,4 +1,7 @@
 const ROUTE_SCROLL_RESET_KEY = 'app:reset-scroll-on-route'
+const ROUTE_TRANSITION_START_EVENT = 'app:route-transition-start'
+const ROUTE_TRANSITION_DURATION = 180
+let isRouteTransitionLocked = false
 
 function getPathnameFromTo(to) {
 	if (typeof to === 'string') {
@@ -58,10 +61,34 @@ function resetScrollInstant() {
 	})
 }
 
+function startRouteTransition(navigateFn, duration = ROUTE_TRANSITION_DURATION) {
+	if (isRouteTransitionLocked) return false
+	isRouteTransitionLocked = true
+
+	window.dispatchEvent(
+		new CustomEvent(ROUTE_TRANSITION_START_EVENT, {
+			detail: { duration }
+		})
+	)
+
+	window.setTimeout(() => {
+		resetScrollInstant()
+		navigateFn()
+		window.setTimeout(() => {
+			isRouteTransitionLocked = false
+		}, 120)
+	}, duration)
+
+	return true
+}
+
 export {
 	consumeRouteScrollReset,
 	getPathnameFromTo,
 	markRouteScrollReset,
+	ROUTE_TRANSITION_DURATION,
+	ROUTE_TRANSITION_START_EVENT,
 	resetScrollInstant,
+	startRouteTransition,
 	shouldHandlePrimaryNavigation
 }

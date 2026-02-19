@@ -12,20 +12,6 @@
 	box-sizing: border-box;
 }
 
-.lab-path__route-wipe {
-	position: fixed;
-	inset: 0;
-	background: #f8fbff;
-	opacity: 0;
-	pointer-events: none;
-	transition: opacity 0.18s ease;
-	z-index: 9999;
-}
-
-.lab-path__route-wipe--active {
-	opacity: 1;
-}
-
 /* ── Фоновые элементы ── */
 
 .lab-path__glow {

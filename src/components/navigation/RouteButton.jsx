@@ -1,5 +1,9 @@
 import { useLocation, useNavigate } from 'react-router-dom'
-import { getPathnameFromTo, markRouteScrollReset } from './routeScrollReset'
+import {
+	getPathnameFromTo,
+	markRouteScrollReset,
+	startRouteTransition
+} from './routeScrollReset'
 
 export function RouteButton({ to, onClick, replace, state, ...props }) {
 	const navigate = useNavigate()
@@ -12,6 +16,10 @@ export function RouteButton({ to, onClick, replace, state, ...props }) {
 		const nextPathname = getPathnameFromTo(to)
 		if (nextPathname && nextPathname !== location.pathname) {
 			markRouteScrollReset()
+			startRouteTransition(() => {
+				navigate(to, { replace, state })
+			})
+			return
 		}
 
 		navigate(to, { replace, state })

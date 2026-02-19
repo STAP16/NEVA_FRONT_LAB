@@ -1,8 +1,6 @@
-import { useRef, useState } from 'react'
+import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { RouteNavLink } from '../../../components/navigation'
-import { resetScrollInstant } from '../../../components/navigation/routeScrollReset'
-import { useRouteNavigate } from '../../../components/navigation'
 import './SixthScreen.css'
 
 /*
@@ -119,21 +117,7 @@ const nodeVariant = {
 
 export function SixthScreen() {
 	const sectionRef = useRef(null)
-	const [isRouteTransitioning, setIsRouteTransitioning] = useState(false)
 	const isInView = useInView(sectionRef, { once: true, margin: '-100px' })
-	const navigate = useRouteNavigate()
-
-	const handleAboutRedirectClick = event => {
-		event.preventDefault()
-		if (isRouteTransitioning) return
-
-		setIsRouteTransitioning(true)
-		sessionStorage.setItem('about:reset-scroll', '1')
-		window.setTimeout(() => {
-			resetScrollInstant()
-			navigate('/about')
-		}, 180)
-	}
 
 	return (
 		<section
@@ -143,7 +127,6 @@ export function SixthScreen() {
 		>
 			<div className="lab-path__glow" />
 			<div className="lab-path__grid-lines" />
-			<div className={`lab-path__route-wipe${isRouteTransitioning ? ' lab-path__route-wipe--active' : ''}`} />
 
 			<motion.div
 				className="lab-path__container"
@@ -240,7 +223,6 @@ export function SixthScreen() {
 					</p>
 					<RouteNavLink
 						to="/about"
-						onClick={handleAboutRedirectClick}
 						className="lab-path__cta"
 					>
 						Посмотреть, как устроена лаборатория →
