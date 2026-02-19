@@ -3,6 +3,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	background: linear-gradient(180deg, #ffffff 0%, #f8fbff 50%, #f0f7ff 100%);
 	padding: clamp(60px, 10vw, 120px) clamp(16px, 4vw, 40px);
 	box-sizing: border-box;
 }
@@ -50,19 +51,19 @@
 	font-size: clamp(14px, 1.5vw, 18px);
 	font-weight: 600;
 	color: #ffffff;
-	background: linear-gradient(135deg, #4a6fa5 0%, #2c5aa0 100%);
+	background: linear-gradient(135deg, #2c5aa0 0%, #4a7fd4 100%);
 	border: none;
-	border-radius: 50px;
+	border-radius: 999px;
 	cursor: pointer;
 	transition: all 0.3s ease;
-	box-shadow: 0 4px 20px rgba(44, 90, 160, 0.3);
+	box-shadow: 0 8px 30px rgba(44, 90, 160, 0.35);
 	text-decoration: none;
 }
 
 .directions__cta-button:hover {
 	transform: translateY(-2px);
-	box-shadow: 0 8px 30px rgba(44, 90, 160, 0.4);
-	background: linear-gradient(135deg, #5176af 0%, #3a6bb0 100%);
+	box-shadow: 0 12px 40px rgba(44, 90, 160, 0.45);
+	background: linear-gradient(135deg, #1e4a8a 0%, #3a6fc4 100%);
 }
 
 .directions__cta-button:active {

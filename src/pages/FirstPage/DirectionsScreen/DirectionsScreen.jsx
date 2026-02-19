@@ -3,7 +3,7 @@ import { motion, useInView } from 'framer-motion'
 import { DirectionDetail, VisualSection } from './components'
 import { directionsData } from './direction-data'
 import './DirectionsScreen.css'
-import { NavLink } from 'react-router-dom'
+import { RouteNavLink } from '../../../components/navigation'
 
 const fadeUp = {
 	hidden: { opacity: 0, y: 20 },
@@ -71,12 +71,12 @@ function DirectionsScreen() {
 					animate={isInView ? { opacity: 1, y: 0 } : {}}
 					transition={{ duration: 0.5, delay: 0.8 }}
 				>
-					<NavLink
+					<RouteNavLink
 						to="/portfolio"
 						className="directions__cta-button"
 					>
 						Смотреть реализованные проекты →
-					</NavLink>
+					</RouteNavLink>
 				</motion.div>
 			</div>
 		</section>

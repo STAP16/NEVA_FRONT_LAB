@@ -61,7 +61,7 @@
 	font-size: clamp(20px, 2.5vw, 28px);
 	font-weight: 700;
 	color: #ffffff;
-	background: linear-gradient(135deg, #4a6fa5 0%, #2c5aa0 100%);
+	background: linear-gradient(135deg, #2c5aa0 0%, #4a7fd4 100%);
 	box-shadow: 0 8px 20px rgba(44, 90, 160, 0.35);
 	z-index: 2;
 }

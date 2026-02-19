@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { useNavigate } from 'react-router-dom'
+import { useRouteNavigate } from '../../../components/navigation'
 import bgImg from '../../../assets/BG_FOR_WANT_TO_JOIN.png'
 import mascotImg from '../../../assets/NEVA_CAP_1.png'
 import './AboutCTA.css'
@@ -51,7 +51,7 @@ const fadeUp = {
 export function AboutCTA() {
 	const ref = useRef(null)
 	const isInView = useInView(ref, { once: true, margin: '-100px' })
-	const navigate = useNavigate()
+	const navigate = useRouteNavigate()
 
 	const handleApply = () => {
 		navigate('/')

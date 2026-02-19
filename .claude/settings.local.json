@@ -13,7 +13,9 @@
       "Bash(node:*)",
       "Bash(npx sharp-cli:*)",
       "Bash(python3:*)",
-      "Bash(identify:*)"
+      "Bash(identify:*)",
+      "Bash(dir:*)",
+      "Bash(xxd:*)"
     ]
   }
 }

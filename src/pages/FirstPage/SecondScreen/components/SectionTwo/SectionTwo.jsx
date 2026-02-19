@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
-import { NavLink } from 'react-router-dom'
 import { motion, useInView } from 'framer-motion'
+import { RouteNavLink } from '../../../../../components/navigation'
 import './SectionTwo.css'
 import nevikRespect from '../../../../../assets/Nevik_respect.png'
 
@@ -158,18 +158,18 @@ function SectionTwo() {
 					animate={isInView ? { opacity: 1, y: 0 } : {}}
 					transition={{ duration: 0.5, delay: 0.6 }}
 				>
-					<NavLink
+					<RouteNavLink
 						className="stories__button stories__button--primary"
 						to="/form"
 					>
 						Хочу так же! Расскажите, как начать
-					</NavLink>
-					<NavLink
+					</RouteNavLink>
+					<RouteNavLink
 						className="stories__button stories__button--secondary"
 						to="/projects"
 					>
 						Посмотреть все проекты
-					</NavLink>
+					</RouteNavLink>
 				</motion.div>
 			</div>
 		</section>
