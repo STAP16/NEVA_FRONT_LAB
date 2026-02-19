@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import './VisualSection.css'
-import nevikMascot from './nevik.png'
+import nevikMascot from '../../../.../../../../assets/NEVIK_FOR_SCND_SCREEN.png'
 
 const fadeUp = {
 	hidden: { opacity: 0, y: 20 },
@@ -50,7 +50,10 @@ function VisualSection() {
 					initial="hidden"
 					animate={isInView ? 'visible' : 'hidden'}
 				>
-					<motion.h3 className="visual-section__title" variants={fadeUp}>
+					<motion.h3
+						className="visual-section__title"
+						variants={fadeUp}
+					>
 						Как это выглядит
 					</motion.h3>
 					<div className="visual-section__grid">
@@ -87,7 +90,7 @@ function VisualSection() {
 						animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
 						transition={{ duration: 0.6, delay: 0.8 }}
 					>
-						Интересно, какие проекты уже запустили?
+						Интересно посмотреть, какие проекты уже реализованы?
 					</motion.div>
 				</div>
 			</div>

@@ -1,4 +1,6 @@
 .process {
+	position: relative;
+	overflow: hidden;
 	min-height: 100vh;
 	display: flex;
 	align-items: center;
@@ -8,7 +10,26 @@
 	box-sizing: border-box;
 }
 
+.process::before {
+	content: '';
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	height: clamp(80px, 14vw, 180px);
+	background: linear-gradient(
+		180deg,
+		rgba(240, 247, 255, 0.9) 0%,
+		rgba(240, 247, 255, 0.42) 55%,
+		rgba(240, 247, 255, 0) 100%
+	);
+	pointer-events: none;
+	z-index: 0;
+}
+
 .process__container {
+	position: relative;
+	z-index: 1;
 	max-width: 1280px;
 	width: 100%;
 	margin: 0 auto;

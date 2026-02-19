@@ -42,6 +42,7 @@
 
 .visual-section__mascot {
 	position: relative;
+	transform: translateY(-80px);
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -74,32 +75,33 @@
 /* ===== Mascot bubble ===== */
 .visual-section__bubble {
 	position: absolute;
-	top: 173px;
+	top: 225px;
 	right: 20%;
 	transform: translateX(-50%);
-	background: linear-gradient(135deg, #2c72de, #5b99f3);
-	color: #ffffff;
+	background: rgba(255, 255, 255, 0.97);
+	border: 1px solid #d7e6ff;
+	color: #355a90;
 	font-size: clamp(14px, 1.6vw, 18px);
 	font-weight: 600;
 	padding: clamp(12px, 2vw, 18px) clamp(16px, 2.5vw, 24px);
 	border-radius: 18px;
 	max-width: 300px;
 	text-align: center;
-	box-shadow: 0 8px 24px rgba(44, 114, 222, 0.3);
+	box-shadow: 0 14px 32px rgba(56, 101, 171, 0.2);
 	z-index: 3;
 }
 
 .visual-section__bubble::after {
 	content: '';
 	position: absolute;
-	bottom: -10px;
-	left: 60%;
-	transform: translateX(-50%);
-	width: 0;
-	height: 0;
-	border-left: 12px solid transparent;
-	border-right: 12px solid transparent;
-	border-top: 12px solid #4a88eb;
+	bottom: -7px;
+	left: 30%;
+	width: 12px;
+	height: 12px;
+	background: rgba(255, 255, 255, 0.97);
+	border-right: 1px solid #d7e6ff;
+	border-bottom: 1px solid #d7e6ff;
+	transform: rotate(45deg);
 }
 
 .visual-section__mascot-image {
