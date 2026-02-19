@@ -81,7 +81,7 @@
 .results__nevik {
 	position: absolute;
 	left: -370px;
-	top: -10px;
+	top: 0px;
 	width: clamp(1060px, 22vw, 1260px);
 	height: auto;
 	z-index: 2;

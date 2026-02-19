@@ -86,13 +86,16 @@ export function ResultsScreen() {
 						style={{ opacity: mascotOpacity, y: mascotY, scale: mascotScale }}
 					/>
 					<motion.div
-						className="results__chat-bubble"
-						initial={{ opacity: 0, y: 20, scale: 0.98 }}
-						animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
-						transition={{ duration: 0.7, delay: 0.8 }}
 						style={{ opacity: mascotOpacity, y: mascotY, scale: mascotScale }}
 					>
-						Мы не тренируем учеников. Мы собираем специалистов.
+						<motion.div
+							className="results__chat-bubble"
+							initial={{ opacity: 0, y: 20, scale: 0.9 }}
+							animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+							transition={{ duration: 0.5, delay: 0.7 }}
+						>
+							Мы не тренируем учеников. Мы собираем специалистов.
+						</motion.div>
 					</motion.div>
 					{results.map((result, i) => (
 						<motion.div
