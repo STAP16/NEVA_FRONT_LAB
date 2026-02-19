@@ -9,6 +9,7 @@ import {
 	resetScrollInstant
 } from './components/navigation/routeScrollReset'
 import { AboutPage } from './pages/AboutPage/AboutPage'
+import { JoinSuccessPage } from './pages/JoinSuccessPage/JoinSuccessPage'
 import './App.css'
 import {
 	DirectionsPage,

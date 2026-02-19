@@ -1,5 +1,6 @@
 ﻿import { useEffect, useMemo, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
+import { useLocation, useNavigate } from 'react-router-dom'
 import './ProjectsPage.css'
 import codeIcon from '../../assets/code.svg'
 import aiIcon from '../../assets/ai_robot.svg'
@@ -468,14 +469,55 @@ const taskGroupConfig = [
 	{ key: 'inProgress', label: 'Задачи в процессе', className: 'project-modal__task-group--progress' },
 	{ key: 'upcoming', label: 'Предстоящие задачи', className: 'project-modal__task-group--upcoming' }
 ]
+const stagger = {
+	hidden: { opacity: 0 },
+	visible: {
+		opacity: 1,
+		transition: { staggerChildren: 0.17, delayChildren: 0.03 }
+	}
+}
+const fadeUp = {
+	hidden: { opacity: 0, y: 20 },
+	visible: {
+		opacity: 1,
+		y: 0,
+		transition: { duration: 0.58, ease: [0.22, 1, 0.36, 1] }
+	}
+}
+const fadeUpSoft = {
+	hidden: { opacity: 0, y: 8 },
+	visible: {
+		opacity: 1,
+		y: 0,
+		transition: { duration: 0.56, ease: [0.22, 1, 0.36, 1] }
+	}
+}
+const chipsStagger = {
+	hidden: { opacity: 1 },
+	visible: {
+		opacity: 1,
+		transition: { staggerChildren: 0.07, delayChildren: 0.08 }
+	}
+}
+const cardsStagger = {
+	hidden: { opacity: 1 },
+	visible: {
+		opacity: 1,
+		transition: { staggerChildren: 0.08, delayChildren: 0.12 }
+	}
+}
 
 export function ProjectsPage() {
+	const navigate = useNavigate()
+	const location = useLocation()
 	const [selectedCategoryKey, setSelectedCategoryKey] = useState('all')
 	const [activeProjectId, setActiveProjectId] = useState(null)
 	const [expandedTaskIds, setExpandedTaskIds] = useState([])
 	const [feedbackDraft, setFeedbackDraft] = useState('')
 	const [extraFeedbackByProject, setExtraFeedbackByProject] = useState({})
 	const [liveTick, setLiveTick] = useState(Date.now())
+	const [isJoinTransitionVisible, setIsJoinTransitionVisible] = useState(false)
+	const [isArrivingFromBack, setIsArrivingFromBack] = useState(Boolean(location.state?.fromSuccessBack))
 
 	const safeCategoryKey = validCategoryKeys.has(selectedCategoryKey) ? selectedCategoryKey : 'all'
 	const filteredProjects = useMemo(() => {
@@ -515,6 +557,20 @@ export function ProjectsPage() {
 			clearInterval(tickInterval)
 		}
 	}, [activeProject])
+
+	useEffect(() => {
+		if (!isArrivingFromBack) {
+			return undefined
+		}
+
+		const timerId = window.setTimeout(() => {
+			setIsArrivingFromBack(false)
+		}, 520)
+
+		return () => {
+			window.clearTimeout(timerId)
+		}
+	}, [isArrivingFromBack])
 
 	const openProjectModal = projectId => {
 		setActiveProjectId(projectId)
@@ -562,37 +618,51 @@ export function ProjectsPage() {
 		return Math.min(100, Math.max(0, progressValue + wave))
 	}
 
+	const handleJoin = project => {
+		if (project.seats < 1 || isJoinTransitionVisible) {
+			return
+		}
+
+		setIsJoinTransitionVisible(true)
+		setActiveProjectId(null)
+
+		window.setTimeout(() => {
+			navigate('/projects/join-success', { state: { fromJoinTransition: true } })
+		}, 440)
+	}
+
 	return (
-		<main className="projects-page">
+		<main className={`projects-page${isJoinTransitionVisible ? ' projects-page--joining' : ''}${isArrivingFromBack ? ' projects-page--arriving' : ''}`}>
 			<section className="projects-hero">
-				<div className="projects-hero__inner">
-					<p className="projects-hero__label">NEVA PROJECT HUB</p>
-					<h1 className="projects-hero__title">Проекты в реальном времени</h1>
-					<p className="projects-hero__subtitle">
+				<motion.div className="projects-hero__inner" variants={stagger} initial="hidden" animate="visible">
+					<motion.p className="projects-hero__label" variants={fadeUp}>NEVA PROJECT HUB</motion.p>
+					<motion.h1 className="projects-hero__title" variants={fadeUp}>Проекты в реальном времени</motion.h1>
+					<motion.p className="projects-hero__subtitle" variants={fadeUp}>
 						Выбирай проект по направлению, подключайся к команде и набирай
 						опыт в реальной продуктовой разработке с поддержкой менторов.
-					</p>
-				</div>
+					</motion.p>
+				</motion.div>
 			</section>
 
 			<section className="projects-board">
-				<div className="projects-board__toolbar">
-					<div className="projects-board__chips" role="tablist" aria-label="Фильтр направлений">
+				<motion.div className="projects-board__toolbar" variants={stagger} initial="hidden" animate="visible">
+					<motion.div className="projects-board__chips" role="tablist" aria-label="Фильтр направлений" variants={chipsStagger}>
 						{categories.map(category => (
-							<button
+							<motion.button
 								key={category.key}
 								type="button"
 								role="tab"
 								aria-selected={safeCategoryKey === category.key}
 								className={`projects-chip${safeCategoryKey === category.key ? ' projects-chip--active' : ''}`}
 								onClick={() => setSelectedCategoryKey(category.key)}
+								variants={fadeUpSoft}
 							>
 								{category.label}
-							</button>
+							</motion.button>
 						))}
-					</div>
+					</motion.div>
 
-					<label className="projects-board__select-wrap">
+					<motion.label className="projects-board__select-wrap" variants={fadeUpSoft}>
 						<span className="projects-board__select-label">Направление</span>
 						<select
 							className="projects-board__select"
@@ -605,17 +675,15 @@ export function ProjectsPage() {
 								</option>
 							))}
 						</select>
-					</label>
-				</div>
+					</motion.label>
+				</motion.div>
 
-				<div className="projects-grid">
+				<motion.div className="projects-grid" variants={cardsStagger} initial="hidden" animate="visible">
 					{filteredProjects.map(project => (
 						<motion.article
 							key={project.id}
 							className="project-card"
-							initial={{ opacity: 0, y: 16 }}
-							animate={{ opacity: 1, y: 0 }}
-							transition={{ duration: 0.35, ease: 'easeOut' }}
+							variants={fadeUpSoft}
 						>
 							<header className="project-card__header">
 								<div className="project-card__badge">
@@ -649,13 +717,13 @@ export function ProjectsPage() {
 								<button type="button" className="project-card__details-toggle" onClick={() => openProjectModal(project.id)}>
 									Подробнее
 								</button>
-								<button type="button" className="project-card__cta">
+								<button type="button" className="project-card__cta" onClick={() => handleJoin(project)}>
 									Присоединиться
 								</button>
 							</div>
 						</motion.article>
 					))}
-				</div>
+				</motion.div>
 			</section>
 
 			<AnimatePresence>
@@ -834,25 +902,45 @@ export function ProjectsPage() {
 								</div>
 							</section>
 
-							<footer className="project-modal__footer">
-								<a
+														<footer className="project-modal__footer">
+								<button
+									type="button"
 									className={`project-modal__primary-action${
 										activeProject.status === 'active' && activeProject.seats < 1 ? ' project-modal__primary-action--disabled' : ''
 									}`}
-									href={activeProject.status === 'completed' ? activeProject.resultsUrl : activeProject.joinUrl}
-									onClick={event => {
-										if (activeProject.status === 'active' && activeProject.seats < 1) {
-											event.preventDefault()
+									onClick={() => {
+										if (activeProject.status === 'completed') {
+											window.location.assign(activeProject.resultsUrl)
+											return
 										}
+										handleJoin(activeProject)
 									}}
 								>
 									{activeProject.status === 'completed' ? 'Просмотреть результаты' : 'Присоединиться'}
-								</a>
+								</button>
 							</footer>
 						</motion.section>
 					</motion.div>
 				)}
 			</AnimatePresence>
+			<AnimatePresence>
+				{isJoinTransitionVisible && (
+					<motion.div
+						className="join-transition"
+						initial={{ opacity: 0, backdropFilter: 'blur(0px)', backgroundColor: 'rgba(16, 35, 64, 0)' }}
+						animate={{ opacity: 1, backdropFilter: 'blur(10px)', backgroundColor: 'rgba(16, 35, 64, 0.2)' }}
+						exit={{ opacity: 0 }}
+						transition={{ duration: 0.42, ease: [0.25, 0.7, 0.2, 1] }}
+					/>
+				)}
+			</AnimatePresence>
 		</main>
 	)
 }
+
+
+
+
+
+
+
