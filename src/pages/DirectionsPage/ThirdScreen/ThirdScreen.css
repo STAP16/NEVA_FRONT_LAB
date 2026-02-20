@@ -26,8 +26,8 @@
 
 .directions-page-third-screen__scene {
 	width: 100%;
-	aspect-ratio: 2.05 / 1;
-	max-height: min(82vh, 1040px);
+	height: 1000px;
+	max-height: 1000px;
 	border-radius: 18px;
 	background:
 		radial-gradient(
@@ -44,7 +44,6 @@
 	align-items: center;
 	overflow: hidden;
 	position: relative;
-	margin: 0 auto;
 }
 
 .directions-page-third-screen__overlay {
@@ -87,7 +86,7 @@
 	}
 
 	.directions-page-third-screen__scene {
-		aspect-ratio: 1.28 / 1;
+		height: min(66vh, 560px);
 		max-height: min(66vh, 560px);
 		border-radius: 14px;
 	}
@@ -100,7 +99,8 @@
 	}
 
 	.directions-page-third-screen__scene {
-		max-height: min(82vh, 1040px);
+		height: 1000px;
+		max-height: 1000px;
 	}
 }
 
@@ -115,6 +115,7 @@
 	}
 
 	.directions-page-third-screen__scene {
-		max-height: min(84vh, 1160px);
+		height: 1000px;
+		max-height: 1000px;
 	}
 }

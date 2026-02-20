@@ -9,8 +9,8 @@ const DIRECTIONS = [
 	{
 		id: 'ai',
 		label: 'AI Systems',
-		orbitX: 0.24,
-		orbitY: 0.15,
+		orbitX: 0.368,
+		orbitY: 0.23,
 		rotation: 0.15,
 		speed: 0.08,
 		phase: 0,
@@ -19,28 +19,18 @@ const DIRECTIONS = [
 	{
 		id: 'web',
 		label: 'Web Engineering',
-		orbitX: 0.38,
-		orbitY: 0.23,
+		orbitX: 0.575,
+		orbitY: 0.345,
 		rotation: -0.32,
 		speed: -0.09,
 		phase: 1.2,
 		orbitColor: 0xfeca57,
 	},
 	{
-		id: 'mobile',
-		label: 'Mobile Apps',
-		orbitX: 0.54,
-		orbitY: 0.31,
-		rotation: 0.52,
-		speed: 0.1,
-		phase: 2.4,
-		orbitColor: 0x48dbfb,
-	},
-	{
 		id: 'data',
 		label: 'Data Analytics',
-		orbitX: 0.7,
-		orbitY: 0.4,
+		orbitX: 0.943,
+		orbitY: 0.529,
 		rotation: -0.18,
 		speed: -0.07,
 		phase: 3.1,
@@ -49,8 +39,8 @@ const DIRECTIONS = [
 	{
 		id: 'design',
 		label: 'Product Design',
-		orbitX: 0.86,
-		orbitY: 0.5,
+		orbitX: 1.15,
+		orbitY: 0.644,
 		rotation: 0.3,
 		speed: 0.09,
 		phase: 4,
@@ -59,8 +49,8 @@ const DIRECTIONS = [
 	{
 		id: 'security',
 		label: 'Cybersecurity',
-		orbitX: 1,
-		orbitY: 0.59,
+		orbitX: 1.334,
+		orbitY: 0.748,
 		rotation: -0.46,
 		speed: -0.06,
 		phase: 4.9,
@@ -69,8 +59,8 @@ const DIRECTIONS = [
 	{
 		id: 'cloud',
 		label: 'Cloud DevOps',
-		orbitX: 1.14,
-		orbitY: 0.67,
+		orbitX: 1.518,
+		orbitY: 0.851,
 		rotation: 0.08,
 		speed: 0.05,
 		phase: 5.7,
@@ -80,6 +70,7 @@ const DIRECTIONS = [
 
 const STAR_COUNT = 120
 const ORBIT_PADDING = 48
+const DRAW_SCALE = 1.2
 const ORBIT_BOUNDS = DIRECTIONS.reduce(
 	(bounds, item) => {
 		const cos = Math.cos(item.rotation)
@@ -173,11 +164,15 @@ function OrbitField({ width, height, activeId, onHover, onSelect }) {
 			const centerY = screenHeight * 0.5
 			const fitByWidth = (screenWidth * 0.5 - ORBIT_PADDING) / ORBIT_BOUNDS.maxX
 			const fitByHeight = (screenHeight * 0.5 - ORBIT_PADDING) / ORBIT_BOUNDS.maxY
-			const dynamicRadius = Math.max(120, Math.min(fitByWidth, fitByHeight))
+			const dynamicRadius = Math.max(120, Math.min(fitByWidth, fitByHeight)) * DRAW_SCALE
 
 			graphics.clear()
 
 			for (const item of DIRECTIONS) {
+				if (item.id === 'mobile') {
+					continue
+				}
+
 				drawEllipsePath(
 					graphics,
 					centerX,
@@ -218,9 +213,9 @@ function OrbitField({ width, height, activeId, onHover, onSelect }) {
 			const centerY = screenHeight * 0.5
 
 			graphics.clear()
-			graphics.circle(centerX, centerY, 70).fill({ color: 0xffffff, alpha: 0.2 })
-			graphics.circle(centerX, centerY, 38).fill({ color: 0xffffff, alpha: 0.36 })
-			graphics.circle(centerX, centerY, 13).fill({ color: 0xffffff, alpha: 0.95 })
+			graphics.circle(centerX, centerY, 84).fill({ color: 0xffffff, alpha: 0.2 })
+			graphics.circle(centerX, centerY, 46).fill({ color: 0xffffff, alpha: 0.36 })
+			graphics.circle(centerX, centerY, 16).fill({ color: 0xffffff, alpha: 0.95 })
 		},
 		[app, height, width]
 	)
@@ -233,7 +228,7 @@ function OrbitField({ width, height, activeId, onHover, onSelect }) {
 		const centerY = screenHeight * 0.5
 		const fitByWidth = (screenWidth * 0.5 - ORBIT_PADDING) / ORBIT_BOUNDS.maxX
 		const fitByHeight = (screenHeight * 0.5 - ORBIT_PADDING) / ORBIT_BOUNDS.maxY
-		const dynamicRadius = Math.max(120, Math.min(fitByWidth, fitByHeight))
+		const dynamicRadius = Math.max(120, Math.min(fitByWidth, fitByHeight)) * DRAW_SCALE
 
 		DIRECTIONS.forEach((item, index) => {
 			anglesRef.current[index] += item.speed * elapsed
@@ -261,8 +256,8 @@ function OrbitField({ width, height, activeId, onHover, onSelect }) {
 			<pixiGraphics draw={drawCore} />
 			{DIRECTIONS.map((item, index) => {
 				const isActive = activeId === item.id
-				const glowRadius = isActive ? 42 : 34
-				const nodeRadius = isActive ? 20 : 16
+				const glowRadius = isActive ? 50 : 41
+				const nodeRadius = isActive ? 24 : 19
 				const strokeWidth = isActive ? 2.2 : 1.5
 
 				return (
@@ -300,7 +295,7 @@ function OrbitField({ width, height, activeId, onHover, onSelect }) {
 
 function ThirdScreen() {
 	const sceneHostRef = useRef(null)
-	const [sceneSize, setSceneSize] = useState({ width: 1200, height: 740 })
+	const [sceneSize, setSceneSize] = useState({ width: 1500, height: 1000 })
 	const [selectedId, setSelectedId] = useState(DIRECTIONS[0].id)
 	const [hoveredId, setHoveredId] = useState(null)
 
@@ -316,7 +311,7 @@ function ThirdScreen() {
 
 			const rect = sceneHostRef.current.getBoundingClientRect()
 			const width = Math.max(320, Math.floor(rect.width))
-			const height = Math.max(320, Math.floor(rect.height))
+			const height = Math.max(1000, Math.floor(rect.height))
 			setSceneSize((prev) => {
 				if (prev.width === width && prev.height === height) {
 					return prev
