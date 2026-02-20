@@ -95,26 +95,35 @@ const ORBIT_BOUNDS = DIRECTIONS.reduce(
 	{ maxX: 1, maxY: 1 }
 )
 
-function pointOnOrbit(rx, ry, rotation, angle) {
+function pointOnOrbit(centerX, centerY, rx, ry, rotation, angle) {
 	const x = Math.cos(angle) * rx
 	const y = Math.sin(angle) * ry
 	const cos = Math.cos(rotation)
 	const sin = Math.sin(rotation)
 
 	return {
-		x: x * cos - y * sin,
-		y: x * sin + y * cos,
+		x: centerX + x * cos - y * sin,
+		y: centerY + x * sin + y * cos,
 	}
 }
 
-function drawEllipsePath(graphics, rx, ry, rotation, color = 0xffffff, alpha = 0.65) {
+function drawEllipsePath(
+	graphics,
+	centerX,
+	centerY,
+	rx,
+	ry,
+	rotation,
+	color = 0xffffff,
+	alpha = 0.65
+) {
 	const segments = 96
-	const start = pointOnOrbit(rx, ry, rotation, 0)
+	const start = pointOnOrbit(centerX, centerY, rx, ry, rotation, 0)
 	graphics.moveTo(start.x, start.y)
 
 	for (let i = 1; i <= segments; i += 1) {
 		const t = (i / segments) * Math.PI * 2
-		const point = pointOnOrbit(rx, ry, rotation, t)
+		const point = pointOnOrbit(centerX, centerY, rx, ry, rotation, t)
 		graphics.lineTo(point.x, point.y)
 	}
 
@@ -171,6 +180,8 @@ function OrbitField({ width, height, activeId, onHover, onSelect }) {
 			for (const item of DIRECTIONS) {
 				drawEllipsePath(
 					graphics,
+					centerX,
+					centerY,
 					dynamicRadius * item.orbitX,
 					dynamicRadius * item.orbitY,
 					item.rotation,
@@ -227,6 +238,8 @@ function OrbitField({ width, height, activeId, onHover, onSelect }) {
 		DIRECTIONS.forEach((item, index) => {
 			anglesRef.current[index] += item.speed * elapsed
 			const point = pointOnOrbit(
+				centerX,
+				centerY,
 				dynamicRadius * item.orbitX,
 				dynamicRadius * item.orbitY,
 				item.rotation,
@@ -235,8 +248,8 @@ function OrbitField({ width, height, activeId, onHover, onSelect }) {
 			const node = nodesRef.current[index]
 
 			if (node) {
-				node.x = centerX + point.x
-				node.y = centerY + point.y
+				node.x = point.x
+				node.y = point.y
 			}
 		})
 	})
