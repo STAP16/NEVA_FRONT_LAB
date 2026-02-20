@@ -1,4 +1,12 @@
-import { HeroScreen, SecondScreen, ProcessScreen, DirectionsScreen, FifthScreen, SixthScreen } from '../index'
+import {
+	HeroScreen,
+	SecondScreen,
+	ProcessScreen,
+	DirectionsScreen,
+	FifthScreen,
+	FaqScreen,
+	SixthScreen
+} from '../index'
 
 export function HomePage() {
 	return (
@@ -8,6 +16,7 @@ export function HomePage() {
 			<DirectionsScreen />
 			<ProcessScreen />
 			<FifthScreen />
+			<FaqScreen />
 			<SixthScreen />
 		</>
 	)

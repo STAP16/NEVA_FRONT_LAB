@@ -17,7 +17,8 @@ import {
 	ProcessScreen,
 	DirectionsScreen,
 	FifthScreen,
-	SixthScreen
+	SixthScreen,
+	FaqScreen
 } from './pages'
 
 const pageTransition = {
@@ -49,6 +50,7 @@ function HomePage() {
 			<ProcessScreen />
 			<FifthScreen />
 			<SixthScreen />
+			<FaqScreen />
 		</>
 	)
 }
