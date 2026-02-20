@@ -617,7 +617,7 @@ function lerpColor(from, to, t) {
 	return (r << 16) | (g << 8) | b
 }
 
-function ThirdScreen() {
+function ChoiceDirection() {
 	const sceneHostRef = useRef(null)
 	const [sceneSize, setSceneSize] = useState({ width: 1500, height: 1000 })
 	const [activeId, setActiveId] = useState(null)
@@ -756,4 +756,4 @@ function ThirdScreen() {
 	)
 }
 
-export { ThirdScreen }
+export { ChoiceDirection }

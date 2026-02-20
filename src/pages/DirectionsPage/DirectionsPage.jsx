@@ -1,11 +1,9 @@
-import { SecondScreen } from './SecondScreen/SecondScreen'
-import { ThirdScreen } from './ThirdScreen/ThirdScreen'
+import { ChoiceDirection } from './ThirdScreen/ThirdScreen'
 
 function DirectionsPage() {
 	return (
 		<>
-			<ThirdScreen />
-			<SecondScreen />
+			<ChoiceDirection />
 		</>
 	)
 }
