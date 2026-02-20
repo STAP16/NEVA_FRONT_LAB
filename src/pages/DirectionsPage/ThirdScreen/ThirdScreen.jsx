@@ -14,7 +14,7 @@ const DIRECTIONS = [
 		rotation: 0.15,
 		speed: 0.08,
 		phase: 0,
-		orbitColor: 0xff6b6b,
+		orbitColor: 0xff6b6b
 	},
 	{
 		id: 'web',
@@ -24,7 +24,7 @@ const DIRECTIONS = [
 		rotation: -0.32,
 		speed: -0.09,
 		phase: 1.2,
-		orbitColor: 0xfeca57,
+		orbitColor: 0xfeca57
 	},
 	{
 		id: 'data',
@@ -34,7 +34,7 @@ const DIRECTIONS = [
 		rotation: -0.18,
 		speed: -0.07,
 		phase: 3.1,
-		orbitColor: 0x1dd1a1,
+		orbitColor: 0x1dd1a1
 	},
 	{
 		id: 'design',
@@ -44,7 +44,7 @@ const DIRECTIONS = [
 		rotation: 0.3,
 		speed: 0.09,
 		phase: 4,
-		orbitColor: 0x5f27cd,
+		orbitColor: 0x5f27cd
 	},
 	{
 		id: 'security',
@@ -54,7 +54,7 @@ const DIRECTIONS = [
 		rotation: -0.46,
 		speed: -0.06,
 		phase: 4.9,
-		orbitColor: 0xff9ff3,
+		orbitColor: 0xff9ff3
 	},
 	{
 		id: 'cloud',
@@ -64,13 +64,15 @@ const DIRECTIONS = [
 		rotation: 0.08,
 		speed: 0.05,
 		phase: 5.7,
-		orbitColor: 0x54a0ff,
-	},
+		orbitColor: 0x54a0ff
+	}
 ]
 
 const STAR_COUNT = 120
 const ORBIT_PADDING = 48
 const DRAW_SCALE = 1.2
+const OUTER_NODE_GLOW_RADIUS = 50
+const SAFE_EDGE_MARGIN = ORBIT_PADDING + OUTER_NODE_GLOW_RADIUS + 8
 const ORBIT_BOUNDS = DIRECTIONS.reduce(
 	(bounds, item) => {
 		const cos = Math.cos(item.rotation)
@@ -80,7 +82,7 @@ const ORBIT_BOUNDS = DIRECTIONS.reduce(
 
 		return {
 			maxX: Math.max(bounds.maxX, extentX),
-			maxY: Math.max(bounds.maxY, extentY),
+			maxY: Math.max(bounds.maxY, extentY)
 		}
 	},
 	{ maxX: 1, maxY: 1 }
@@ -94,7 +96,7 @@ function pointOnOrbit(centerX, centerY, rx, ry, rotation, angle) {
 
 	return {
 		x: centerX + x * cos - y * sin,
-		y: centerY + x * sin + y * cos,
+		y: centerY + x * sin + y * cos
 	}
 }
 
@@ -121,10 +123,20 @@ function drawEllipsePath(
 	graphics.stroke({ color, width: 1.5, alpha })
 }
 
+function getDynamicRadius(screenWidth, screenHeight) {
+	const halfWidth = Math.max(0, screenWidth * 0.5 - SAFE_EDGE_MARGIN)
+	const halfHeight = Math.max(0, screenHeight * 0.5 - SAFE_EDGE_MARGIN)
+	const fitByWidth = halfWidth / ORBIT_BOUNDS.maxX
+	const fitByHeight = halfHeight / ORBIT_BOUNDS.maxY
+	const baseRadius = Math.min(fitByWidth, fitByHeight)
+
+	return Math.max(0, baseRadius / DRAW_SCALE)
+}
+
 function OrbitField({ width, height, activeId, onHover, onSelect }) {
 	const { app } = useApplication()
 	const nodesRef = useRef([])
-	const anglesRef = useRef(DIRECTIONS.map((item) => item.phase))
+	const anglesRef = useRef(DIRECTIONS.map(item => item.phase))
 
 	const stars = useMemo(
 		() =>
@@ -132,7 +144,7 @@ function OrbitField({ width, height, activeId, onHover, onSelect }) {
 				x: Math.random() * width,
 				y: Math.random() * height,
 				r: 0.6 + Math.random() * 1.8,
-				a: 0.2 + Math.random() * 0.55,
+				a: 0.2 + Math.random() * 0.55
 			})),
 		[width, height]
 	)
@@ -141,13 +153,13 @@ function OrbitField({ width, height, activeId, onHover, onSelect }) {
 		() =>
 			Array.from({ length: 8 }, (_, index) => ({
 				angle: (Math.PI / 4) * index,
-				alpha: index % 2 === 0 ? 0.32 : 0.2,
+				alpha: index % 2 === 0 ? 0.32 : 0.2
 			})),
 		[]
 	)
 
 	const drawStars = useCallback(
-		(graphics) => {
+		graphics => {
 			graphics.clear()
 			for (const star of stars) {
 				graphics.circle(star.x, star.y, star.r).fill({ color: 0xffffff, alpha: star.a })
@@ -157,22 +169,16 @@ function OrbitField({ width, height, activeId, onHover, onSelect }) {
 	)
 
 	const drawOrbits = useCallback(
-		(graphics) => {
+		graphics => {
 			const screenWidth = app?.screen?.width ?? width
 			const screenHeight = app?.screen?.height ?? height
 			const centerX = screenWidth * 0.5
 			const centerY = screenHeight * 0.5
-			const fitByWidth = (screenWidth * 0.5 - ORBIT_PADDING) / ORBIT_BOUNDS.maxX
-			const fitByHeight = (screenHeight * 0.5 - ORBIT_PADDING) / ORBIT_BOUNDS.maxY
-			const dynamicRadius = Math.max(120, Math.min(fitByWidth, fitByHeight)) * DRAW_SCALE
+			const dynamicRadius = getDynamicRadius(screenWidth, screenHeight) * DRAW_SCALE
 
 			graphics.clear()
 
 			for (const item of DIRECTIONS) {
-				if (item.id === 'mobile') {
-					continue
-				}
-
 				drawEllipsePath(
 					graphics,
 					centerX,
@@ -206,7 +212,7 @@ function OrbitField({ width, height, activeId, onHover, onSelect }) {
 	)
 
 	const drawCore = useCallback(
-		(graphics) => {
+		graphics => {
 			const screenWidth = app?.screen?.width ?? width
 			const screenHeight = app?.screen?.height ?? height
 			const centerX = screenWidth * 0.5
@@ -220,15 +226,13 @@ function OrbitField({ width, height, activeId, onHover, onSelect }) {
 		[app, height, width]
 	)
 
-	useTick((ticker) => {
+	useTick(ticker => {
 		const elapsed = ticker.deltaMS / 1000
 		const screenWidth = app?.screen?.width ?? width
 		const screenHeight = app?.screen?.height ?? height
 		const centerX = screenWidth * 0.5
 		const centerY = screenHeight * 0.5
-		const fitByWidth = (screenWidth * 0.5 - ORBIT_PADDING) / ORBIT_BOUNDS.maxX
-		const fitByHeight = (screenHeight * 0.5 - ORBIT_PADDING) / ORBIT_BOUNDS.maxY
-		const dynamicRadius = Math.max(120, Math.min(fitByWidth, fitByHeight)) * DRAW_SCALE
+		const dynamicRadius = getDynamicRadius(screenWidth, screenHeight) * DRAW_SCALE
 
 		DIRECTIONS.forEach((item, index) => {
 			anglesRef.current[index] += item.speed * elapsed
@@ -263,7 +267,7 @@ function OrbitField({ width, height, activeId, onHover, onSelect }) {
 				return (
 					<pixiContainer
 						key={item.id}
-						ref={(node) => {
+						ref={node => {
 							nodesRef.current[index] = node
 						}}
 						eventMode="static"
@@ -274,7 +278,7 @@ function OrbitField({ width, height, activeId, onHover, onSelect }) {
 						pointertap={() => onSelect(item.id)}
 					>
 						<pixiGraphics
-							draw={(graphics) => {
+							draw={graphics => {
 								graphics.clear()
 								graphics
 									.circle(0, 0, glowRadius)
@@ -311,8 +315,8 @@ function ThirdScreen() {
 
 			const rect = sceneHostRef.current.getBoundingClientRect()
 			const width = Math.max(320, Math.floor(rect.width))
-			const height = Math.max(1000, Math.floor(rect.height))
-			setSceneSize((prev) => {
+			const height = Math.max(320, Math.floor(rect.height))
+			setSceneSize(prev => {
 				if (prev.width === width && prev.height === height) {
 					return prev
 				}
@@ -320,7 +324,7 @@ function ThirdScreen() {
 			})
 		}
 
-		const observer = new ResizeObserver((entries) => {
+		const observer = new ResizeObserver(entries => {
 			const entry = entries[0]
 			if (!entry) {
 				return
@@ -341,38 +345,30 @@ function ThirdScreen() {
 	}, [])
 
 	const activeId = hoveredId ?? selectedId
-	const activeDirection = DIRECTIONS.find((item) => item.id === activeId) ?? DIRECTIONS[0]
-	const dpr =
-		typeof window !== 'undefined'
-			? Math.min(window.devicePixelRatio || 1, 2)
-			: 1
+	const dpr = typeof window !== 'undefined' ? Math.min(window.devicePixelRatio || 1, 2) : 1
 
 	return (
 		<section className="directions-page-third-screen">
-			<div className="directions-page-third-screen__content">
-				<div className="directions-page-third-screen__scene" ref={sceneHostRef}>
-					<Application
+			<div
+				className="directions-page-third-screen__canvas-host"
+				ref={sceneHostRef}
+			>
+				<Application
+					width={sceneSize.width}
+					height={sceneSize.height}
+					backgroundAlpha={0}
+					antialias
+					autoDensity
+					resolution={dpr}
+				>
+					<OrbitField
 						width={sceneSize.width}
 						height={sceneSize.height}
-						backgroundAlpha={0}
-						antialias
-						autoDensity
-						resolution={dpr}
-					>
-						<OrbitField
-							width={sceneSize.width}
-							height={sceneSize.height}
-							activeId={activeId}
-							onHover={setHoveredId}
-							onSelect={setSelectedId}
-						/>
-					</Application>
-
-					<div className="directions-page-third-screen__overlay">
-						<p>Направления</p>
-						<h2>{activeDirection.label}</h2>
-					</div>
-				</div>
+						activeId={activeId}
+						onHover={setHoveredId}
+						onSelect={setSelectedId}
+					/>
+				</Application>
 			</div>
 		</section>
 	)
