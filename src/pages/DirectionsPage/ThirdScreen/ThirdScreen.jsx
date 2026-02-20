@@ -143,6 +143,7 @@ function getDynamicRadius(screenWidth, screenHeight) {
 function OrbitField({ width, height, activeId, onHover, onSelect }) {
 	const { app } = useApplication()
 	const nodesRef = useRef([])
+	const coreRef = useRef(null)
 	const anglesRef = useRef(DIRECTIONS.map(item => item.phase))
 
 	const stars = useMemo(
@@ -226,8 +227,8 @@ function OrbitField({ width, height, activeId, onHover, onSelect }) {
 			const centerY = screenHeight * 0.5
 
 			graphics.clear()
-			graphics.circle(centerX, centerY, 84).fill({ color: 0xffffff, alpha: 0.2 })
-			graphics.circle(centerX, centerY, 46).fill({ color: 0xffffff, alpha: 0.36 })
+			graphics.circle(centerX, centerY, 84).fill({ color: 0xffffff, alpha: 0.18 })
+			graphics.circle(centerX, centerY, 46).fill({ color: 0xffffff, alpha: 0.34 })
 			graphics.circle(centerX, centerY, 16).fill({ color: 0xffffff, alpha: 0.95 })
 		},
 		[app, height, width]
@@ -235,11 +236,27 @@ function OrbitField({ width, height, activeId, onHover, onSelect }) {
 
 	useTick(ticker => {
 		const elapsed = ticker.deltaMS / 1000
+		const t = ticker.lastTime / 1000
 		const screenWidth = app?.screen?.width ?? width
 		const screenHeight = app?.screen?.height ?? height
 		const centerX = screenWidth * 0.5
 		const centerY = screenHeight * 0.5
 		const dynamicRadius = getDynamicRadius(screenWidth, screenHeight) * DRAW_SCALE
+		const pulse = (Math.sin(t * 2.2) + 1) * 0.15
+
+		if (coreRef.current) {
+			const g = coreRef.current
+			g.clear()
+			g.circle(centerX, centerY, 82 + pulse * 16).fill({
+				color: 0xffffff,
+				alpha: 0.14 + pulse * 0.08
+			})
+			g.circle(centerX, centerY, 44 + pulse * 10).fill({
+				color: 0xffffff,
+				alpha: 0.28 + pulse * 0.08
+			})
+			g.circle(centerX, centerY, 16).fill({ color: 0xffffff, alpha: 0.95 })
+		}
 
 		DIRECTIONS.forEach((item, index) => {
 			anglesRef.current[index] += item.speed * elapsed
@@ -264,7 +281,10 @@ function OrbitField({ width, height, activeId, onHover, onSelect }) {
 		<>
 			<pixiGraphics draw={drawStars} />
 			<pixiGraphics draw={drawOrbits} />
-			<pixiGraphics draw={drawCore} />
+			<pixiGraphics
+				ref={coreRef}
+				draw={drawCore}
+			/>
 			{DIRECTIONS.map((item, index) => {
 				const isActive = activeId === item.id
 				const scale = item.nodeScale ?? 1
