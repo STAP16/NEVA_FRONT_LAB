@@ -2,12 +2,12 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Application, extend, useApplication, useTick } from '@pixi/react'
 import { Circle, Container, Graphics } from 'pixi.js'
 import { motion, AnimatePresence } from 'framer-motion'
-import nevikAI from '../../../assets/NEVIK_TOUCH.png'
-import nevikWeb from '../../../assets/NEVIK_FOR_SCND_SCREEN.png'
-import nevikData from '../../../assets/NEVIK_WHAT_YOU_GET.png'
-import nevikDesign from '../../../assets/NEVIK_WITH_CASE.png'
-import nevikSecurity from '../../../assets/NEVIK_FOR_ABOUT_FIRST_SCREEN.png'
-import nevikCloud from '../../../assets/nevik_cap.png'
+import nevikAI from '../../../assets/NEVIK_AI.png'
+import nevikWeb from '../../../assets/NEVIK_WEB.png'
+import nevikData from '../../../assets/NEVIK_DATA_SCINCE.png'
+import nevikDesign from '../../../assets/NEVIK_DESIGN.png'
+import nevikSecurity from '../../../assets/NEVIK_BACKEND.png'
+import nevikCloud from '../../../assets/NEVIK_DEVOPS.png'
 import './ThirdScreen.css'
 
 extend({ Container, Graphics })
@@ -18,15 +18,18 @@ const DIRECTIONS = [
 		label: 'AI Systems',
 		title: 'AI-системы',
 		description:
-			'Погружение в мир искусственного интеллекта: от нейросетей до генеративных моделей.',
+			'Освоение искусственного интеллекта как инструмента для разработки, автоматизации и построения прикладных решений.',
 		bullets: [
-			'Машинное обучение и нейронные сети',
-			'Обработка естественного языка (NLP)',
-			'Компьютерное зрение и генеративный AI'
+			'Работа с современными моделями и API',
+			'Оркестрирование AI-агентов и построение workflow',
+			'Разработка решений и сервисов'
 		],
 		ctaLabel: 'Подробнее',
-		color: '#5b8def',
-		colorHex: 0x5b8def,
+		colorPrimary: '#8A78EE',
+		colorPrimaryHex: 0x8a78ee,
+		colorSoft: 'rgba(201, 189, 252, 0.28)',
+		colorGlow: 'rgba(138, 120, 238, 0.24)',
+		colorGlowHex: 0x8a78ee,
 		mascotVariant: nevikAI,
 		orbitX: 0.368,
 		orbitY: 0.23,
@@ -40,16 +43,18 @@ const DIRECTIONS = [
 		id: 'web',
 		label: 'Web Engineering',
 		title: 'Веб-разработка',
-		description:
-			'Полный цикл создания современных веб-приложений — от фронтенда до бэкенда.',
+		description: 'Полный цикл создания современных веб-приложений — от фронтенда до бэкенда.',
 		bullets: [
 			'React, Vue и современные фреймворки',
 			'Node.js и серверная архитектура',
 			'REST API и базы данных'
 		],
 		ctaLabel: 'Подробнее',
-		color: '#4a7fd4',
-		colorHex: 0x4a7fd4,
+		colorPrimary: '#5F9FE8',
+		colorPrimaryHex: 0x5f9fe8,
+		colorSoft: 'rgba(181, 215, 250, 0.28)',
+		colorGlow: 'rgba(95, 159, 232, 0.24)',
+		colorGlowHex: 0x5f9fe8,
 		mascotVariant: nevikWeb,
 		orbitX: 0.575,
 		orbitY: 0.345,
@@ -63,16 +68,18 @@ const DIRECTIONS = [
 		id: 'data',
 		label: 'Data Analytics',
 		title: 'Аналитика данных',
-		description:
-			'Превращаем данные в решения: анализ, визуализация и предиктивные модели.',
+		description: 'Превращаем данные в решения: анализ, визуализация и предиктивные модели.',
 		bullets: [
 			'Python, Pandas и SQL для анализа',
 			'Визуализация и дашборды',
 			'Статистика и предиктивная аналитика'
 		],
 		ctaLabel: 'Подробнее',
-		color: '#6b9ae8',
-		colorHex: 0x6b9ae8,
+		colorPrimary: '#39C2E6',
+		colorPrimaryHex: 0x39c2e6,
+		colorSoft: 'rgba(170, 237, 250, 0.28)',
+		colorGlow: 'rgba(57, 194, 230, 0.24)',
+		colorGlowHex: 0x39c2e6,
 		mascotVariant: nevikData,
 		orbitX: 0.943,
 		orbitY: 0.529,
@@ -95,8 +102,11 @@ const DIRECTIONS = [
 			'Прототипирование в Figma'
 		],
 		ctaLabel: 'Подробнее',
-		color: '#7da4e0',
-		colorHex: 0x7da4e0,
+		colorPrimary: '#9A8CF2',
+		colorPrimaryHex: 0x9a8cf2,
+		colorSoft: 'rgba(214, 205, 252, 0.3)',
+		colorGlow: 'rgba(154, 140, 242, 0.23)',
+		colorGlowHex: 0x9a8cf2,
 		mascotVariant: nevikDesign,
 		orbitX: 1.15,
 		orbitY: 0.644,
@@ -108,18 +118,22 @@ const DIRECTIONS = [
 	},
 	{
 		id: 'security',
-		label: 'Cybersecurity',
-		title: 'Кибербезопасность',
+		label: 'Бекенд инженерия',
+		title: 'Бекенд инженерия',
 		description:
-			'Защита цифровых систем: от анализа уязвимостей до построения защищённых архитектур.',
+			'Серверная разработка и инженерный подход: от API и архитектуры до надёжной backend-инфраструктуры.',
 		bullets: [
-			'Сетевая безопасность и пентест',
-			'Криптография и защита данных',
-			'Аудит и мониторинг инфраструктуры'
+			'Node.js, Python и проектирование серверной логики',
+			'REST API, базы данных и интеграции',
+			'Архитектура, производительность и надёжность сервисов'
 		],
 		ctaLabel: 'Подробнее',
-		color: '#5a82c9',
-		colorHex: 0x5a82c9,
+		colorPrimary: '#40CBC7',
+		colorPrimaryHex: 0x40cbc7,
+		colorSoft: 'rgba(201, 236, 235, 0.28)',
+		colorGlow: 'rgba(64, 203, 199, 0.24)',
+		colorGlowHex: 0x40cbc7,
+		nodeBaseHex: 0x9fd8d6,
 		mascotVariant: nevikSecurity,
 		orbitX: 1.334,
 		orbitY: 0.748,
@@ -133,16 +147,18 @@ const DIRECTIONS = [
 		id: 'cloud',
 		label: 'Cloud DevOps',
 		title: 'Cloud и DevOps',
-		description:
-			'Облачные технологии и автоматизация: CI/CD, контейнеры и инфраструктура как код.',
+		description: 'Облачные технологии и автоматизация: CI/CD, контейнеры и инфраструктура как код.',
 		bullets: [
 			'Docker, Kubernetes и оркестрация',
 			'CI/CD пайплайны и автоматизация',
 			'AWS / GCP и облачная архитектура'
 		],
 		ctaLabel: 'Подробнее',
-		color: '#4f74b8',
-		colorHex: 0x4f74b8,
+		colorPrimary: '#3E8FD8',
+		colorPrimaryHex: 0x3e8fd8,
+		colorSoft: 'rgba(170, 211, 246, 0.28)',
+		colorGlow: 'rgba(62, 143, 216, 0.24)',
+		colorGlowHex: 0x3e8fd8,
 		mascotVariant: nevikCloud,
 		orbitX: 1.518,
 		orbitY: 0.851,
@@ -220,26 +236,16 @@ function getDynamicRadius(screenWidth, screenHeight) {
 	return Math.max(0, baseRadius / DRAW_SCALE)
 }
 
-function OrbitField({
-	width,
-	height,
-	activeId,
-	hoveredId,
-	onHover,
-	onSelect
-}) {
+function OrbitField({ width, height, activeId, hoveredId, onHover, onSelect }) {
 	const { app } = useApplication()
 	const nodesRef = useRef([])
 	const coreRef = useRef(null)
 	const orbitsRef = useRef(null)
 	const nodeGraphicsRefs = useRef([])
 	const anglesRef = useRef(DIRECTIONS.map(item => item.phase))
-	const displayId = hoveredId ?? activeId
 
 	// Smooth transition state per node & orbit
-	const nodeAnimRef = useRef(
-		DIRECTIONS.map(() => ({ t: 0, alpha: 1 }))
-	)
+	const nodeAnimRef = useRef(DIRECTIONS.map(() => ({ t: 0, h: 0, alpha: 1 })))
 	const stars = useMemo(
 		() =>
 			Array.from({ length: STAR_COUNT }, () => ({
@@ -356,9 +362,9 @@ function OrbitField({
 					dynamicRadius * item.orbitX,
 					dynamicRadius * item.orbitY,
 					item.rotation,
-					item.orbitColor,
-					0.52,
-					1.5
+					0xe7f1ff,
+					0.5,
+					1.35
 				)
 			})
 		}
@@ -376,14 +382,20 @@ function OrbitField({
 			const node = nodesRef.current[index]
 			const anim = nodeAnimRef.current[index]
 
-			// Smooth activation: t lerps 0→1 (active) or 1→0 (inactive)
-			const isActive = displayId === item.id
+			const isActive = activeId === item.id
+			const isHovered = hoveredId === item.id
+
+			// Active transition
 			const targetT = isActive ? 1 : 0
 			anim.t += (targetT - anim.t) * lerpFactor
 
-			// Smooth alpha for dimming inactive nodes
-			const hasActive = displayId != null
-			const targetAlpha = hasActive && !isActive ? 0.72 : 1
+			// Hover transition for non-active nodes
+			const targetH = isHovered && !isActive ? 1 : 0
+			anim.h += (targetH - anim.h) * lerpFactor
+
+			// Keep active node dominant, but allow hovered inactive node to lift a bit
+			const hasActive = activeId != null
+			const targetAlpha = hasActive ? (isActive ? 1 : isHovered ? 0.94 : 0.72) : isHovered ? 1 : 1
 			anim.alpha += (targetAlpha - anim.alpha) * lerpFactor
 
 			if (node) {
@@ -397,30 +409,33 @@ function OrbitField({
 			if (ng) {
 				const scale = item.nodeScale ?? 1
 				const sizeOff = item.nodeSizeOffset ?? 0
-				const p = anim.t // 0 = inactive, 1 = active
+				const pActive = anim.t
+				const pHover = anim.h
+				const p = pActive + (1 - pActive) * pHover * 0.78
 
-				const glowR = (41 + 11 * p) * scale + sizeOff
-				const nodeR = (19 + 5 * p) * scale + sizeOff
+				const glowR = (36 + 4 * p) * scale + sizeOff
+				const nodeR = (19 + 2 * p) * scale + sizeOff
 
 				// Interpolate colors/alphas between inactive and active
-				const glowExtraR = 8 * p
-				const glowColorAlpha = 0.18 * p
-				const whiteGlowAlpha = 0.2 + 0.1 * p
+				const glowExtraR = 4 * p
+				const glowColorAlpha = 0.14 * pActive + 0.14 * pHover
+				const whiteGlowAlpha = 0.2 + 0.08 * p
 
-				const fillAlpha = 0.65
-				const innerR = nodeR * (0.7 - 0.05 * p)
-				const innerAlpha = 0.4 + 0.1 * p
+				const fillAlpha = 0.62 + 0.11 * p
+				const innerR = nodeR * 0.7
+				const innerBaseAlpha = item.nodeInnerBaseAlpha ?? 0.36
+				const innerAlpha = innerBaseAlpha + (0.42 - innerBaseAlpha) * p
 
-				const ringOuterR = nodeR + 5 + 1 * p
-				const ringOuterW = 1.5 + 0.3 * p
-				const ringOuterAlpha = 0.6 + 0.1 * p
+				const ringOuterR = nodeR + 4 + 0.4 * p
+				const ringOuterW = 1.4 + 0.15 * p
+				const ringOuterAlpha = 0.58 + 0.05 * p
 
 				ng.clear()
 
 				// Color glow (fades in for active)
 				if (p > 0.01) {
 					ng.circle(0, 0, glowR + glowExtraR).fill({
-						color: item.colorHex,
+						color: item.colorGlowHex,
 						alpha: glowColorAlpha
 					})
 				}
@@ -428,12 +443,14 @@ function OrbitField({
 				// White glow
 				ng.circle(0, 0, glowR).fill({ color: 0xffffff, alpha: whiteGlowAlpha })
 
-				// Node fill — blend from neutral blue to direction color
-				const fillColor = p > 0.5 ? item.colorHex : 0xa8c8ff
+				// Node fill — smooth blend from neutral blue to direction color
+				const baseFillColor = item.nodeBaseHex ?? 0xa8c8ff
+				const fillColor = lerpColor(baseFillColor, item.colorPrimaryHex, p * 0.82)
 				ng.circle(0, 0, nodeR).fill({ color: fillColor, alpha: fillAlpha })
 
 				// Inner highlight
-				ng.circle(0, 0, innerR).fill({ color: 0xcfe2ff, alpha: innerAlpha })
+				const innerColor = item.nodeInnerHex ?? 0xcfe2ff
+				ng.circle(0, 0, innerR).fill({ color: innerColor, alpha: innerAlpha })
 
 				// Outer ring (white)
 				ng.circle(0, 0, ringOuterR).stroke({
@@ -445,14 +462,13 @@ function OrbitField({
 				// Inner color ring (fades in for active)
 				if (p > 0.1) {
 					ng.circle(0, 0, nodeR + 3 * p).stroke({
-						color: item.colorHex,
-						width: 1.2 * p,
-						alpha: 0.5 * p
+						color: item.colorPrimaryHex,
+						width: 0.95 * p,
+						alpha: 0.2 * pActive + 0.18 * pHover
 					})
 				}
 			}
 		})
-
 	})
 
 	return (
@@ -536,10 +552,14 @@ function DirectionPanel({ direction }) {
 			initial="hidden"
 			animate="visible"
 			exit="exit"
-			style={{ '--dir-color': direction.color }}
+			style={{
+				'--dir-color': direction.colorPrimary,
+				'--dir-soft': direction.colorSoft,
+				'--dir-glow': direction.colorGlow
+			}}
 		>
 			<motion.div
-				className="direction-panel__content"
+				className="direction-panel__content direction-panel__content--with-mascot"
 				variants={contentVariants}
 				initial="enter"
 				animate="center"
@@ -555,7 +575,7 @@ function DirectionPanel({ direction }) {
 						>
 							<span
 								className="direction-panel__bullet-icon"
-								style={{ color: direction.color }}
+								style={{ color: direction.colorPrimary }}
 							>
 								✓
 							</span>
@@ -566,14 +586,14 @@ function DirectionPanel({ direction }) {
 				<button
 					className="direction-panel__cta"
 					style={{
-						background: `linear-gradient(135deg, ${direction.color}, ${direction.color}dd)`
+						background: `linear-gradient(135deg, ${direction.colorPrimary}, ${direction.colorPrimary})`
 					}}
 				>
 					{direction.ctaLabel}
 				</button>
-				<div className="direction-panel__mascot-wrap">
+				<div className="direction-panel__mascot-wrap direction-panel__mascot-wrap--card">
 					<img
-						className="direction-panel__mascot"
+						className="direction-panel__mascot direction-panel__mascot--card"
 						src={direction.mascotVariant}
 						alt={direction.title}
 					/>
@@ -581,6 +601,21 @@ function DirectionPanel({ direction }) {
 			</motion.div>
 		</motion.div>
 	)
+}
+
+function lerpColor(from, to, t) {
+	const clamped = Math.max(0, Math.min(1, t))
+	const r1 = (from >> 16) & 0xff
+	const g1 = (from >> 8) & 0xff
+	const b1 = from & 0xff
+	const r2 = (to >> 16) & 0xff
+	const g2 = (to >> 8) & 0xff
+	const b2 = to & 0xff
+	const r = Math.round(r1 + (r2 - r1) * clamped)
+	const g = Math.round(g1 + (g2 - g1) * clamped)
+	const b = Math.round(b1 + (b2 - b1) * clamped)
+
+	return (r << 16) | (g << 8) | b
 }
 
 function ThirdScreen() {
@@ -645,15 +680,13 @@ function ThirdScreen() {
 
 	const handleClosePanel = useCallback(() => {
 		setPanelOpen(false)
-		// Keep activeId for context preservation
+		setActiveId(null)
+		setHoveredId(null)
 	}, [])
 
 	const handleBackgroundClick = useCallback(
 		e => {
-			if (
-				panelOpen &&
-				e.target === e.currentTarget
-			) {
+			if (panelOpen && e.target === e.currentTarget) {
 				handleClosePanel()
 			}
 		},
@@ -661,7 +694,6 @@ function ThirdScreen() {
 	)
 
 	const activeDirection = activeId ? DIRECTIONS.find(d => d.id === activeId) : null
-	const displayId = hoveredId ?? activeId
 	const dpr = typeof window !== 'undefined' ? Math.min(window.devicePixelRatio || 1, 2) : 1
 
 	return (
@@ -696,7 +728,7 @@ function ThirdScreen() {
 					<OrbitField
 						width={sceneSize.width}
 						height={sceneSize.height}
-						activeId={displayId}
+						activeId={activeId}
 						hoveredId={hoveredId}
 						onHover={setHoveredId}
 						onSelect={handleSelect}
