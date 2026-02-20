@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { Application, extend, useTick } from '@pixi/react'
+import { Application, extend, useApplication, useTick } from '@pixi/react'
 import { Circle, Container, Graphics } from 'pixi.js'
 import './ThirdScreen.css'
 
@@ -9,8 +9,8 @@ const DIRECTIONS = [
 	{
 		id: 'ai',
 		label: 'AI Systems',
-		orbitX: 0.28,
-		orbitY: 0.17,
+		orbitX: 0.24,
+		orbitY: 0.15,
 		rotation: 0.15,
 		speed: 0.08,
 		phase: 0,
@@ -19,8 +19,8 @@ const DIRECTIONS = [
 	{
 		id: 'web',
 		label: 'Web Engineering',
-		orbitX: 0.44,
-		orbitY: 0.26,
+		orbitX: 0.38,
+		orbitY: 0.23,
 		rotation: -0.32,
 		speed: -0.09,
 		phase: 1.2,
@@ -29,8 +29,8 @@ const DIRECTIONS = [
 	{
 		id: 'mobile',
 		label: 'Mobile Apps',
-		orbitX: 0.62,
-		orbitY: 0.36,
+		orbitX: 0.54,
+		orbitY: 0.31,
 		rotation: 0.52,
 		speed: 0.1,
 		phase: 2.4,
@@ -39,8 +39,8 @@ const DIRECTIONS = [
 	{
 		id: 'data',
 		label: 'Data Analytics',
-		orbitX: 0.82,
-		orbitY: 0.46,
+		orbitX: 0.7,
+		orbitY: 0.4,
 		rotation: -0.18,
 		speed: -0.07,
 		phase: 3.1,
@@ -49,8 +49,8 @@ const DIRECTIONS = [
 	{
 		id: 'design',
 		label: 'Product Design',
-		orbitX: 1.02,
-		orbitY: 0.57,
+		orbitX: 0.86,
+		orbitY: 0.5,
 		rotation: 0.3,
 		speed: 0.09,
 		phase: 4,
@@ -59,8 +59,8 @@ const DIRECTIONS = [
 	{
 		id: 'security',
 		label: 'Cybersecurity',
-		orbitX: 1.22,
-		orbitY: 0.68,
+		orbitX: 1,
+		orbitY: 0.59,
 		rotation: -0.46,
 		speed: -0.06,
 		phase: 4.9,
@@ -69,8 +69,8 @@ const DIRECTIONS = [
 	{
 		id: 'cloud',
 		label: 'Cloud DevOps',
-		orbitX: 1.4,
-		orbitY: 0.78,
+		orbitX: 1.14,
+		orbitY: 0.67,
 		rotation: 0.08,
 		speed: 0.05,
 		phase: 5.7,
@@ -79,27 +79,42 @@ const DIRECTIONS = [
 ]
 
 const STAR_COUNT = 120
+const ORBIT_PADDING = 48
+const ORBIT_BOUNDS = DIRECTIONS.reduce(
+	(bounds, item) => {
+		const cos = Math.cos(item.rotation)
+		const sin = Math.sin(item.rotation)
+		const extentX = Math.sqrt((item.orbitX * cos) ** 2 + (item.orbitY * sin) ** 2)
+		const extentY = Math.sqrt((item.orbitX * sin) ** 2 + (item.orbitY * cos) ** 2)
 
-function pointOnOrbit(center, rx, ry, rotation, angle) {
+		return {
+			maxX: Math.max(bounds.maxX, extentX),
+			maxY: Math.max(bounds.maxY, extentY),
+		}
+	},
+	{ maxX: 1, maxY: 1 }
+)
+
+function pointOnOrbit(rx, ry, rotation, angle) {
 	const x = Math.cos(angle) * rx
 	const y = Math.sin(angle) * ry
 	const cos = Math.cos(rotation)
 	const sin = Math.sin(rotation)
 
 	return {
-		x: center.x + x * cos - y * sin,
-		y: center.y + x * sin + y * cos,
+		x: x * cos - y * sin,
+		y: x * sin + y * cos,
 	}
 }
 
-function drawEllipsePath(graphics, center, rx, ry, rotation, color = 0xffffff, alpha = 0.65) {
+function drawEllipsePath(graphics, rx, ry, rotation, color = 0xffffff, alpha = 0.65) {
 	const segments = 96
-	const start = pointOnOrbit(center, rx, ry, rotation, 0)
+	const start = pointOnOrbit(rx, ry, rotation, 0)
 	graphics.moveTo(start.x, start.y)
 
 	for (let i = 1; i <= segments; i += 1) {
 		const t = (i / segments) * Math.PI * 2
-		const point = pointOnOrbit(center, rx, ry, rotation, t)
+		const point = pointOnOrbit(rx, ry, rotation, t)
 		graphics.lineTo(point.x, point.y)
 	}
 
@@ -107,18 +122,10 @@ function drawEllipsePath(graphics, center, rx, ry, rotation, color = 0xffffff, a
 }
 
 function OrbitField({ width, height, activeId, onHover, onSelect }) {
+	const { app } = useApplication()
 	const nodesRef = useRef([])
 	const anglesRef = useRef(DIRECTIONS.map((item) => item.phase))
 
-	const center = useMemo(
-		() => ({
-			x: width * 0.5,
-			y: height * 0.5,
-		}),
-		[width, height]
-	)
-
-	const maxRadius = useMemo(() => Math.min(width, height) * 0.52, [width, height])
 	const stars = useMemo(
 		() =>
 			Array.from({ length: STAR_COUNT }, () => ({
@@ -151,67 +158,85 @@ function OrbitField({ width, height, activeId, onHover, onSelect }) {
 
 	const drawOrbits = useCallback(
 		(graphics) => {
+			const screenWidth = app?.screen?.width ?? width
+			const screenHeight = app?.screen?.height ?? height
+			const centerX = screenWidth * 0.5
+			const centerY = screenHeight * 0.5
+			const fitByWidth = (screenWidth * 0.5 - ORBIT_PADDING) / ORBIT_BOUNDS.maxX
+			const fitByHeight = (screenHeight * 0.5 - ORBIT_PADDING) / ORBIT_BOUNDS.maxY
+			const dynamicRadius = Math.max(120, Math.min(fitByWidth, fitByHeight))
+
 			graphics.clear()
 
 			for (const item of DIRECTIONS) {
 				drawEllipsePath(
 					graphics,
-					center,
-					maxRadius * item.orbitX,
-					maxRadius * item.orbitY,
+					dynamicRadius * item.orbitX,
+					dynamicRadius * item.orbitY,
 					item.rotation,
 					item.orbitColor,
 					0.52
 				)
 			}
 
-			graphics.moveTo(center.x, center.y - maxRadius * 0.95)
-			graphics.lineTo(center.x, center.y + maxRadius * 0.95)
+			graphics.moveTo(centerX, centerY - dynamicRadius * 0.95)
+			graphics.lineTo(centerX, centerY + dynamicRadius * 0.95)
 			graphics.stroke({ color: 0xffffff, width: 1.2, alpha: 0.26 })
 
-			graphics.moveTo(center.x - maxRadius * 0.95, center.y)
-			graphics.lineTo(center.x + maxRadius * 0.95, center.y)
+			graphics.moveTo(centerX - dynamicRadius * 0.95, centerY)
+			graphics.lineTo(centerX + dynamicRadius * 0.95, centerY)
 			graphics.stroke({ color: 0xffffff, width: 1.2, alpha: 0.22 })
 
 			for (const ray of rays) {
-				graphics.moveTo(center.x, center.y)
+				graphics.moveTo(centerX, centerY)
 				graphics.lineTo(
-					center.x + Math.cos(ray.angle) * maxRadius * 0.76,
-					center.y + Math.sin(ray.angle) * maxRadius * 0.76
+					centerX + Math.cos(ray.angle) * dynamicRadius * 0.76,
+					centerY + Math.sin(ray.angle) * dynamicRadius * 0.76
 				)
 				graphics.stroke({ color: 0xffffff, width: 0.9, alpha: ray.alpha })
 			}
 		},
-		[center, maxRadius, rays]
+		[app, height, rays, width]
 	)
 
 	const drawCore = useCallback(
 		(graphics) => {
+			const screenWidth = app?.screen?.width ?? width
+			const screenHeight = app?.screen?.height ?? height
+			const centerX = screenWidth * 0.5
+			const centerY = screenHeight * 0.5
+
 			graphics.clear()
-			graphics.circle(center.x, center.y, 70).fill({ color: 0xffffff, alpha: 0.2 })
-			graphics.circle(center.x, center.y, 38).fill({ color: 0xffffff, alpha: 0.36 })
-			graphics.circle(center.x, center.y, 13).fill({ color: 0xffffff, alpha: 0.95 })
+			graphics.circle(centerX, centerY, 70).fill({ color: 0xffffff, alpha: 0.2 })
+			graphics.circle(centerX, centerY, 38).fill({ color: 0xffffff, alpha: 0.36 })
+			graphics.circle(centerX, centerY, 13).fill({ color: 0xffffff, alpha: 0.95 })
 		},
-		[center.x, center.y]
+		[app, height, width]
 	)
 
 	useTick((ticker) => {
 		const elapsed = ticker.deltaMS / 1000
+		const screenWidth = app?.screen?.width ?? width
+		const screenHeight = app?.screen?.height ?? height
+		const centerX = screenWidth * 0.5
+		const centerY = screenHeight * 0.5
+		const fitByWidth = (screenWidth * 0.5 - ORBIT_PADDING) / ORBIT_BOUNDS.maxX
+		const fitByHeight = (screenHeight * 0.5 - ORBIT_PADDING) / ORBIT_BOUNDS.maxY
+		const dynamicRadius = Math.max(120, Math.min(fitByWidth, fitByHeight))
 
 		DIRECTIONS.forEach((item, index) => {
 			anglesRef.current[index] += item.speed * elapsed
 			const point = pointOnOrbit(
-				center,
-				maxRadius * item.orbitX,
-				maxRadius * item.orbitY,
+				dynamicRadius * item.orbitX,
+				dynamicRadius * item.orbitY,
 				item.rotation,
 				anglesRef.current[index]
 			)
 			const node = nodesRef.current[index]
 
 			if (node) {
-				node.x = point.x
-				node.y = point.y
+				node.x = centerX + point.x
+				node.y = centerY + point.y
 			}
 		})
 	})
@@ -271,19 +296,40 @@ function ThirdScreen() {
 			return undefined
 		}
 
+		const syncSceneSize = () => {
+			if (!sceneHostRef.current) {
+				return
+			}
+
+			const rect = sceneHostRef.current.getBoundingClientRect()
+			const width = Math.max(320, Math.floor(rect.width))
+			const height = Math.max(320, Math.floor(rect.height))
+			setSceneSize((prev) => {
+				if (prev.width === width && prev.height === height) {
+					return prev
+				}
+				return { width, height }
+			})
+		}
+
 		const observer = new ResizeObserver((entries) => {
 			const entry = entries[0]
 			if (!entry) {
 				return
 			}
-
-			const width = Math.max(320, Math.floor(entry.contentRect.width))
-			const height = Math.max(420, Math.floor(width * 0.62))
-			setSceneSize({ width, height })
+			syncSceneSize()
 		})
 
 		observer.observe(sceneHostRef.current)
-		return () => observer.disconnect()
+		window.addEventListener('resize', syncSceneSize)
+		window.visualViewport?.addEventListener('resize', syncSceneSize)
+		syncSceneSize()
+
+		return () => {
+			observer.disconnect()
+			window.removeEventListener('resize', syncSceneSize)
+			window.visualViewport?.removeEventListener('resize', syncSceneSize)
+		}
 	}, [])
 
 	const activeId = hoveredId ?? selectedId
