@@ -623,6 +623,7 @@ function ThirdScreen() {
 	const [activeId, setActiveId] = useState(null)
 	const [hoveredId, setHoveredId] = useState(null)
 	const [panelOpen, setPanelOpen] = useState(false)
+	const [hasSphereInteraction, setHasSphereInteraction] = useState(false)
 
 	useEffect(() => {
 		if (!sceneHostRef.current) {
@@ -667,6 +668,7 @@ function ThirdScreen() {
 
 	const handleSelect = useCallback(
 		id => {
+			setHasSphereInteraction(true)
 			if (id === activeId && panelOpen) {
 				// Variant A: do nothing on re-click
 				return
@@ -733,6 +735,22 @@ function ThirdScreen() {
 						onSelect={handleSelect}
 					/>
 				</Application>
+
+				<AnimatePresence>
+					{!hasSphereInteraction && (
+						<motion.div
+							className="directions-page-third-screen__headline"
+							initial={{ opacity: 0, y: -14 }}
+							animate={{ opacity: 1, y: 0 }}
+							exit={{ opacity: 0, y: -10 }}
+							transition={{ duration: 0.35, ease: 'easeOut' }}
+						>
+							<p className="directions-page-third-screen__subtitle">
+								Нажмите на сферу, чтобы изучить направление
+							</p>
+						</motion.div>
+					)}
+				</AnimatePresence>
 			</div>
 		</section>
 	)

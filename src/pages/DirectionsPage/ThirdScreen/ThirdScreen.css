@@ -16,6 +16,48 @@
 	position: relative;
 }
 
+.directions-page-third-screen__headline {
+	position: absolute;
+	left: 43%;
+	bottom: clamp(250px, 1.5vh, 250px);
+	transform: translateX(-50%);
+	z-index: 12;
+	width: max-content;
+	max-width: none;
+	pointer-events: none;
+	text-align: center;
+}
+
+.directions-page-third-screen__title {
+	margin: 0 0 8px;
+	font-size: clamp(28px, 3.8vw, 52px);
+	font-weight: 700;
+	line-height: 1.15;
+	color: #1e3a6e;
+	white-space: nowrap;
+}
+
+.directions-page-third-screen__subtitle {
+	margin: 0;
+	font-size: clamp(12px, 1.05vw, 14px);
+	font-weight: 500;
+	line-height: 1.4;
+	color: rgba(61, 90, 128, 0.74);
+	white-space: nowrap;
+	opacity: 0.82;
+	animation: directions-hint-pulse 2.2s ease-in-out infinite;
+}
+
+@keyframes directions-hint-pulse {
+	0%,
+	100% {
+		opacity: 0.78;
+	}
+	50% {
+		opacity: 0.96;
+	}
+}
+
 .directions-page-third-screen__canvas-host {
 	width: min(1500px, calc(100vw - 48px));
 	height: 1000px;
