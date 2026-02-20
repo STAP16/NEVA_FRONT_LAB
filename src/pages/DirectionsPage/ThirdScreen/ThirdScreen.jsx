@@ -14,7 +14,8 @@ const DIRECTIONS = [
 		rotation: 0.15,
 		speed: 0.08,
 		phase: 0,
-		orbitColor: 0xff6b6b
+		orbitColor: 0xf4f8ff,
+		nodeScale: 0.78
 	},
 	{
 		id: 'web',
@@ -24,7 +25,8 @@ const DIRECTIONS = [
 		rotation: -0.32,
 		speed: -0.09,
 		phase: 1.2,
-		orbitColor: 0xfeca57
+		orbitColor: 0xe8f1ff,
+		nodeScale: 1
 	},
 	{
 		id: 'data',
@@ -34,7 +36,9 @@ const DIRECTIONS = [
 		rotation: -0.18,
 		speed: -0.07,
 		phase: 3.1,
-		orbitColor: 0x1dd1a1
+		orbitColor: 0xdce8fb,
+		nodeScale: 1,
+		nodeSizeOffset: 5
 	},
 	{
 		id: 'design',
@@ -44,7 +48,8 @@ const DIRECTIONS = [
 		rotation: 0.3,
 		speed: 0.09,
 		phase: 4,
-		orbitColor: 0x5f27cd
+		orbitColor: 0xcfddf6,
+		nodeScale: 1
 	},
 	{
 		id: 'security',
@@ -54,7 +59,8 @@ const DIRECTIONS = [
 		rotation: -0.46,
 		speed: -0.06,
 		phase: 4.9,
-		orbitColor: 0xff9ff3
+		orbitColor: 0xcfddf6,
+		nodeScale: 1
 	},
 	{
 		id: 'cloud',
@@ -62,9 +68,10 @@ const DIRECTIONS = [
 		orbitX: 1.518,
 		orbitY: 0.851,
 		rotation: 0.08,
-		speed: 0.05,
+		speed: 0.08,
 		phase: 5.7,
-		orbitColor: 0x54a0ff
+		orbitColor: 0xc8d8f3,
+		nodeScale: 1
 	}
 ]
 
@@ -260,8 +267,10 @@ function OrbitField({ width, height, activeId, onHover, onSelect }) {
 			<pixiGraphics draw={drawCore} />
 			{DIRECTIONS.map((item, index) => {
 				const isActive = activeId === item.id
-				const glowRadius = isActive ? 50 : 41
-				const nodeRadius = isActive ? 24 : 19
+				const scale = item.nodeScale ?? 1
+				const nodeSizeOffset = item.nodeSizeOffset ?? 0
+				const glowRadius = (isActive ? 50 : 41) * scale + nodeSizeOffset
+				const nodeRadius = (isActive ? 24 : 19) * scale + nodeSizeOffset
 				const strokeWidth = isActive ? 2.2 : 1.5
 
 				return (
