@@ -9,8 +9,18 @@ import {
 	resetScrollInstant
 } from './components/navigation/routeScrollReset'
 import { AboutPage } from './pages/AboutPage/AboutPage'
+import { JoinSuccessPage } from './pages/JoinSuccessPage/JoinSuccessPage'
 import './App.css'
-import { DirectionsPage } from './pages'
+import {
+	DirectionsPage,
+	ProjectsPage,
+	HeroScreen,
+	SecondScreen,
+	ProcessScreen,
+	DirectionsScreen,
+	FifthScreen,
+	SixthScreen
+} from './pages'
 
 const pageTransition = {
 	initial: { opacity: 0 },
