@@ -10,16 +10,7 @@ import {
 } from './components/navigation/routeScrollReset'
 import { AboutPage } from './pages/AboutPage/AboutPage'
 import './App.css'
-import {
-	DirectionsPage,
-	HeroScreen,
-	SecondScreen,
-	ProcessScreen,
-	DirectionsScreen,
-	FifthScreen,
-	SixthScreen,
-	FaqScreen
-} from './pages'
+import { DirectionsPage } from './pages'
 
 const pageTransition = {
 	initial: { opacity: 0 },
@@ -37,21 +28,6 @@ function PageWrapper({ children }) {
 		>
 			{children}
 		</motion.div>
-	)
-}
-
-function HomePage() {
-	return (
-		<>
-			<HeroScreen />
-			<SecondScreen />
-			{/* Экран 3 - Детальные направления */}
-			<DirectionsScreen />
-			<ProcessScreen />
-			<FifthScreen />
-			<SixthScreen />
-			<FaqScreen />
-		</>
 	)
 }
 
@@ -90,14 +66,6 @@ function App() {
 				>
 					<Route
 						path="/"
-						element={
-							<PageWrapper>
-								<HomePage />
-							</PageWrapper>
-						}
-					/>
-					<Route
-						path="/about"
 						element={
 							<PageWrapper>
 								<AboutPage />

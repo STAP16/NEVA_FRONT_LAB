@@ -222,7 +222,7 @@ export function SixthScreen() {
 						Большинство участников проходит этот путь за 6–12 месяцев
 					</p>
 					<RouteNavLink
-						to="/about"
+						to="/"
 						className="lab-path__cta"
 					>
 						Посмотреть, как устроена лаборатория →

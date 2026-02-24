@@ -10,8 +10,7 @@ const directionIconMap = {
 	[directionsTypes.YOURSELF]: rocketIcon
 }
 
-function DirectionDetail({ category, title, type, description, forYou, benefits, extra }) {
-	console.log(forYou)
+function DirectionDetail({ category, title, type, description }) {
 
 	return (
 		<article className="direction-detail">
@@ -29,22 +28,6 @@ function DirectionDetail({ category, title, type, description, forYou, benefits,
 			<h3 className="direction-detail__title">{title}</h3>
 			<p className="direction-detail__description">{description}</p>
 
-			<div className="direction-detail__info">
-				<div className="direction-detail__block">
-					<span className="direction-detail__label">Тебе, если:</span>
-					<p className="direction-detail__text">{forYou}</p>
-				</div>
-
-				<div className="direction-detail__block">
-					<span className="direction-detail__label">Что получишь:</span>
-					<p className="direction-detail__text">{benefits}</p>
-				</div>
-
-				<div className="direction-detail__block">
-					<span className="direction-detail__label">{extra.label}:</span>
-					<p className="direction-detail__text">{extra.text}</p>
-				</div>
-			</div>
 		</article>
 	)
 }

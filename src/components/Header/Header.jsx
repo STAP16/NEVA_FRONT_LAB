@@ -17,7 +17,7 @@ function Header() {
 		<header className={`header${scrolled ? ' header--scrolled' : ''}`}>
 			<RouteLink to="/" className="header__logo">NEVA</RouteLink>
 			<nav className="header__nav">
-				<RouteNavLink to="/about" className={({ isActive }) => `header__link${isActive ? ' header__link--active' : ''}`}>
+				<RouteNavLink to="/" className={({ isActive }) => `header__link${isActive ? ' header__link--active' : ''}`}>
 					О лаборатории
 				</RouteNavLink>
 				<RouteNavLink to="/directions" className={({ isActive }) => `header__link${isActive ? ' header__link--active' : ''}`}>

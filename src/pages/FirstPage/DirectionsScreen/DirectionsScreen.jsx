@@ -50,14 +50,10 @@ function DirectionsScreen() {
 					{directionsData.map(direction => (
 						<motion.div key={direction.type} variants={fadeUp} style={{ display: 'flex' }}>
 							<DirectionDetail
-								icon={direction.icon}
 								category={direction.category}
 								type={direction.type}
 								title={direction.title}
 								description={direction.description}
-								forYou={direction.forYou}
-								benefits={direction.benefits}
-								extra={direction.extra}
 							/>
 						</motion.div>
 					))}
