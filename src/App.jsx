@@ -90,6 +90,22 @@ function App() {
 							</PageWrapper>
 						}
 					/>
+					<Route
+						path="/projects"
+						element={
+							<PageWrapper>
+								<ProjectsPage />
+							</PageWrapper>
+						}
+					/>
+					<Route
+						path="/projects/join-success"
+						element={
+							<PageWrapper>
+								<JoinSuccessPage />
+							</PageWrapper>
+						}
+					/>
 				</Routes>
 			</AnimatePresence>
 			<Footer />
