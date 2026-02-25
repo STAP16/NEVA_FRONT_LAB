@@ -725,13 +725,16 @@ export function ProjectsPage() {
 				</motion.div>
 
 				<motion.div
-					key={safeCategoryKey}
+					key={`${safeCategoryKey}-${projects.length}`}
 					className="projects-grid"
 					variants={cardsStagger}
 					initial="hidden"
 					animate="visible"
 				>
-					{filteredProjects.map(project => (
+					{isLoading && (
+						<p className="projects-grid__empty">Загрузка проектов...</p>
+					)}
+					{!isLoading && filteredProjects.map(project => (
 						<motion.article
 							key={project.id}
 							className="project-card"
@@ -775,7 +778,7 @@ export function ProjectsPage() {
 							</div>
 						</motion.article>
 					))}
-					{filteredProjects.length === 0 && (
+					{!isLoading && filteredProjects.length === 0 && (
 						<p className="projects-grid__empty">По этому фильтру пока нет проектов.</p>
 					)}
 				</motion.div>

@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.1.4",
+    "neva-lab-front": "file:..",
     "ra-data-simple-rest": "^5.14.2",
     "react": "^19.2.4",
     "react-admin": "^5.14.2",
