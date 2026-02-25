@@ -1,16 +1,58 @@
-# React + Vite
+# NEVA LAB Front + Admin + Server
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Быстрый старт (локально)
 
-Currently, two official plugins are available:
+1. Установите зависимости в каждом приложении:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+```bash
+npm install
+npm --prefix server install
+npm --prefix admin install
+```
 
-## React Compiler
+2. Поднимите PostgreSQL:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+docker compose -f server/docker-compose.yml up -d
+```
 
-## Expanding the ESLint configuration
+3. Настройте `server/.env` по шаблону `server/.env.example`:
+- сгенерируйте `JWT_SECRET`:
+  `node -e "console.log(require('crypto').randomBytes(48).toString('hex'))"`
+- задайте `DATABASE_URL`
+- при первом запуске можно передать `ADMIN_INITIAL_PASSWORD` (временно)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+4. Запустите все сервисы одной командой:
+
+```bash
+npm run dev
+```
+
+## Сборка
+
+```bash
+npm run build
+```
+
+Команда собирает `frontend` и `admin`.
+
+## Прод-стек через Docker Compose
+
+1. Создайте `.env` из `.env.example` в корне.
+2. Запустите:
+
+```bash
+docker compose up --build -d
+```
+
+Сервисы:
+- frontend: `http://localhost`
+- admin: `http://localhost:8080`
+- server API: `http://localhost:3001/api`
+
+## Безопасность
+
+- `JWT_SECRET` обязателен и должен быть длинным/случайным.
+- `ADMIN_PASSWORD` не хранится в `.env`.
+- Если админ отсутствует в БД, сервер создаст пользователя `ADMIN_USERNAME` и сохранит только хеш пароля.
+- `server/.env` исключен из Git.

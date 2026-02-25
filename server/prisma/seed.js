@@ -1,5 +1,4 @@
 import { PrismaClient } from '@prisma/client'
-import bcrypt from 'bcryptjs'
 
 const prisma = new PrismaClient()
 
@@ -266,15 +265,6 @@ const projects = [
 ]
 
 async function main() {
-	// Create admin user
-	const passwordHash = await bcrypt.hash('admin123', 10)
-	await prisma.admin.upsert({
-		where: { username: 'admin' },
-		update: { passwordHash },
-		create: { username: 'admin', passwordHash }
-	})
-	console.log('Admin user created: admin / admin123')
-
 	// Seed projects
 	for (const projectData of projects) {
 		const { timeline, tasks, mentors, members, feedback, ...project } = projectData
