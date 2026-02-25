@@ -108,6 +108,24 @@ function App() {
 					/>
 				</Routes>
 			</AnimatePresence>
+			<Routes>
+				<Route
+					path="/"
+					element={<HomePage />}
+				/>
+				<Route
+					path="/about"
+					element={<AboutPage />}
+				/>
+				<Route
+					path="/directions"
+					element={<DirectionsPage />}
+				/>
+				<Route
+					path="/projects"
+					element={<ProjectsPage />}
+				/>
+			</Routes>
 			<Footer />
 		</>
 	)
