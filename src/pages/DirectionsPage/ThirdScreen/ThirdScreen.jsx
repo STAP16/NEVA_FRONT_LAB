@@ -267,8 +267,8 @@ function OrbitField({ width, height, activeId, hoveredId, onHover, onSelect }) {
 
 	const drawStaticGrid = useCallback(
 		graphics => {
-			const screenWidth = app?.screen?.width ?? width
-			const screenHeight = app?.screen?.height ?? height
+			const screenWidth = app?.renderer ? app.screen.width : width
+			const screenHeight = app?.renderer ? app.screen.height : height
 			const centerX = screenWidth * 0.5
 			const centerY = screenHeight * 0.5
 			const dynamicRadius = getDynamicRadius(screenWidth, screenHeight) * DRAW_SCALE
@@ -307,8 +307,8 @@ function OrbitField({ width, height, activeId, hoveredId, onHover, onSelect }) {
 
 	const drawCore = useCallback(
 		graphics => {
-			const screenWidth = app?.screen?.width ?? width
-			const screenHeight = app?.screen?.height ?? height
+			const screenWidth = app?.renderer ? app.screen.width : width
+			const screenHeight = app?.renderer ? app.screen.height : height
 			const centerX = screenWidth * 0.5
 			const centerY = screenHeight * 0.5
 
@@ -323,8 +323,8 @@ function OrbitField({ width, height, activeId, hoveredId, onHover, onSelect }) {
 	useTick(ticker => {
 		const elapsed = ticker.deltaMS / 1000
 		const t = ticker.lastTime / 1000
-		const screenWidth = app?.screen?.width ?? width
-		const screenHeight = app?.screen?.height ?? height
+		const screenWidth = app?.renderer ? app.screen.width : width
+		const screenHeight = app?.renderer ? app.screen.height : height
 		const centerX = screenWidth * 0.5
 		const centerY = screenHeight * 0.5
 		const dynamicRadius = getDynamicRadius(screenWidth, screenHeight) * DRAW_SCALE

@@ -1,0 +1,18 @@
+{
+  "name": "neva-lab-admin",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "^5.1.4",
+    "ra-data-simple-rest": "^5.14.2",
+    "react": "^19.2.4",
+    "react-admin": "^5.14.2",
+    "react-dom": "^19.2.4",
+    "vite": "^7.3.1"
+  }
+}

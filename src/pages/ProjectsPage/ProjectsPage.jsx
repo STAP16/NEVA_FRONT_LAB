@@ -1,7 +1,8 @@
-﻿import { useEffect, useMemo, useState } from 'react'
+﻿import { useCallback, useEffect, useMemo, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useLocation, useNavigate } from 'react-router-dom'
 import './ProjectsPage.css'
+import { fetchProjects, submitProjectFeedback, joinProject } from '../../api/projects.js'
 import codeIcon from '../../assets/code.svg'
 import aiIcon from '../../assets/ai_robot.svg'
 import caseIcon from '../../assets/case.svg'
@@ -30,7 +31,8 @@ const createTask = (id, title, timeLabel, owner, resources, stagesDone) => ({
 	stagesDone
 })
 
-const projects = [
+// Fallback data used when the API is unavailable.
+const FALLBACK_PROJECTS = [
 	{
 		id: 'edu-track',
 		title: 'Учебный трек',
@@ -446,6 +448,20 @@ const projects = [
 	}
 ]
 
+function addAvatarsToProjects(projectList) {
+	return projectList.map(project => ({
+		...project,
+		mentors: (project.mentors || []).map(mentor => ({
+			...mentor,
+			avatar: createAvatarDataUri(mentor.name, mentor.avatarColor || '#3f6fb3')
+		})),
+		members: (project.members || []).map(member => ({
+			...member,
+			avatar: createAvatarDataUri(member.name, member.avatarColor || '#4b7ac0')
+		}))
+	}))
+}
+
 const categories = [
 	{ key: 'all', label: 'Все' },
 	{ key: 'web', label: 'Web' },
@@ -510,6 +526,8 @@ const cardsStagger = {
 export function ProjectsPage() {
 	const navigate = useNavigate()
 	const location = useLocation()
+	const [projects, setProjects] = useState(() => addAvatarsToProjects(FALLBACK_PROJECTS))
+	const [isLoading, setIsLoading] = useState(true)
 	const [selectedCategoryKey, setSelectedCategoryKey] = useState('all')
 	const [activeProjectId, setActiveProjectId] = useState(null)
 	const [expandedTaskIds, setExpandedTaskIds] = useState([])
@@ -519,17 +537,27 @@ export function ProjectsPage() {
 	const [isJoinTransitionVisible, setIsJoinTransitionVisible] = useState(false)
 	const [isArrivingFromBack, setIsArrivingFromBack] = useState(Boolean(location.state?.fromSuccessBack))
 
+	useEffect(() => {
+		fetchProjects()
+			.then(data => setProjects(addAvatarsToProjects(data)))
+			.catch(() => {
+				// Fallback to hardcoded data if API is unavailable
+				setProjects(addAvatarsToProjects(FALLBACK_PROJECTS))
+			})
+			.finally(() => setIsLoading(false))
+	}, [])
+
 	const safeCategoryKey = validCategoryKeys.has(selectedCategoryKey) ? selectedCategoryKey : 'all'
 	const filteredProjects = useMemo(() => {
 		if (safeCategoryKey === 'all') {
 			return projects
 		}
 		return projects.filter(project => project.categoryKey === safeCategoryKey)
-	}, [safeCategoryKey])
+	}, [safeCategoryKey, projects])
 
 	const activeProject = useMemo(
 		() => projects.find(project => project.id === activeProjectId) ?? null,
-		[activeProjectId]
+		[activeProjectId, projects]
 	)
 
 	const activeProjectFeedback = activeProject
@@ -588,13 +616,13 @@ export function ProjectsPage() {
 		)
 	}
 
-	const submitFeedback = () => {
+	const submitFeedback = useCallback(async () => {
 		const trimmedFeedback = feedbackDraft.trim()
 		if (!activeProject || !trimmedFeedback) {
 			return
 		}
 
-		const feedbackRecord = {
+		const localFallback = {
 			author: 'Вы',
 			role: 'Наблюдатель проекта',
 			text: trimmedFeedback,
@@ -606,21 +634,39 @@ export function ProjectsPage() {
 			})
 		}
 
-		setExtraFeedbackByProject(currentState => ({
-			...currentState,
-			[activeProject.id]: [...(currentState[activeProject.id] ?? []), feedbackRecord]
-		}))
+		try {
+			const saved = await submitProjectFeedback(activeProject.id, {
+				author: 'Вы',
+				role: 'Наблюдатель проекта',
+				text: trimmedFeedback
+			})
+			setExtraFeedbackByProject(currentState => ({
+				...currentState,
+				[activeProject.id]: [...(currentState[activeProject.id] ?? []), saved]
+			}))
+		} catch {
+			setExtraFeedbackByProject(currentState => ({
+				...currentState,
+				[activeProject.id]: [...(currentState[activeProject.id] ?? []), localFallback]
+			}))
+		}
 		setFeedbackDraft('')
-	}
+	}, [activeProject, feedbackDraft])
 
 	const getLiveMemberProgress = progressValue => {
 		const wave = Math.round(Math.sin(liveTick / 5000) * 2)
 		return Math.min(100, Math.max(0, progressValue + wave))
 	}
 
-	const handleJoin = project => {
+	const handleJoin = async project => {
 		if (project.seats < 1 || isJoinTransitionVisible) {
 			return
+		}
+
+		try {
+			await joinProject(project.id)
+		} catch {
+			// Continue with transition even if API fails
 		}
 
 		setIsJoinTransitionVisible(true)
@@ -678,7 +724,13 @@ export function ProjectsPage() {
 					</motion.label>
 				</motion.div>
 
-				<motion.div className="projects-grid" variants={cardsStagger} initial="hidden" animate="visible">
+				<motion.div
+					key={safeCategoryKey}
+					className="projects-grid"
+					variants={cardsStagger}
+					initial="hidden"
+					animate="visible"
+				>
 					{filteredProjects.map(project => (
 						<motion.article
 							key={project.id}
@@ -723,6 +775,9 @@ export function ProjectsPage() {
 							</div>
 						</motion.article>
 					))}
+					{filteredProjects.length === 0 && (
+						<p className="projects-grid__empty">По этому фильтру пока нет проектов.</p>
+					)}
 				</motion.div>
 			</section>
 

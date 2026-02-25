@@ -13,13 +13,7 @@ import { JoinSuccessPage } from './pages/JoinSuccessPage/JoinSuccessPage'
 import './App.css'
 import {
 	DirectionsPage,
-	ProjectsPage,
-	HeroScreen,
-	SecondScreen,
-	ProcessScreen,
-	DirectionsScreen,
-	FifthScreen,
-	SixthScreen
+	ProjectsPage
 } from './pages'
 
 const pageTransition = {
@@ -108,24 +102,6 @@ function App() {
 					/>
 				</Routes>
 			</AnimatePresence>
-			<Routes>
-				<Route
-					path="/"
-					element={<HomePage />}
-				/>
-				<Route
-					path="/about"
-					element={<AboutPage />}
-				/>
-				<Route
-					path="/directions"
-					element={<DirectionsPage />}
-				/>
-				<Route
-					path="/projects"
-					element={<ProjectsPage />}
-				/>
-			</Routes>
 			<Footer />
 		</>
 	)

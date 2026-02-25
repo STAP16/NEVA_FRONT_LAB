@@ -87,10 +87,8 @@ export function TeamScreen() {
 						/>
 					</div>
 					<div className="team__lead-info">
-						<h3 className="team__lead-name">
-							Руководитель лаборатории
-							<br /> <h3 className="team__lead-FIO">Котоман Степан</h3>
-						</h3>
+						<h3 className="team__lead-name">Руководитель лаборатории</h3>
+						<p className="team__lead-FIO">Котоман Степан</p>
 						<p className="team__lead-role">
 							Координация направлений, связь с партнёрами, стратегия развития
 						</p>

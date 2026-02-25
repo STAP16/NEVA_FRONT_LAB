@@ -1,0 +1,103 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Admin {
+  id           Int      @id @default(autoincrement())
+  username     String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+}
+
+model Project {
+  id                 String   @id
+  title              String
+  category           String
+  categoryKey        String
+  summary            String
+  stage              String
+  progress           Int
+  progressDone       Int
+  progressInProgress Int
+  progressUpcoming   Int
+  participants       Int
+  deadline           String
+  completionDateText String
+  seats              Int
+  status             String   @default("active")
+  resultsUrl         String?
+  joinUrl            String?
+  sortOrder          Int      @default(0)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  timeline  TimelineItem[]
+  tasks     Task[]
+  mentors   Mentor[]
+  members   Member[]
+  feedback  Feedback[]
+}
+
+model TimelineItem {
+  id        Int     @id @default(autoincrement())
+  projectId String
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  name      String
+  dates     String
+  state     String
+  sortOrder Int     @default(0)
+}
+
+model Task {
+  id         Int      @id @default(autoincrement())
+  taskKey    String
+  projectId  String
+  project    Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  groupKey   String
+  title      String
+  timeLabel  String
+  owner      String
+  resources  String[]
+  stagesDone String[]
+  sortOrder  Int      @default(0)
+}
+
+model Mentor {
+  id             Int     @id @default(autoincrement())
+  projectId      String
+  project        Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  name           String
+  specialization String
+  role           String
+  avatarColor    String  @default("#3f6fb3")
+  sortOrder      Int     @default(0)
+}
+
+model Member {
+  id          Int      @id @default(autoincrement())
+  projectId   String
+  project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  name        String
+  role        String
+  activity    String
+  progress    Int
+  history     String[]
+  avatarColor String   @default("#4b7ac0")
+  sortOrder   Int      @default(0)
+}
+
+model Feedback {
+  id        Int      @id @default(autoincrement())
+  projectId String
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  author    String
+  role      String
+  text      String
+  time      String
+  createdAt DateTime @default(now())
+}

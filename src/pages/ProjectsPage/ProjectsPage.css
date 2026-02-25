@@ -5,7 +5,9 @@
 		radial-gradient(circle at 90% 2%, rgba(44, 90, 160, 0.2) 0%, transparent 35%),
 		linear-gradient(180deg, #f4f9ff 0%, #e8f2ff 100%);
 	color: #1f3b67;
-	transition: filter 0.42s cubic-bezier(0.25, 0.7, 0.2, 1), opacity 0.42s cubic-bezier(0.25, 0.7, 0.2, 1);
+	transition:
+		filter 0.42s cubic-bezier(0.25, 0.7, 0.2, 1),
+		opacity 0.42s cubic-bezier(0.25, 0.7, 0.2, 1);
 }
 
 .projects-page--joining {
@@ -28,10 +30,6 @@
 	}
 }
 
-.projects-hero {
-	padding: clamp(40px, 6vw, 90px) clamp(16px, 4vw, 48px) clamp(20px, 3vw, 32px);
-}
-
 .projects-hero__inner {
 	max-width: 980px;
 	margin: 0 auto;
@@ -41,6 +39,7 @@
 .projects-hero__label {
 	display: inline-block;
 	margin: 0 0 14px;
+	margin-top: 50px;
 	padding: 7px 16px;
 	border-radius: 999px;
 	font-size: clamp(11px, 1.2vw, 13px);
@@ -141,9 +140,18 @@
 	gap: clamp(14px, 2vw, 22px);
 }
 
+.projects-grid__empty {
+	margin: 0;
+	padding: 18px;
+	border-radius: 12px;
+	border: 1px solid rgba(43, 86, 143, 0.14);
+	background: rgba(255, 255, 255, 0.72);
+	color: #345b88;
+	font-size: 14px;
+}
+
 .project-card {
-	background:
-		linear-gradient(160deg, rgba(255, 255, 255, 0.95) 0%, rgba(244, 250, 255, 0.9) 100%);
+	background: linear-gradient(160deg, rgba(255, 255, 255, 0.95) 0%, rgba(244, 250, 255, 0.9) 100%);
 	border: 1px solid rgba(54, 103, 176, 0.14);
 	border-radius: 22px;
 	padding: 20px;
@@ -151,7 +159,9 @@
 	display: flex;
 	flex-direction: column;
 	gap: 12px;
-	transition: transform 0.2s ease, box-shadow 0.2s ease;
+	transition:
+		transform 0.2s ease,
+		box-shadow 0.2s ease;
 	will-change: transform, opacity;
 }
 
@@ -268,7 +278,10 @@
 	color: #2a5187;
 	background: rgba(255, 255, 255, 0.82);
 	cursor: pointer;
-	transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+	transition:
+		transform 0.2s ease,
+		border-color 0.2s ease,
+		background-color 0.2s ease;
 }
 
 .project-card__details-toggle:hover {
@@ -288,7 +301,9 @@
 	cursor: pointer;
 	background: linear-gradient(135deg, #2c5aa0 0%, #4a7fd4 100%);
 	box-shadow: 0 8px 20px rgba(44, 90, 160, 0.3);
-	transition: transform 0.2s ease, box-shadow 0.2s ease;
+	transition:
+		transform 0.2s ease,
+		box-shadow 0.2s ease;
 }
 
 .project-card__cta:hover {
