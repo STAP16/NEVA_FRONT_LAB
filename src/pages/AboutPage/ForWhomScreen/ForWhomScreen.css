@@ -10,17 +10,6 @@
 	position: relative;
 }
 
-.for-whom__mascot {
-	position: absolute;
-	bottom: 20%;
-	left: 30%;
-	transform: translate(-50%, -50%);
-	width: clamp(800px, 40vw, 1050px);
-	height: auto;
-	pointer-events: none;
-	z-index: 0;
-}
-
 .for-whom__container {
 	position: relative;
 	width: 100%;
@@ -35,7 +24,7 @@
 	align-items: center;
 	gap: clamp(12px, 2vw, 20px);
 	text-align: center;
-	margin-bottom: clamp(98px, 7vw, 122px);
+	margin-bottom: clamp(32px, 4vw, 52px);
 	max-width: 700px;
 	margin-left: auto;
 	margin-right: auto;
@@ -203,9 +192,6 @@
 		flex-shrink: 1;
 	}
 
-	.for-whom__mascot {
-		display: none;
-	}
 }
 
 @media (max-width: 480px) {

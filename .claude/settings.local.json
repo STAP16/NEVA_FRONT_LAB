@@ -18,7 +18,14 @@
       "Bash(xxd:*)",
       "Bash(npx prisma migrate dev --name add-application-model)",
       "Bash(./node_modules/.bin/prisma migrate dev --name add-application-model)",
-      "Bash(git checkout -- src/pages/ProjectsPage/ProjectsPage.jsx)"
+      "Bash(git checkout -- src/pages/ProjectsPage/ProjectsPage.jsx)",
+      "Bash(python -c \":*)",
+      "Bash(npx prisma migrate dev --name restructure_project_model --create-only)",
+      "Bash(npx prisma migrate dev --name restructure_project_model)",
+      "Bash(npx prisma migrate diff --from-schema-datamodel prisma/schema.prisma --to-schema-datasource prisma/schema.prisma --script)",
+      "Bash(npx prisma migrate diff --from-schema-datasource prisma/schema.prisma --to-schema-datamodel prisma/schema.prisma --script)",
+      "Bash(npx prisma migrate deploy)",
+      "Bash(npx prisma generate)"
     ]
   }
 }

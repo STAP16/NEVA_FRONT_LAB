@@ -57,9 +57,13 @@ function CustomSelect({ options, value, onChange, placeholder, renderOption }) {
 								setOpen(false)
 							}}
 						>
-							{renderOption ? renderOption(option) : option.label}
-							{option.subtitle && (
-								<span className="contacts-select__option-subtitle">{option.subtitle}</span>
+							{renderOption ? renderOption(option) : (
+								<>
+									{option.label}
+									{option.subtitle && (
+										<span className="contacts-select__option-subtitle">{option.subtitle}</span>
+									)}
+								</>
 							)}
 						</button>
 					))}

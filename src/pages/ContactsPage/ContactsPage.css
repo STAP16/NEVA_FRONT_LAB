@@ -8,7 +8,7 @@
 /* ── Hero ── */
 .contacts-hero {
 	text-align: center;
-	padding: clamp(100px, 12vw, 160px) clamp(16px, 4vw, 40px) clamp(24px, 3vw, 40px);
+	padding: clamp(24px, 3vw, 40px) clamp(16px, 4vw, 40px) clamp(24px, 3vw, 40px);
 }
 
 .contacts-hero__inner {

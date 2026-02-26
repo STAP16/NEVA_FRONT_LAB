@@ -1,6 +1,5 @@
 import { useRef } from 'react'
 import { motion, useInView, useScroll, useTransform } from 'framer-motion'
-import forWhomImg from '../../../assets/NEVA_FORWHOM.png'
 import './ForWhomScreen.css'
 
 const fits = [
@@ -32,9 +31,7 @@ export function ForWhomScreen() {
 		offset: ['start end', 'start']
 	})
 
-	const mascotY = useTransform(scrollYProgress, [0, 0.8], [500, 0])
-	const mascotOpacity = useTransform(scrollYProgress, [0, 0.5], [0, 1])
-	const cardsOpacity = useTransform(scrollYProgress, [0, 0.8], [0, 0.9])
+	const cardsOpacity = useTransform(scrollYProgress, [0, 0.8], [0, 1])
 	const cardsY = useTransform(scrollYProgress, [0.5, 1], [50, 0])
 
 	return (
@@ -43,13 +40,6 @@ export function ForWhomScreen() {
 			id="for-whom"
 			ref={sectionRef}
 		>
-			<motion.img
-				className="for-whom__mascot"
-				src={forWhomImg}
-				alt="Nevik"
-				style={{ opacity: mascotOpacity, y: mascotY }}
-			/>
-
 			<motion.div
 				className="for-whom__container"
 				ref={ref}

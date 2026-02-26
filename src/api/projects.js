@@ -11,21 +11,3 @@ export async function fetchProject(id) {
 	if (!response.ok) throw new Error('Failed to fetch project')
 	return response.json()
 }
-
-export async function submitProjectFeedback(projectId, { author, role, text }) {
-	const response = await fetch(`${API_BASE}/api/projects/${projectId}/feedback`, {
-		method: 'POST',
-		headers: { 'Content-Type': 'application/json' },
-		body: JSON.stringify({ author, role, text })
-	})
-	if (!response.ok) throw new Error('Failed to submit feedback')
-	return response.json()
-}
-
-export async function joinProject(projectId) {
-	const response = await fetch(`${API_BASE}/api/projects/${projectId}/join`, {
-		method: 'POST'
-	})
-	if (!response.ok) throw new Error('Failed to join')
-	return response.json()
-}
