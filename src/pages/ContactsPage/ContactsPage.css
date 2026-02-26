@@ -381,3 +381,90 @@
 		display: none;
 	}
 }
+
+
+.contacts-submit-modal {
+	position: fixed;
+	inset: 0;
+	background: rgba(20, 44, 76, 0.36);
+	backdrop-filter: blur(6px);
+	display: grid;
+	place-items: center;
+	z-index: 1200;
+	animation: contactsModalFadeIn 0.24s ease-out;
+}
+
+.contacts-submit-modal__card {
+	min-width: min(420px, calc(100vw - 32px));
+	padding: 26px 28px;
+	border-radius: 18px;
+	background: #ffffff;
+	box-shadow: 0 20px 60px rgba(20, 44, 76, 0.26);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 10px;
+	animation: contactsModalCardIn 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.contacts-submit-modal__spinner {
+	width: 42px;
+	height: 42px;
+	border-radius: 50%;
+	border: 3px solid #d9e8f8;
+	border-top-color: #2c5aa0;
+	animation: contactsSpin 0.75s linear infinite;
+}
+
+.contacts-submit-modal__check {
+	width: 44px;
+	height: 44px;
+	border-radius: 50%;
+	background: #e8f1ff;
+	color: #2c5aa0;
+	font-size: 24px;
+	font-weight: 700;
+	display: grid;
+	place-items: center;
+	animation: contactsCheckPop 0.3s ease-out;
+}
+
+.contacts-submit-modal__title {
+	margin: 0;
+	font-size: 20px;
+	font-weight: 700;
+	color: #1e3a5f;
+}
+
+@keyframes contactsSpin {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+@keyframes contactsModalFadeIn {
+	from { opacity: 0; }
+	to { opacity: 1; }
+}
+
+@keyframes contactsModalCardIn {
+	from {
+		opacity: 0;
+		transform: translateY(18px) scale(0.96);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0) scale(1);
+	}
+}
+
+@keyframes contactsCheckPop {
+	from {
+		opacity: 0;
+		transform: scale(0.8);
+	}
+	to {
+		opacity: 1;
+		transform: scale(1);
+	}
+}

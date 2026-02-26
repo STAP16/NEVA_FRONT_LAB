@@ -1,4 +1,4 @@
-const STORAGE_KEY = 'neva-lab-applications'
+﻿const STORAGE_KEY = 'neva-lab-applications'
 const TELEGRAM_BOT_TOKEN = import.meta.env.VITE_TELEGRAM_BOT_TOKEN || ''
 const TELEGRAM_CHAT_ID = import.meta.env.VITE_TELEGRAM_CHAT_ID || ''
 
@@ -55,7 +55,9 @@ export async function submitApplication(data) {
 		// Ignore storage errors to keep UX flow working in private mode/restricted browsers.
 	}
 
-	await sendTelegramNotification(nextItem)
+	void sendTelegramNotification(nextItem).catch(() => {
+	// Keep the form optimistic: notification errors must not block user flow.
+})
 	await new Promise(resolve => window.setTimeout(resolve, 350))
 	return { ok: true, application: nextItem }
 }

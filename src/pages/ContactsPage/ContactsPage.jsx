@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import { DIRECTIONS } from '../../data/directions'
 import { PROJECTS } from '../../data/projects'
 import { submitApplication } from '../../data/applications'
@@ -95,6 +95,7 @@ export function ContactsPage() {
 	const [directions, setDirections] = useState([])
 	const [projects, setProjects] = useState([])
 	const [submitting, setSubmitting] = useState(false)
+	const [submitStage, setSubmitStage] = useState('idle')
 	const [submitted, setSubmitted] = useState(false)
 	const [error, setError] = useState('')
 
@@ -143,6 +144,7 @@ export function ContactsPage() {
 		if (!isValid || submitting) return
 
 		setSubmitting(true)
+		setSubmitStage('sending')
 		setError('')
 
 		try {
@@ -157,8 +159,12 @@ export function ContactsPage() {
 				phone: phone.trim() || undefined,
 				email: email.trim() || undefined
 			})
-			setSubmitted(true)
+			setSubmitStage('success')
+			window.setTimeout(() => {
+				setSubmitted(true)
+			}, 850)
 		} catch {
+			setSubmitStage('idle')
 			setError('Не удалось отправить заявку. Попробуйте позже.')
 		} finally {
 			setSubmitting(false)
@@ -223,7 +229,7 @@ export function ContactsPage() {
 						Присоединяйся к команде
 					</motion.h1>
 					<motion.p className="contacts-hero__subtitle" variants={fadeUp}>
-						Заполни форму — мы свяжемся с тобой и обсудим участие
+						Заполни форму - мы свяжемся с тобой и обсудим участие
 					</motion.p>
 				</motion.div>
 			</section>
@@ -371,6 +377,26 @@ export function ContactsPage() {
 				<span className="contacts-info__dot" />
 				<a href="https://github.com/nevalab" className="contacts-info__item" target="_blank" rel="noopener noreferrer">GitHub</a>
 			</motion.section>
+<AnimatePresence>
+{submitStage !== 'idle' && (
+<div className="contacts-submit-modal">
+<div className="contacts-submit-modal__card">
+{submitStage === 'sending' ? (
+<>
+<span className="contacts-submit-modal__spinner" aria-hidden="true" />
+<h3 className="contacts-submit-modal__title">Отправляем заявку...</h3>
+</>
+) : (
+<>
+<div className="contacts-submit-modal__check">✓</div>
+<h3 className="contacts-submit-modal__title">Заявка отправлена</h3>
+</>
+)}
+</div>
+</div>
+)}
+</AnimatePresence>
 		</main>
 	)
 }
+

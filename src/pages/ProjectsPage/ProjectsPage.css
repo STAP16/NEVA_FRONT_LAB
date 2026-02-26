@@ -257,6 +257,13 @@
 	box-shadow: 0 12px 24px rgba(44, 90, 160, 0.35);
 }
 
+.project-card__cta--disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
+	box-shadow: none;
+	pointer-events: none;
+}
+
 /* ── Modal ── */
 .project-modal {
 	position: fixed;
