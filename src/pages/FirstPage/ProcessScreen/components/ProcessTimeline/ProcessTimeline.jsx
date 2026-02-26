@@ -14,6 +14,7 @@ function ProcessTimeline({ steps }) {
 							src={step.icon}
 							alt={step.title}
 							className="process-step__icon-image"
+						loading="lazy"
 						/>
 					</div>
 					<h3 className="process-step__title">{step.title}</h3>

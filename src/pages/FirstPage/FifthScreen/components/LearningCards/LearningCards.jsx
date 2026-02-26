@@ -19,6 +19,7 @@ function LearningCards({ cards }) {
 											src={card.icon}
 											alt={card.title}
 											className="learning-card__icon-image"
+										loading="lazy"
 										/>
 									</div>
 									<h3 className="learning-card__title">{card.title}</h3>
@@ -54,6 +55,7 @@ function LearningCards({ cards }) {
 										src={card.icon}
 										alt={card.title}
 										className="learning-card__icon-image"
+									loading="lazy"
 									/>
 								</div>
 								<h3 className="learning-card__title">{card.title}</h3>

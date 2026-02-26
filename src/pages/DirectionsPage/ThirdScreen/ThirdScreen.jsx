@@ -9,6 +9,7 @@ import nevikData from '../../../assets/NEVIK_DATA_SCINCE.png'
 import nevikDesign from '../../../assets/NEVIK_DESIGN.png'
 import nevikSecurity from '../../../assets/NEVIK_BACKEND.png'
 import nevikCloud from '../../../assets/NEVIK_DEVOPS.png'
+import kolanAvatar from '../../../assets/KOLAN.jpg'
 import './ThirdScreen.css'
 
 extend({ Container, Graphics })
@@ -18,7 +19,7 @@ const DIRECTIONS = [
 		id: 'ai',
 		label: 'AI Systems',
 		title: 'AI-системы',
-		description: 'Освоение искусственного интеллекта как основовного инструмента 2026 года',
+		description: 'Освоение AI-систем и применение их для закрытия большого спектра задач.',
 		bullets: [
 			'Работа с современными моделями и API',
 			'Оркестрирование AI-агентов и построение workflow',
@@ -44,6 +45,8 @@ const DIRECTIONS = [
 		label: 'Web Engineering',
 		title: 'Веб-разработка',
 		description: 'Полный цикл создания современных веб-приложений — от фронтенда до бэкенда.',
+		mentorAvatar: kolanAvatar,
+		mentorName: 'Колан',
 		bullets: [
 			'React, Vue и современные фреймворки',
 			'Node.js и серверная архитектура',
@@ -145,13 +148,13 @@ const DIRECTIONS = [
 	},
 	{
 		id: 'cloud',
-		label: 'Cloud DevOps',
-		title: 'Cloud и DevOps',
-		description: 'Облачные технологии и автоматизация: CI/CD, контейнеры и инфраструктура.',
+		label: 'Chatbot Dev',
+		title: 'Разработка чат-ботов',
+		description: 'Реализация продвинутых чат-ботов с интеграцией ИИ.',
 		bullets: [
-			'Docker, Kubernetes и оркестрация',
-			'CI/CD пайплайны и автоматизация',
-			'Настройка серверов и облачная архитектура'
+			'Telegram, Discord и другие платформы',
+			'Интеграция с AI-моделями и API',
+			'Автоматизация бизнес-процессов через ботов'
 		],
 		ctaLabel: 'Подробнее',
 		colorPrimary: '#3E8FD8',
@@ -592,6 +595,18 @@ function DirectionPanel({ direction, onCtaClick }) {
 				>
 					{direction.ctaLabel}
 				</button>
+				{direction.mentorAvatar && (
+					<div className="direction-panel__mentor-wrap">
+						<img
+							className="direction-panel__mentor-avatar"
+							src={direction.mentorAvatar}
+							alt={direction.mentorName || ''}
+						/>
+						{direction.mentorName && (
+							<span className="direction-panel__mentor-name">{direction.mentorName}</span>
+						)}
+					</div>
+				)}
 				<div className="direction-panel__mascot-wrap direction-panel__mascot-wrap--card">
 					<img
 						className="direction-panel__mascot direction-panel__mascot--card"

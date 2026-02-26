@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useState } from 'react'
+import { lazy, Suspense, useEffect, useLayoutEffect, useState } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import Header from './components/Header/Header'
@@ -8,14 +8,13 @@ import {
 	ROUTE_TRANSITION_START_EVENT,
 	resetScrollInstant
 } from './components/navigation/routeScrollReset'
-import { AboutPage } from './pages/AboutPage/AboutPage'
-import { JoinSuccessPage } from './pages/JoinSuccessPage/JoinSuccessPage'
 import './App.css'
-import {
-	DirectionsPage,
-	ProjectsPage
-} from './pages'
-import { ContactsPage } from './pages/ContactsPage/ContactsPage'
+
+const AboutPage = lazy(() => import('./pages/AboutPage/AboutPage').then(m => ({ default: m.AboutPage })))
+const DirectionsPage = lazy(() => import('./pages/DirectionsPage').then(m => ({ default: m.DirectionsPage })))
+const ProjectsPage = lazy(() => import('./pages/ProjectsPage/ProjectsPage').then(m => ({ default: m.ProjectsPage })))
+const ContactsPage = lazy(() => import('./pages/ContactsPage/ContactsPage').then(m => ({ default: m.ContactsPage })))
+const JoinSuccessPage = lazy(() => import('./pages/JoinSuccessPage/JoinSuccessPage').then(m => ({ default: m.JoinSuccessPage })))
 
 const pageTransition = {
 	initial: { opacity: 0 },
@@ -64,6 +63,7 @@ function App() {
 		<>
 			<div className={`app__route-wipe${isRouteWipeActive ? ' app__route-wipe--active' : ''}`} />
 			<Header />
+			<Suspense fallback={null}>
 			<AnimatePresence mode="wait">
 				<Routes
 					location={location}
@@ -111,6 +111,7 @@ function App() {
 					/>
 				</Routes>
 			</AnimatePresence>
+			</Suspense>
 			<Footer />
 		</>
 	)

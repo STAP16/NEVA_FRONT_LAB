@@ -54,6 +54,7 @@ function SectionTwo() {
 								src={nevikRespect}
 								alt="Маскот NEVA — Невик"
 								className="stories__mascot-image"
+								loading="lazy"
 								initial={{ opacity: 0, scale: 0.9 }}
 								animate={isInView ? { opacity: 1, scale: 1 } : {}}
 								transition={{ duration: 0.6, delay: 0.3 }}

@@ -20,6 +20,7 @@ function DirectionDetail({ category, title, type, description }) {
 						src={directionIconMap[type]}
 						alt={category}
 						className="direction-detail__icon-image"
+					loading="lazy"
 					/>
 				</span>
 				<span className="direction-detail__category">{category}</span>

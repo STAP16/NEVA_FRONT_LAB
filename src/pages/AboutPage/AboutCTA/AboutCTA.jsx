@@ -75,6 +75,7 @@ export function AboutCTA() {
 				src={bgImg}
 				alt=""
 				aria-hidden="true"
+				loading="lazy"
 			/>
 			<div
 				className="about-cta__container"
@@ -173,6 +174,7 @@ export function AboutCTA() {
 						className="about-cta__mascot"
 						src={mascotImg}
 						alt="NEVIK — маскот NEVA LAB"
+						loading="lazy"
 					/>
 				</motion.div>
 			</div>

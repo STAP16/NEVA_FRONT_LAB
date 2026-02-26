@@ -251,6 +251,27 @@
 	max-height: 390px;
 }
 
+.direction-panel__mentor-wrap {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	margin-top: 14px;
+}
+
+.direction-panel__mentor-avatar {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	object-fit: cover;
+	border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.direction-panel__mentor-name {
+	font-size: 13px;
+	font-weight: 600;
+	color: rgba(255, 255, 255, 0.9);
+}
+
 /* ===== Mobile ===== */
 
 @media (max-width: 768px) {

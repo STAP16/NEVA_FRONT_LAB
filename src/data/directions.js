@@ -4,5 +4,5 @@ export const DIRECTIONS = [
 	{ id: 'data', title: 'Аналитика данных' },
 	{ id: 'design', title: 'Продуктовый дизайн' },
 	{ id: 'security', title: 'Бекенд инженерия' },
-	{ id: 'cloud', title: 'Cloud и DevOps' }
+	{ id: 'cloud', title: 'Разработка чат-ботов' }
 ]

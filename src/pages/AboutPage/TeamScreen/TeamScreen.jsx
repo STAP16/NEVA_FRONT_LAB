@@ -8,19 +8,19 @@ const mentors = [
 	{
 		role: 'Веб-разработка',
 		description:
-			'Практикующие разработчики с опытом коммерческих проектов. Помогают освоить стек, код-ревью и продуктовые практики.',
+			'Практикующие разработчики. Помогают освоить стек, код-ревью и продуктовые практики.',
 		icon: '💻'
 	},
 	{
-		role: 'Мобильная разработка',
-		description: 'Специалисты по iOS и Android. Ведут от прототипа до рабочего приложения.',
-		icon: '📱'
+		role: 'Разработка чат-ботов',
+		description: 'Реализация продвинутых чат-ботов с интеграцией ИИ.',
+		icon: '🤖'
 	},
 	{
-		role: 'AI и Data Science',
+		role: 'AI-системы',
 		description:
-			'Инженеры с опытом в ML и анализе данных. Помогают внедрить AI в реальный продукт.',
-		icon: '🤖'
+			'Освоение AI-систем и применение их для закрытия большого спектра задач.',
+		icon: '🧠'
 	},
 	{
 		role: 'UI/UX Дизайн',
@@ -84,6 +84,7 @@ export function TeamScreen() {
 							className="team__lead-avatar-img"
 							src={teamLeadImg}
 							alt="Котоман Степан"
+						loading="lazy"
 						/>
 					</div>
 					<div className="team__lead-info">
@@ -119,6 +120,7 @@ export function TeamScreen() {
 										className="team__mentor-avatar-img"
 										src={designerAvatar}
 										alt={mentor.name}
+									loading="lazy"
 									/>
 								</div>
 							) : (

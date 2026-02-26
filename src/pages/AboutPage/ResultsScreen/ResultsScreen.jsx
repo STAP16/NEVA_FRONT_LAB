@@ -80,6 +80,7 @@ export function ResultsScreen() {
 						className="results__nevik"
 						src={nevikImg}
 						alt="Nevik"
+						loading="lazy"
 						initial={{ opacity: 0, x: -40 }}
 						animate={isInView ? { opacity: 1, x: 0 } : {}}
 						transition={{ duration: 0.7, delay: 0.2 }}
