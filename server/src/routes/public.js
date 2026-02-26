@@ -1,6 +1,7 @@
 import { Router } from 'express'
 import { prisma } from '../db.js'
 import { serializeProject, serializeProjectList } from '../serializers/projectSerializer.js'
+import { sendTelegramNotification } from '../utils/telegram.js'
 
 const router = Router()
 
@@ -72,6 +73,16 @@ router.post('/applications', async (req, res) => {
 				email: email || null
 			}
 		})
+
+		const label = type === 'lab' ? `Лаборатория: ${direction}` : `Проект: ${projectId}`
+		sendTelegramNotification(
+			`<b>Новая заявка #${application.id}</b>\n` +
+			`${firstName} ${lastName}\n` +
+			`Telegram: ${telegram}\n` +
+			`Тип: ${label}` +
+			(phone ? `\nТелефон: ${phone}` : '') +
+			(email ? `\nПочта: ${email}` : '')
+		)
 
 		res.status(201).json({ success: true, id: application.id })
 	} catch (err) {

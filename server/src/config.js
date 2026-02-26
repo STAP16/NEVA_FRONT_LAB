@@ -23,5 +23,7 @@ export const config = {
 	adminInitialPassword: process.env.ADMIN_INITIAL_PASSWORD || crypto.randomBytes(18).toString('base64url'),
 	adminInitialPasswordProvided: Boolean(process.env.ADMIN_INITIAL_PASSWORD),
 	dbConnectRetries: parseInt(process.env.DB_CONNECT_RETRIES || '15', 10),
-	dbConnectRetryDelayMs: parseInt(process.env.DB_CONNECT_RETRY_DELAY_MS || '2000', 10)
+	dbConnectRetryDelayMs: parseInt(process.env.DB_CONNECT_RETRY_DELAY_MS || '2000', 10),
+	telegramBotToken: process.env.TELEGRAM_BOT_TOKEN || '',
+	telegramChatId: process.env.TELEGRAM_CHAT_ID || ''
 }
