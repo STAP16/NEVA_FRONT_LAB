@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Application, extend, useApplication, useTick } from '@pixi/react'
 import { Circle, Container, Graphics } from 'pixi.js'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useRouteNavigate } from '../../../components/navigation'
 import nevikAI from '../../../assets/NEVIK_AI.png'
 import nevikWeb from '../../../assets/NEVIK_WEB.png'
 import nevikData from '../../../assets/NEVIK_DATA_SCINCE.png'
@@ -541,7 +542,7 @@ const contentVariants = {
 	}
 }
 
-function DirectionPanel({ direction }) {
+function DirectionPanel({ direction, onCtaClick }) {
 	if (!direction) return null
 
 	return (
@@ -587,6 +588,7 @@ function DirectionPanel({ direction }) {
 					style={{
 						background: `linear-gradient(135deg, ${direction.colorPrimary}, ${direction.colorPrimary})`
 					}}
+					onClick={() => onCtaClick(direction)}
 				>
 					{direction.ctaLabel}
 				</button>
@@ -618,12 +620,17 @@ function lerpColor(from, to, t) {
 }
 
 function ChoiceDirection() {
+	const navigate = useRouteNavigate()
 	const sceneHostRef = useRef(null)
 	const [sceneSize, setSceneSize] = useState({ width: 1500, height: 1000 })
 	const [activeId, setActiveId] = useState(null)
 	const [hoveredId, setHoveredId] = useState(null)
 	const [panelOpen, setPanelOpen] = useState(false)
 	const [hasSphereInteraction, setHasSphereInteraction] = useState(false)
+
+	const handleDirectionCta = useCallback(direction => {
+		navigate(`/contacts?mode=lab&direction=${encodeURIComponent(direction.title)}`)
+	}, [navigate])
 
 	useEffect(() => {
 		if (!sceneHostRef.current) {
@@ -710,6 +717,7 @@ function ChoiceDirection() {
 					<DirectionPanel
 						key={activeDirection.id}
 						direction={activeDirection}
+						onCtaClick={handleDirectionCta}
 					/>
 				)}
 			</AnimatePresence>

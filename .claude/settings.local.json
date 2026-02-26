@@ -15,7 +15,10 @@
       "Bash(python3:*)",
       "Bash(identify:*)",
       "Bash(dir:*)",
-      "Bash(xxd:*)"
+      "Bash(xxd:*)",
+      "Bash(npx prisma migrate dev --name add-application-model)",
+      "Bash(./node_modules/.bin/prisma migrate dev --name add-application-model)",
+      "Bash(git checkout -- src/pages/ProjectsPage/ProjectsPage.jsx)"
     ]
   }
 }

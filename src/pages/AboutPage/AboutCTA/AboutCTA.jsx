@@ -54,27 +54,15 @@ export function AboutCTA() {
 	const navigate = useRouteNavigate()
 
 	const handleApply = () => {
-		navigate('/')
-		setTimeout(() => {
-			const el = document.getElementById('start-direction')
-			if (el) el.scrollIntoView({ behavior: 'smooth' })
-		}, 100)
+		navigate('/contacts?mode=lab')
 	}
 
 	const handleDirections = () => {
-		navigate('/')
-		setTimeout(() => {
-			const el = document.getElementById('directions')
-			if (el) el.scrollIntoView({ behavior: 'smooth' })
-		}, 100)
+		navigate('/directions')
 	}
 
 	const handleProjects = () => {
-		navigate('/')
-		setTimeout(() => {
-			const el = document.getElementById('projects')
-			if (el) el.scrollIntoView({ behavior: 'smooth' })
-		}, 100)
+		navigate('/projects')
 	}
 
 	return (

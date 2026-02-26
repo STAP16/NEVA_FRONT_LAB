@@ -1,3 +1,4 @@
+import { RouteLink } from '../navigation'
 import './Footer.css'
 import nevaLabLogo from '../../assets/neva_lab_logo.png'
 
@@ -100,9 +101,9 @@ function Footer() {
 						<h4 className="footer__heading footer__heading--cta">
 							Начни свой проект сегодня
 						</h4>
-						<a href="#join" className="footer__cta-button">
+						<RouteLink to="/contacts?mode=lab" className="footer__cta-button">
 							Присоединиться к команде
-						</a>
+						</RouteLink>
 						<div className="footer__contact-info">
 							<a
 								href="mailto:hello@nevalab.ru"

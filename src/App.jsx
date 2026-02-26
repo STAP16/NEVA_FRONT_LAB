@@ -15,6 +15,7 @@ import {
 	DirectionsPage,
 	ProjectsPage
 } from './pages'
+import { ContactsPage } from './pages/ContactsPage/ContactsPage'
 
 const pageTransition = {
 	initial: { opacity: 0 },
@@ -89,6 +90,14 @@ function App() {
 						element={
 							<PageWrapper>
 								<ProjectsPage />
+							</PageWrapper>
+						}
+					/>
+					<Route
+						path="/contacts"
+						element={
+							<PageWrapper>
+								<ContactsPage />
 							</PageWrapper>
 						}
 					/>

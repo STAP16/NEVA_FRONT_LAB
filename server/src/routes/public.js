@@ -100,4 +100,53 @@ router.post('/projects/:id/join', async (req, res) => {
 	}
 })
 
+const DIRECTIONS = [
+	{ id: 'ai', title: 'AI-системы' },
+	{ id: 'web', title: 'Веб-разработка' },
+	{ id: 'data', title: 'Аналитика данных' },
+	{ id: 'design', title: 'Продуктовый дизайн' },
+	{ id: 'security', title: 'Бекенд инженерия' },
+	{ id: 'cloud', title: 'Cloud и DevOps' }
+]
+
+router.get('/directions', (req, res) => {
+	res.json(DIRECTIONS)
+})
+
+router.post('/applications', async (req, res) => {
+	try {
+		const { type, firstName, lastName, telegram, direction, projectId, phone, email } = req.body
+
+		if (!type || !firstName || !lastName || !telegram) {
+			return res.status(400).json({ error: 'type, firstName, lastName and telegram are required' })
+		}
+
+		if (type === 'lab' && !direction) {
+			return res.status(400).json({ error: 'direction is required for lab applications' })
+		}
+
+		if (type === 'project' && !projectId) {
+			return res.status(400).json({ error: 'projectId is required for project applications' })
+		}
+
+		const application = await prisma.application.create({
+			data: {
+				type,
+				firstName,
+				lastName,
+				telegram,
+				direction: direction || null,
+				projectId: projectId || null,
+				phone: phone || null,
+				email: email || null
+			}
+		})
+
+		res.status(201).json({ success: true, id: application.id })
+	} catch (err) {
+		console.error('POST /applications error:', err.message)
+		res.status(500).json({ error: 'Failed to submit application' })
+	}
+})
+
 export default router

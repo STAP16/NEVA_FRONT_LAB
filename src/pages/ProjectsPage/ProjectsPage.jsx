@@ -658,23 +658,11 @@ export function ProjectsPage() {
 		return Math.min(100, Math.max(0, progressValue + wave))
 	}
 
-	const handleJoin = async project => {
-		if (project.seats < 1 || isJoinTransitionVisible) {
+	const handleJoin = project => {
+		if (project.seats < 1) {
 			return
 		}
-
-		try {
-			await joinProject(project.id)
-		} catch {
-			// Continue with transition even if API fails
-		}
-
-		setIsJoinTransitionVisible(true)
-		setActiveProjectId(null)
-
-		window.setTimeout(() => {
-			navigate('/projects/join-success', { state: { fromJoinTransition: true } })
-		}, 440)
+		navigate('/contacts?mode=project&project=' + encodeURIComponent(project.title))
 	}
 
 	return (

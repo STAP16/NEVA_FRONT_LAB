@@ -101,3 +101,16 @@ model Feedback {
   time      String
   createdAt DateTime @default(now())
 }
+
+model Application {
+  id        Int      @id @default(autoincrement())
+  type      String
+  firstName String
+  lastName  String
+  telegram  String
+  direction String?
+  projectId String?
+  phone     String?
+  email     String?
+  createdAt DateTime @default(now())
+}
