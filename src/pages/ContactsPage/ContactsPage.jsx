@@ -1,8 +1,9 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { fetchDirections, submitApplication } from '../../api/contacts'
-import { fetchProjects } from '../../api/projects'
+import { DIRECTIONS } from '../../data/directions'
+import { PROJECTS } from '../../data/projects'
+import { submitApplication } from '../../data/applications'
 import './ContactsPage.css'
 
 const fadeUp = {
@@ -98,22 +99,8 @@ export function ContactsPage() {
 	const [error, setError] = useState('')
 
 	useEffect(() => {
-		fetchDirections()
-			.then(setDirections)
-			.catch(() => {
-				setDirections([
-					{ id: 'ai', title: 'AI-системы' },
-					{ id: 'web', title: 'Веб-разработка' },
-					{ id: 'data', title: 'Аналитика данных' },
-					{ id: 'design', title: 'Продуктовый дизайн' },
-					{ id: 'security', title: 'Бекенд инженерия' },
-					{ id: 'cloud', title: 'Cloud и DevOps' }
-				])
-			})
-
-		fetchProjects()
-			.then(data => setProjects(data.filter(p => p.status === 'active' && p.seats > 0)))
-			.catch(() => setProjects([]))
+		setDirections(DIRECTIONS)
+		setProjects(PROJECTS.filter(project => project.status === 'active' && project.seats > 0))
 	}, [])
 
 	useEffect(() => {
@@ -146,6 +133,11 @@ export function ContactsPage() {
 		return true
 	}, [firstName, lastName, telegram, direction, projectId, mode])
 
+	const selectedProject = useMemo(
+		() => projects.find(project => project.id === projectId) || null,
+		[projects, projectId]
+	)
+
 	const handleSubmit = useCallback(async e => {
 		e.preventDefault()
 		if (!isValid || submitting) return
@@ -161,6 +153,7 @@ export function ContactsPage() {
 				telegram: telegram.trim(),
 				direction: mode === 'lab' ? direction : undefined,
 				projectId: mode === 'project' ? projectId : undefined,
+				projectTitle: mode === 'project' ? selectedProject?.title : undefined,
 				phone: phone.trim() || undefined,
 				email: email.trim() || undefined
 			})
@@ -170,7 +163,7 @@ export function ContactsPage() {
 		} finally {
 			setSubmitting(false)
 		}
-	}, [isValid, submitting, mode, firstName, lastName, telegram, direction, projectId, phone, email])
+	}, [isValid, submitting, mode, firstName, lastName, telegram, direction, projectId, selectedProject, phone, email])
 
 	const handleModeChange = useCallback(newMode => {
 		setMode(newMode)

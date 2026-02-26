@@ -25,7 +25,9 @@
       "Bash(npx prisma migrate diff --from-schema-datamodel prisma/schema.prisma --to-schema-datasource prisma/schema.prisma --script)",
       "Bash(npx prisma migrate diff --from-schema-datasource prisma/schema.prisma --to-schema-datamodel prisma/schema.prisma --script)",
       "Bash(npx prisma migrate deploy)",
-      "Bash(npx prisma generate)"
+      "Bash(npx prisma generate)",
+      "Bash(cmd //c \"rmdir /s /q node_modules\")",
+      "Bash(npm run dev:admin)"
     ]
   }
 }

@@ -8,15 +8,11 @@
     "files.watcherExclude": {
       "**/node_modules/**": true,
       "**/dist/**": true,
-      "**/.git/**": true,
-      "**/admin/**": true,
-      "**/server/**": true
+      "**/.git/**": true
     },
     "search.exclude": {
       "**/node_modules/**": true,
-      "**/dist/**": true,
-      "**/admin/**": true,
-      "**/server/**": true
+      "**/dist/**": true
     }
   }
 }
