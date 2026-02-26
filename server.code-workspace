@@ -1,0 +1,18 @@
+{
+  "folders": [
+    {
+      "path": "server"
+    }
+  ],
+  "settings": {
+    "files.watcherExclude": {
+      "**/node_modules/**": true,
+      "**/dist/**": true,
+      "**/.git/**": true
+    },
+    "search.exclude": {
+      "**/node_modules/**": true,
+      "**/dist/**": true
+    }
+  }
+}
