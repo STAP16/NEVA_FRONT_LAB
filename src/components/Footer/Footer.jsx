@@ -29,17 +29,17 @@ function Footer() {
 						<h4 className="footer__heading">Навигация</h4>
 						<ul className="footer__links">
 							<li>
-								<a href="#about" className="footer__link">
+								<RouteLink to="/" className="footer__link">
 									О лаборатории
-								</a>
+								</RouteLink>
 							</li>
 							<li>
-								<a
-									href="#directions"
+								<RouteLink
+									to="/directions"
 									className="footer__link"
 								>
 									Направления
-								</a>
+								</RouteLink>
 							</li>
 							<li>
 								<a href="#college" className="footer__link">
@@ -57,9 +57,9 @@ function Footer() {
 								</a>
 							</li>
 							<li>
-								<a href="#projects" className="footer__link">
+								<RouteLink to="/projects" className="footer__link">
 									Проекты и кейсы
-								</a>
+								</RouteLink>
 							</li>
 						</ul>
 					</div>
@@ -106,10 +106,10 @@ function Footer() {
 						</RouteLink>
 						<div className="footer__contact-info">
 							<a
-								href="mailto:hello@nevalab.ru"
+								href="mailto:nevalab27@mail.ru"
 								className="footer__link"
 							>
-								hello@nevalab.ru
+								nevalab27@mail.ru
 							</a>
 							<p className="footer__address">
 								СПбПУ, институт среднего профессионального
@@ -118,7 +118,7 @@ function Footer() {
 						</div>
 						<div className="footer__socials">
 							<a
-								href="https://t.me/nevalab"
+								href="https://t.me/nevacomm"
 								className="footer__social-link"
 								target="_blank"
 								rel="noopener noreferrer"
@@ -150,7 +150,7 @@ function Footer() {
 								</svg>
 							</a>
 							<a
-								href="https://github.com/nevalab"
+								href="https://github.com/STAP16"
 								className="footer__social-link"
 								target="_blank"
 								rel="noopener noreferrer"
