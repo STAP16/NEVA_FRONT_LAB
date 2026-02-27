@@ -63,56 +63,56 @@ function App() {
 		<>
 			<div className={`app__route-wipe${isRouteWipeActive ? ' app__route-wipe--active' : ''}`} />
 			<Header />
-			<Suspense fallback={null}>
-			<AnimatePresence mode="wait">
-				<Routes
-					location={location}
-					key={location.pathname}
-				>
-					<Route
-						path="/"
-						element={
-							<PageWrapper>
-								<AboutPage />
-							</PageWrapper>
-						}
-					/>
-					<Route
-						path="/directions"
-						element={
-							<PageWrapper>
-								<DirectionsPage />
-							</PageWrapper>
-						}
-					/>
-					<Route
-						path="/projects"
-						element={
-							<PageWrapper>
-								<ProjectsPage />
-							</PageWrapper>
-						}
-					/>
-					<Route
-						path="/contacts"
-						element={
-							<PageWrapper>
-								<ContactsPage />
-							</PageWrapper>
-						}
-					/>
-					<Route
-						path="/projects/join-success"
-						element={
-							<PageWrapper>
-								<JoinSuccessPage />
-							</PageWrapper>
-						}
-					/>
-				</Routes>
-			</AnimatePresence>
+			<Suspense fallback={<div style={{ minHeight: '100vh' }} />}>
+				<AnimatePresence mode="wait">
+					<Routes
+						location={location}
+						key={location.pathname}
+					>
+						<Route
+							path="/"
+							element={
+								<PageWrapper>
+									<AboutPage />
+								</PageWrapper>
+							}
+						/>
+						<Route
+							path="/directions"
+							element={
+								<PageWrapper>
+									<DirectionsPage />
+								</PageWrapper>
+							}
+						/>
+						<Route
+							path="/projects"
+							element={
+								<PageWrapper>
+									<ProjectsPage />
+								</PageWrapper>
+							}
+						/>
+						<Route
+							path="/contacts"
+							element={
+								<PageWrapper>
+									<ContactsPage />
+								</PageWrapper>
+							}
+						/>
+						<Route
+							path="/projects/join-success"
+							element={
+								<PageWrapper>
+									<JoinSuccessPage />
+								</PageWrapper>
+							}
+						/>
+					</Routes>
+				</AnimatePresence>
+				<Footer />
 			</Suspense>
-			<Footer />
 		</>
 	)
 }

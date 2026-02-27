@@ -2,11 +2,14 @@ import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import teamLeadImg from '../../../assets/NEVA_LAB_TEAM_LEAD.webp'
 import designerAvatar from '../../../assets/Designer_avatar.jpg'
+import kolanAvatar from '../../../assets/KOLAN.jpg'
 import './TeamScreen.css'
 
 const mentors = [
 	{
 		role: 'Веб-разработка',
+		name: 'Мороз Николай',
+		avatar: kolanAvatar,
 		description:
 			'Практикующие разработчики. Помогают освоить стек, код-ревью и продуктовые практики.',
 		icon: '💻'
@@ -25,7 +28,7 @@ const mentors = [
 	{
 		role: 'UI/UX Дизайн',
 		name: 'Максим Панкрушев',
-		avatar: 'designer',
+		avatar: designerAvatar,
 		description:
 			'Дизайнеры с опытом запуска продуктов. Учат проектировать интерфейсы, которые решают задачи пользователя.',
 		icon: '🎨'
@@ -114,13 +117,13 @@ export function TeamScreen() {
 							variants={fadeUp}
 							transition={{ delay: 0.3 + i * 0.1 }}
 						>
-							{mentor.avatar === 'designer' ? (
+							{mentor.avatar ? (
 								<div className="team__mentor-avatar">
 									<img
 										className="team__mentor-avatar-img"
-										src={designerAvatar}
+										src={mentor.avatar}
 										alt={mentor.name}
-									loading="lazy"
+										loading="lazy"
 									/>
 								</div>
 							) : (

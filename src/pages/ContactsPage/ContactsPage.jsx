@@ -200,12 +200,6 @@ export function ContactsPage() {
 					animate={{ opacity: 1, scale: 1 }}
 					transition={{ duration: 0.4, delay: 0.2 }}
 				>
-					<div className="contacts-success__icon">
-						<svg width="64" height="64" viewBox="0 0 64 64" fill="none">
-							<circle cx="32" cy="32" r="30" stroke="#2c5aa0" strokeWidth="2.5" />
-							<path d="M20 33l8 8 16-18" stroke="#2c5aa0" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-						</svg>
-					</div>
 					<h2 className="contacts-success__title">Спасибо за заявку!</h2>
 					<p className="contacts-success__text">
 						Ответим в течение 24 часов в Telegram. Пока можешь изучить наши проекты и направления.
@@ -363,20 +357,6 @@ export function ContactsPage() {
 				</div>
 			</motion.section>
 
-			<motion.section
-				className="contacts-info"
-				initial={{ opacity: 0 }}
-				animate={{ opacity: 1 }}
-				transition={{ duration: 0.5, delay: 0.3 }}
-			>
-				<a href="mailto:hello@nevalab.ru" className="contacts-info__item">hello@nevalab.ru</a>
-				<span className="contacts-info__dot" />
-				<a href="https://t.me/nevalab" className="contacts-info__item" target="_blank" rel="noopener noreferrer">Telegram</a>
-				<span className="contacts-info__dot" />
-				<a href="https://vk.com/nevalab" className="contacts-info__item" target="_blank" rel="noopener noreferrer">VK</a>
-				<span className="contacts-info__dot" />
-				<a href="https://github.com/nevalab" className="contacts-info__item" target="_blank" rel="noopener noreferrer">GitHub</a>
-			</motion.section>
 <AnimatePresence>
 {submitStage !== 'idle' && (
 <div className="contacts-submit-modal">
