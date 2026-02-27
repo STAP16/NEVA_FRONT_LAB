@@ -10,6 +10,8 @@ import nevikDesign from '../../../assets/NEVIK_DESIGN.png'
 import nevikSecurity from '../../../assets/NEVIK_BACKEND.png'
 import nevikCloud from '../../../assets/NEVIK_DEVOPS.png'
 import kolanAvatar from '../../../assets/KOLAN.jpg'
+import designerAvatar from '../../../assets/Designer_avatar.jpg'
+import teamLeadAvatar from '../../../assets/NEVA_LAB_TEAM_LEAD.webp'
 import './ThirdScreen.css'
 
 extend({ Container, Graphics })
@@ -20,6 +22,8 @@ const DIRECTIONS = [
 		label: 'AI Systems',
 		title: 'AI-системы',
 		description: 'Освоение AI-систем и применение их для закрытия большого спектра задач.',
+		mentorAvatar: teamLeadAvatar,
+		mentorName: 'Котоман Степан',
 		bullets: [
 			'Работа с современными моделями и API',
 			'Оркестрирование AI-агентов и построение workflow',
@@ -46,7 +50,7 @@ const DIRECTIONS = [
 		title: 'Веб-разработка',
 		description: 'Полный цикл создания современных веб-приложений — от фронтенда до бэкенда.',
 		mentorAvatar: kolanAvatar,
-		mentorName: 'Колан',
+		mentorName: 'Мороз Николай',
 		bullets: [
 			'React, Vue и современные фреймворки',
 			'Node.js и серверная архитектура',
@@ -99,6 +103,8 @@ const DIRECTIONS = [
 		title: 'Продуктовый дизайн',
 		description:
 			'Проектирование интерфейсов, которые любят пользователи — UX/UI от идеи до прототипа.',
+		mentorAvatar: designerAvatar,
+		mentorName: 'Панкрушев Максим',
 		bullets: [
 			'UX-исследования и проектирование',
 			'UI-дизайн и дизайн-системы',
