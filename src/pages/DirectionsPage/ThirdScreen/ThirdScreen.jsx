@@ -179,6 +179,14 @@ const DIRECTIONS = [
 	}
 ]
 
+// Preload all direction images so they display instantly on card open
+DIRECTIONS.forEach(d => {
+	[d.mascotVariant, d.mentorAvatar].filter(Boolean).forEach(src => {
+		const img = new Image()
+		img.src = src
+	})
+})
+
 const STAR_COUNT = 120
 const ORBIT_PADDING = 48
 const DRAW_SCALE = 1.2
@@ -523,18 +531,19 @@ function OrbitField({ width, height, activeId, hoveredId, onHover, onSelect }) {
 	)
 }
 
+const isMobile = () => typeof window !== 'undefined' && window.innerWidth <= 768
+
 const panelVariants = {
-	hidden: { x: -80, opacity: 0 },
+	hidden: isMobile() ? { y: 120, opacity: 0 } : { x: -80, opacity: 0 },
 	visible: {
 		x: 0,
+		y: 0,
 		opacity: 1,
 		transition: { duration: 0.28, ease: [0.33, 1, 0.68, 1] }
 	},
-	exit: {
-		x: -80,
-		opacity: 0,
-		transition: { duration: 0.2, ease: 'easeIn' }
-	}
+	exit: isMobile()
+		? { y: 120, opacity: 0, transition: { duration: 0.2, ease: 'easeIn' } }
+		: { x: -80, opacity: 0, transition: { duration: 0.2, ease: 'easeIn' } }
 }
 
 const contentVariants = {
@@ -551,7 +560,7 @@ const contentVariants = {
 	}
 }
 
-function DirectionPanel({ direction, onCtaClick }) {
+function DirectionPanel({ direction, onCtaClick, onClose }) {
 	if (!direction) return null
 
 	return (
@@ -567,6 +576,13 @@ function DirectionPanel({ direction, onCtaClick }) {
 				'--dir-glow': direction.colorGlow
 			}}
 		>
+			<button
+				className="direction-panel__close"
+				onClick={onClose}
+				aria-label="Закрыть"
+			>
+				&#x2715;
+			</button>
 			<motion.div
 				className="direction-panel__content direction-panel__content--with-mascot"
 				variants={contentVariants}
@@ -607,6 +623,7 @@ function DirectionPanel({ direction, onCtaClick }) {
 							className="direction-panel__mentor-avatar"
 							src={direction.mentorAvatar}
 							alt={direction.mentorName || ''}
+							decoding="sync"
 						/>
 						{direction.mentorName && (
 							<span className="direction-panel__mentor-name">{direction.mentorName}</span>
@@ -618,6 +635,7 @@ function DirectionPanel({ direction, onCtaClick }) {
 						className="direction-panel__mascot direction-panel__mascot--card"
 						src={direction.mascotVariant}
 						alt={direction.title}
+						decoding="sync"
 					/>
 				</div>
 			</motion.div>
@@ -739,6 +757,7 @@ function ChoiceDirection() {
 						key={activeDirection.id}
 						direction={activeDirection}
 						onCtaClick={handleDirectionCta}
+						onClose={handleClosePanel}
 					/>
 				)}
 			</AnimatePresence>
