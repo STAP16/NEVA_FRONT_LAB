@@ -24,7 +24,7 @@ export const PROJECTS = [
 		mentor: "Котоман С.",
 		deadline: "Март 2026",
 		recruitmentDate: "Февраль 2026",
-		progress: 20,
+		progress: 37 ,
 		seats: 0,
 		status: "active"
 	},
