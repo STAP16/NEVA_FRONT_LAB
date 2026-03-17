@@ -1,20 +1,5 @@
 export const PROJECTS = [
 	{
-		id: 'lab-kit-ui',
-		title: 'UI-набор лаборатории',
-		description:
-			'Единая дизайн-система для проектов NEVA LAB: компоненты, токены и гайды, чтобы быстрее запускать интерфейсы без потери качества.',
-		category: 'Дизайн',
-		categoryKey: 'design',
-		participants: 1,
-		mentor: 'Панкрушев Максим.',
-		deadline: 'Май 2026',
-		recruitmentDate: 'Февраль 2026',
-		progress: 10,
-		seats: 3,
-		status: 'active'
-	},
-	{
 		id: "auto-check-student-works",
 		title: "Автопроверка работ студентов",
 		description: "Веб-приложение для учителя: создание работ (лаб/практ/контрольная), загрузка правильных вариантов и автоматическая проверка ответов студентов с помощью ИИ",
